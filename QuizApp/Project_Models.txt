@@ -1,0 +1,170 @@
+Quiz_App framework/Templates:  https://www.figma.com/file/2fShk4ZEs1D74lHMeWGRv3/Quiz-App?type=whiteboard&node-
+id=0-1&t=1eUd4ljvO5vaOTEI-0
+
+Quiz App Models:
+User Class:
+Properties:
+UserId
+Username
+Password (hashed and salted)
+Role (Quiz Taker or Quiz Creator)
+Methods:
+Register(string username, string password, UserRole role) - Create a new user account.
+Login(string username, string password) - Authenticate a user using JWT.
+
+Quiz Class:
+Properties:
+QuizId
+Title
+Description
+Category
+TimeLimit (optional)
+Creator (reference to a User)
+Questions (a list of Question objects)
+Methods:
+CreateQuiz(string title, string description, string category, int? timeLimit, User creator) - Create a new quiz.
+EditQuiz(string title, string description, string category, int? timeLimit) - Edit quiz details.
+AddQuestion(Question question) - Add a question to the quiz.
+RemoveQuestion(Question question) - Remove a question from the quiz.
+ActivateQuiz() - Activate a quiz for participants.
+DeactivateQuiz() - Deactivate a quiz for participants.
+
+Question Class:
+Properties:
+QuestionId
+Text
+Options (a list of Option objects)
+Methods:
+CreateQuestion(string text) - Create a new question.
+AddOption(Option option) - Add an option to the question.
+RemoveOption(Option option) - Remove an option from the question.
+
+Option Class:
+Properties:
+OptionId
+Text
+IsCorrect
+Methods:
+CreateOption(string text, bool isCorrect) - Create a new option.
+
+QuizResult Class:
+Properties:
+ResultId
+User (reference to the user who took the quiz)
+Quiz (reference to the quiz)
+Score
+SubmissionTime
+Methods:
+SaveResult(User user, Quiz quiz, int score, DateTime submissionTime) - Save the quiz result for a user.
+
+LeaderboardEntry Class:
+Properties:
+User
+Quiz
+Score
+Methods:
+GetLeaderboardForQuiz(Quiz quiz) - Retrieve the top scorers for a specific quiz.
+
+QuizCategory Class:
+Properties:
+CategoryId
+Name
+Methods:
+CreateCategory(string name) - Create a new quiz category.
+
+Admin Class:
+Properties:
+AdminId
+Username
+Password (hashed and salted)
+Methods:
+Login(string username, string password) - Authenticate an admin user.
+ManageQuizzes() - Access the admin panel for managing quizzes.
+ViewStatistics(Quiz quiz) - View statistics and user performance for a specific quiz.
+
+QuizService Class:
+Methods:
+GetAllQuizzes() - Retrieve a list of all available quizzes.
+GetActiveQuizzes() - Retrieve active quizzes.
+GetQuizById(int quizId) - Retrieve a specific quiz by its ID.
+GetQuizResults(Quiz quiz) - Retrieve results for a specific quiz.
+GetUserQuizResults(User user, Quiz quiz) - Retrieve results for a specific user and quiz.
+CalculateScore(Quiz quiz, List<Question> questions, List<int> selectedOptions) - Calculate the user's score.
+
+QuizApp Class:
+Methods:
+FilterQuizzesByCategory(QuizCategory category) - Filter quizzes by category.
+SecureQuizNavigation() - Implement security measures to prevent cheating.
+
+DataAccess Class:
+Methods:
+SaveQuiz(Quiz quiz) - Save quiz data to the database.
+LoadQuiz(int quizId) - Load quiz data from the database.
+
+APIService Class:
+Methods:
+IntegrateWithAPI(string apiUrl) - Integrate with a RESTful API for data retrieval and storage.
+
+
+
+Quiz_App_Controllers:
+
+User Authentication Controller:
+Handles user registration, login
+
+User Role Management Controller:
+Manages user roles (Quiz Taker and Quiz Creator).
+
+Quiz Creation Controller:
+Allows Quiz Creators to create and manage quizzes.
+Handles adding, editing, and deleting quizzes.
+Manages questions, answer choices, and time limits.
+
+Quiz Taking Controller:
+Facilitates quiz selection and participation for Quiz Takers.
+Implements timers for time-limited quizzes.
+Records and validates user answers.
+
+Scoring Controller:
+Calculates and displays scores upon quiz completion.
+Provides feedback on correct and incorrect answers.
+Manages storage of user scores and quiz results.
+
+Leaderboard Controller:
+Handles the leaderboard functionality.
+Retrieves and displays top scorers for each quiz.
+Allows filtering by quiz category.
+
+Quiz Categories Controller:
+Manages quiz categorization and filtering by categories.
+
+Admin Panel Controller:
+Provides Quiz Creators with tools to manage their quizzes.
+Allows editing, deleting, and deactivating quizzes.
+Presents statistics and user performance for each quiz.
+
+Responsive Design Controller:
+Ensures the app's responsive design to support various devices and screen sizes.
+
+Security Controller:
+Implements security measures to prevent cheating, e.g., controlling navigation within quizzes.
+
+Data Storage Controller:
+Manages interaction with the database (MongoDB, PostgreSQL) to store quiz data, user profiles, and results.
+
+API Integration Controller:
+Integrates with a RESTful API for data retrieval and storage.
+
+User Interface (UI/UX) Controller:
+Designs and maintains an intuitive and aesthetically pleasing user interface for the app.
+
+Testing and Debugging Controller:
+Responsible for conducting testing, debugging, and ensuring the app functions without errors.
+
+Deployment Controller:
+Manages the deployment of the app to a web server or cloud platform for public access.
+These controllers will help in structuring and organizing the application's logic, ensuring that each component 
+of the Quiz App operates smoothly and efficiently as per the specified requirements.
+
+
+

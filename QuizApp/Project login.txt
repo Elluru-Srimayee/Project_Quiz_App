@@ -1,0 +1,623 @@
+User.cs In Models folder
+using System.ComponentModel.DataAnnotations;
+
+namespace QuizApp.Models
+{
+    public class User
+    {
+        [Key]
+        public string Username { get; set; }
+
+        public byte[] Password { get; set; }
+        public string Role { get; set; }
+        public byte[] Key { get; set; }
+    }
+}
+
+Product.cs as Quiz.cs in models folder
+
+using QuizApp.Models;
+
+namespace QuizApp.Models
+{
+    public class Quiz
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Quantity { get; set; }
+        public string Picture { get; set; }
+        public ICollection<CartItems> CartItems { get; set; }
+    }
+}
+
+namespace Shopping_App.Models.DTOs
+{
+    public class UserDTO
+    {
+        public string Username { get; set; }
+        public string? Role { get; set; }
+        public string? Token { get; set; }
+        public string Password { get; set; }
+    }
+}
+
+using System.ComponentModel.DataAnnotations;
+
+namespace Shopping_App.Models.DTOs
+{
+    public class UserViewModel : UserDTO
+    {
+        [Required(ErrorMessage = "Confirm password cannot be empty")]
+        [Compare("Password", ErrorMessage = "Password and Confirm password do not match")]
+        public string ConfirmPassword { get; set; }
+
+    }
+}
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using QuizApp.Contexts;
+using QuizApp.Interfaces;
+using QuizApp.Models;
+
+namespace QuizApp.Repositories
+{
+    public class UserRepository : IRepository<string, User>
+    {
+        private readonly ShoppingContext _context;
+
+        public UserRepository(ShoppingContext context)
+        {
+            _context = context;
+        }
+        public User Add(User entity)
+        {
+            _context.Users.Add(entity);
+            _context.SaveChanges();
+            return entity;
+        }
+
+        public User Delete(string key)
+        {
+            var user = GetById(key);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+                return user;
+            }
+            return null;
+        }
+
+        public IList<User> GetAll()
+        {
+            if (_context.Users.Count() == 0)
+                return null;
+            return _context.Users.ToList();
+        }
+
+        public User GetById(string key)
+        {
+            var user = _context.Users.SingleOrDefault(u => u.Username == key);
+            return user;
+        }
+
+        public User Update(User entity)
+        {
+            var user = GetById(entity.Username);
+            if (user != null)
+            {
+                _context.Entry<User>(user).State = EntityState.Modified;
+                _context.SaveChanges();
+                return user;
+            }
+            return null;
+        }
+    }
+}
+
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Contexts;
+using QuizApp.Interfaces;
+using QuizApp.Models;
+
+namespace QuizApp.Repositories
+{
+    public class QuizRepository : IRepository<int, Quiz>
+    {
+        private readonly QuizContext _context;
+        public QuizRepository(QuizContext context)
+        {
+            _context = context;
+        }
+        public Quiz Add(Quiz entity)
+        {
+            _context.Products.Add(entity);
+            _context.SaveChanges();
+            return entity;
+        }
+
+        public Quiz Delete(int key)
+        {
+            var product = GetById(key);
+            if (product != null)
+            {
+                _context.Quizs.Remove(quiz);
+                _context.SaveChanges();
+                return product;
+            }
+            return null;
+        }
+
+        public IList<Quiz> GetAll()
+        {
+            if (_context.Quizs.Count() == 0)
+                return null;
+            return _context.Quizs.ToList();
+        }
+
+        public Quiz GetById(int key)
+        {
+            var product = _context.Quizs.SingleOrDefault(u => u.Id == key);
+            return quiz;
+        }
+
+        public Quiz Update(Quiz entity)
+        {
+            var quiz = GetById(entity.Id);
+            if (quiz != null)
+            {
+                _context.Entry<Quiz>(quiz).State = EntityState.Modified;
+                _context.SaveChanges();
+                return quiz;
+            }
+            return null;
+        }
+    }
+}
+
+using QuizApp.Interfaces;
+using QuizApp.Models;
+using QuizApp.Models.DTOs;
+using System.Security.Cryptography;
+using System.Text;
+namespace QuizApp.Services
+{
+    public class UserService : IUserService
+    {
+        private readonly IRepository<string, User> _repository;
+
+        public UserService(IRepository<string, User> repository)
+        {
+            _repository = repository;
+        }
+        public UserDTO Login(UserDTO userDTO)
+        {
+            var user = _repository.GetById(userDTO.Username);
+            if (user != null)
+            {
+                HMACSHA512 hmac = new HMACSHA512(user.Key);
+                var userpass = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
+                for (int i = 0; i < userpass.Length; i++)
+                {
+                    if (user.Password[i] != userpass[i])
+                        return null;
+                }
+                userDTO.Password = "";
+                return userDTO;
+            }
+            return null;
+        }
+
+        public UserDTO Register(UserDTO userDTO)
+        {
+            HMACSHA512 hmac = new HMACSHA512();
+            User user = new User()
+            {
+                Username = userDTO.Username,
+                Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password)),
+                Key = hmac.Key,
+                Role = userDTO.Role
+            };
+            var result = _repository.Add(user);
+            if (result != null)
+            {
+                userDTO.Password = "";
+                return userDTO;
+            }
+            return null;
+
+        }
+    }
+}
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Interfaces;
+using QuizApp.Models.DTOs;
+namespace QuizApp.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ParticipantController : ControllerBase
+    {
+        private readonly IUserService _userService;
+
+        public ParticipantController(IUserService userService)
+        {
+            _userService = userService;
+        }
+        [HttpPost("register")]
+        public ActionResult Register(UserDTO viewModel)
+        {
+            string message = "";
+            try
+            {
+                var user = _userService.Register(viewModel);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+            }
+            catch (DbUpdateException exp)
+            {
+                message = "Duplicate username";
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+            return BadRequest(message);
+        }
+        [HttpGet("login")]
+        public ActionResult Login(UserDTO viewModel)
+        {
+            string message = "";
+            var result = _userService.Login(viewModel);
+            if (result != null)
+            {
+                return Ok(result);
+            }
+            message = "Invalid username or password";
+            return BadRequest(message);
+        }
+    }
+}
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Interfaces;
+using QuizApp.Models.DTOs;
+
+namespace QuizApp.Controllers
+{
+    public class UserController : Controller
+    {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Register(UserDTO viewModel)
+        {
+            try
+            {
+                var user = _userService.Register(viewModel);
+                if (user != null)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (DbUpdateException exp)
+            {
+                ViewBag.Message = "User name already exits";
+            }
+            catch (Exception)
+            {
+                ViewBag.Message = "Invalid data. Coudld not register";
+                throw;
+            }
+
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(UserDTO userDTO)
+        {
+            var result = _userService.Login(userDTO);
+            if (result != null)
+            {
+                TempData.Add("username", userDTO.Username);
+                return RedirectToAction("Index", "Home");
+            }
+            ViewData["Message"] = "Invalid username or password";
+            return View();
+        }
+    }
+}
+
+using Microsoft.AspNetCore.Mvc;
+using Shopping_App.Models;
+using System.Diagnostics;
+
+namespace Shopping_App.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+using Microsoft.EntityFrameworkCore;
+using QuizApp.Models;
+using System.Collections.Generic;
+using System.Reflection.Emit;
+
+namespace QuizApp.Contexts
+{
+    public class QuizContext : DbContext
+    {
+        public QuizContext(DbContextOptions options) : base(options)
+        {
+
+        }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Quiz> Quizs { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItems> CartItems { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //Fluent API
+            modelBuilder.Entity<Cart>(cart =>
+            {
+                cart.HasKey(ck => ck.cartNumber);
+            });
+            modelBuilder.Entity<CartItems>(ci =>
+            {
+                ci.HasKey(cik => new { cik.CartNumber, cik.Product_Id });
+            });
+            modelBuilder.Entity<CartItems>()
+                .HasOne<Product>(ci => ci.Product)
+                .WithMany(p => p.CartItems);
+        }
+    }
+}
+
+using Shopping_App.Models.DTOs;
+
+namespace Shopping_App.Interfaces
+{
+    public interface IUserService
+    {
+        UserDTO Login(UserDTO userDTO);
+        UserDTO Register(UserDTO userDTO);
+    }
+}
+
+Views Home folder Index.cshtml:
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Shopping App</h1>
+    <p>Welcome to our store</p>
+    @if (TempData.ContainsKey("username"))
+    {
+        <div class="alert alert-success">
+            Welcome @TempData["username"]
+        </div>
+    }
+</div>
+
+Views/user/login.cshtml
+@model Shopping_App.Models.DTOs.UserDTO
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Login">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            @if (@ViewData["Message"] != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewData["Message"]
+                </div>
+            }
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+Views/user/register.cshtml
+@model Shopping_App.Models.DTOs.UserViewModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<h4>User</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Username" class="control-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <select asp-for="Role" class="form-control">
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Message;
+        </div>
+    }
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+appsettings.json:
+
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "ConnectionStrings": {
+    "conn": "Data source=DESKTOP-313G9P3\\DEMOINSTANCE;user id=sa;password=Thanusha@4;Initial catalog=dbShopping06Nov2023"
+  },
+  "AllowedHosts": "*"
+}
+
+Program.cs:
+
+using Microsoft.EntityFrameworkCore;
+using Shopping_App.Contexts;
+using Shopping_App.Interfaces;
+using Shopping_App.Models;
+using Shopping_App.Repositories;
+using Shopping_App.Services;
+
+namespace Shopping_App
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var builder = WebApplication.CreateBuilder(args);
+
+            // Add services to the container.
+            builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<ShoppingContext>(opts =>
+            {
+                opts.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
+            });
+            builder.Services.AddScoped<IRepository<string,User>, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
+
+
+            var app = builder.Build();
+
+            // Configure the HTTP request pipeline.
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            app.Run();
+        }
+    }
+}

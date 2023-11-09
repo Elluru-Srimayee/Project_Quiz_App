@@ -1,0 +1,102 @@
+Backend (.NET Core)
+
+1.Setup .NET Project:
+
+Create a new .NET Core project using a template such as Web API.
+
+2.Database Configuration:
+
+Set up a database using Entity Framework Core or any other preferred database technology.
+Define models for users, quizzes, questions, answers, results, etc.
+
+3.Authentication and Authorization:
+
+Implement user registration and login with JWT authentication.
+Create user roles for Quiz Takers and Quiz Creators.
+Secure routes and endpoints based on user roles.
+
+4.Quiz Creation and Management:
+
+Implement API endpoints to allow Quiz Creators to create, edit, and delete quizzes.
+Add endpoints for adding questions, answer choices, and setting time limits.
+
+5.Quiz Taking and Scoring:
+
+Create API endpoints for Quiz Takers to select and participate in quizzes.
+Calculate and store scores for each user upon quiz completion.
+Provide feedback on quiz results.
+
+6.Leaderboard:
+
+Develop API endpoints to retrieve leaderboard data.
+Implement filtering by quiz category.
+
+7.Quiz Categories:
+
+Create API endpoints for managing quiz categories.
+Allow users to filter quizzes by category.
+
+8.Admin Panel:
+
+Implement an admin panel for Quiz Creators.
+Enable quiz management, user performance viewing, and statistics.
+
+9.API Integration:
+
+Integrate with a RESTful API for data retrieval and storage if necessary.
+
+10.Security:
+
+Implement security measures to prevent cheating or unauthorized access.
+
+
+Frontend (React)
+
+1.Setup React Project:
+
+Create a new React project using create-react-app or your preferred setup.
+
+2.User Registration and Authentication:
+
+Implement user registration and login pages.
+Use JWT for user authentication.
+
+3.User Roles:
+
+Create distinct UI experiences for Quiz Takers and Quiz Creators.
+Implement role-based routing and navigation.
+
+4.Quiz Browsing:
+
+Develop pages for users to browse and select available quizzes.
+Implement timer functionality for time-limited quizzes.
+
+5.Quiz Taking:
+
+Create the UI for answering questions in quizzes.
+Show feedback on correct and incorrect answers.
+
+6.Leaderboard and Quiz Categories:
+
+Develop UI components for leaderboard and category filtering.
+
+7.Admin Panel:
+
+Create an admin panel UI for Quiz Creators to manage quizzes and view statistics.
+
+8.Responsive Design:
+
+Ensure that the frontend is responsive for various screen sizes.
+
+9.Testing and Debugging:
+
+Perform testing and debugging to ensure a bug-free application.
+
+10.Deployment:
+
+Deploy the frontend to a web server or cloud platform.
+This is a high-level overview, and the actual implementation involves coding and integrating different parts of the application. It's recommended to follow best practices, use state management libraries like Redux for React, handle API requests, and create a user-friendly and visually appealing UI. The actual code and file structure will be quite extensive.
+
+
+frontend wire frames:
+https://www.figma.com/file/2fShk4ZEs1D74lHMeWGRv3/Quiz-App?type=whiteboard&t=wxUzRig9GojKMkTp-0
