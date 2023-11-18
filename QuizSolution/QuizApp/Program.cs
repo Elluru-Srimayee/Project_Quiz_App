@@ -69,11 +69,14 @@ namespace QuizApp
             builder.Services.AddScoped<IRepository<string, User>, UserRepository>();
             builder.Services.AddScoped<IRepository<int, Quiz>, QuizRepository>();
             builder.Services.AddScoped<IRepository<int, Questions>, QuestionRepository>();
+            builder.Services.AddScoped<IRepository<int, QuizResult>, QuizResultRepository>();
 
+            
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<IQuizService, QuizService>();
             builder.Services.AddScoped<IQuestionService, QuestionService>();
+            builder.Services.AddScoped<IQuizResultService, QuizResultService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

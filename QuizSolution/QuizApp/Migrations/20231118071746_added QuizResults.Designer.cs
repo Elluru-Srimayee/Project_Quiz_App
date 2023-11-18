@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuizApp.Contexts;
 
@@ -11,9 +12,10 @@ using QuizApp.Contexts;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    partial class QuizContextModelSnapshot : ModelSnapshot
+    [Migration("20231118071746_added QuizResults")]
+    partial class addedQuizResults
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -101,23 +103,14 @@ namespace QuizApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizResultId"), 1L, 1);
 
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
                     b.Property<int>("Score")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserAnswer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("QuizResultId");
@@ -172,7 +165,9 @@ namespace QuizApp.Migrations
 
                     b.HasOne("QuizApp.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("Username");
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
 

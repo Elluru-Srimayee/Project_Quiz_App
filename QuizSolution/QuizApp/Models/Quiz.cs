@@ -14,7 +14,6 @@ namespace QuizApp.Models
         public string Description { get; set; }
         public string Category { get;  set; }
         public int? TimeLimit{ get; set; }
-        public int? CreatorId{ get; set; }
         [JsonIgnore]
         public ICollection<Questions>? Questions { get; set; }
     }

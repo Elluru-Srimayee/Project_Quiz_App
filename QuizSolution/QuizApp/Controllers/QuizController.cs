@@ -5,6 +5,7 @@ using QuizApp.Exceptions;
 using QuizApp.Interfaces;
 using QuizApp.Models;
 using QuizApp.Models.DTOs;
+using QuizApp.Services;
 
 namespace QuizApp.Controllers
 {
@@ -13,10 +14,14 @@ namespace QuizApp.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IQuizService _quizService;
+        private readonly IQuestionService _questionService;
+        private readonly IQuizResultService _quizResultService;
 
-        public QuizController(IQuizService quizService)
+        public QuizController(IQuizService quizService,IQuestionService questionService, IQuizResultService quizResultService)
         {
             _quizService = quizService;
+            _questionService = questionService;
+            _quizResultService = quizResultService;
         }
         [HttpGet]
         public ActionResult Get()
@@ -78,6 +83,32 @@ namespace QuizApp.Controllers
                 errorMessage = e.Message;
             }
             return BadRequest(errorMessage);
+        }
+        [HttpGet("quiz/{quizId}/questions")]
+        public ActionResult<IEnumerable<QuestionDTO>> GetQuestionsForQuiz(int quizId)
+        {
+            try
+            {
+                var questions = _questionService.GetQuestionsByQuizId(quizId);
+                return Ok(questions);
+            }
+            catch (NoQuestionsAvailableException e)
+            {
+                return NotFound($"No questions found for Quiz ID {quizId}. {e.Message}");
+            }
+        }
+        [HttpPost("evaluate/{quizId}")]
+        public ActionResult<QuizResultDTO> EvaluateAnswer(int quizId, [FromBody] AnswerDTO answerDTO)
+        {
+            try
+            {
+                var result = _quizResultService.EvaluateAnswer(quizId, answerDTO);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Failed to evaluate the answer. {e.Message}");
+            }
         }
 
     }

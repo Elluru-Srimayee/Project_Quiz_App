@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuizApp.Contexts;
 
@@ -11,9 +12,10 @@ using QuizApp.Contexts;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    partial class QuizContextModelSnapshot : ModelSnapshot
+    [Migration("20231117124857_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,42 +95,6 @@ namespace QuizApp.Migrations
                     b.ToTable("Quizs");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.QuizResult", b =>
-                {
-                    b.Property<int>("QuizResultId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizResultId"), 1L, 1);
-
-                    b.Property<bool>("IsCorrect")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("QuestionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Score")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserAnswer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("QuizResultId");
-
-                    b.HasIndex("QuizId");
-
-                    b.HasIndex("Username");
-
-                    b.ToTable("QuizResults");
-                });
-
             modelBuilder.Entity("QuizApp.Models.User", b =>
                 {
                     b.Property<string>("Username")
@@ -160,23 +126,6 @@ namespace QuizApp.Migrations
                         .IsRequired();
 
                     b.Navigation("Quiz");
-                });
-
-            modelBuilder.Entity("QuizApp.Models.QuizResult", b =>
-                {
-                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
-                        .WithMany()
-                        .HasForeignKey("QuizId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuizApp.Models.User", "User")
-                        .WithMany()
-                        .HasForeignKey("Username");
-
-                    b.Navigation("Quiz");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("QuizApp.Models.Quiz", b =>

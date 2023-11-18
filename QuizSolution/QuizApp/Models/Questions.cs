@@ -8,19 +8,17 @@ namespace QuizApp.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int QuestionId { get; set; }
-        public string Username { get; set; }
         
-
-        [ForeignKey("Username")]
-        public User User { get; set; }
+        
         public string QuestionTxt { get; set; }
         public string Option1 { get; set; }
         public string Option2 { get; set; }
         public string? Option3 { get; set; }
         public string? Option4 { get; set; }
-        public int Answer { get; set; }
+        public string Answer { get; set; }
         public int QuizId { get; set; }
         [ForeignKey("QuizId")]
         public Quiz Quiz { get; set; } //Navigation Property
+        public int? UserAnswer { get; set; }
     }
 }
