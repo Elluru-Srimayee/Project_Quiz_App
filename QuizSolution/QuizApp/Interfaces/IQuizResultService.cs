@@ -8,11 +8,12 @@ namespace QuizApp.Interfaces
     {
         QuizResult AddQuizResult(QuizResult quizResult);
         QuizResult UpdateQuizResult(QuizResult quizResult);
-        QuizResult GetQuizResultById(int quizResultId);
-        IList<QuizResult> GetResultsByUser(string username);
+        public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId);
         IList<QuizResult> GetResultsByQuiz(int quizId);
         IList<QuizResult> GetAllQuizResults();
         bool DeleteQuizResult(int quizResultId);
         QuizResultDTO EvaluateAnswer(int quizId, AnswerDTO answerDTO);
+        public int GetTotalScoreForUserInQuiz(int quizId, string username);
+        public IList<LeaderboardEntryDTO> GetLeaderboard(int quizId);
     }
 }

@@ -1,16 +1,19 @@
 ﻿using QuizApp.Exceptions;
 using QuizApp.Interfaces;
 using QuizApp.Models;
+using QuizApp.Repositories;
 
 namespace QuizApp.Services
 {
     public class QuizService : IQuizService
     {
         private readonly IRepository<int, Quiz> _quizRepository;
+        private readonly IRepository<int, Questions> _questionRepository;
 
-        public QuizService(IRepository<int, Quiz> repository)
+        public QuizService(IRepository<int, Quiz> quizRepository, IRepository<int, Questions> questionRepository)
         {
-            _quizRepository = repository;
+            _quizRepository = quizRepository;
+            _questionRepository = questionRepository;
         }
         public Quiz Add(Quiz quiz)
         {
@@ -28,12 +31,16 @@ namespace QuizApp.Services
             }
             throw new NoQuizsAvailableException();
         }
-        public async Task<List<Quiz>> GetQuizzesByCategoryAsync(string category)
+        public List<Quiz> GetQuizzesByCategory(string category)
         {
-            var quizzes = await Task.Run(() => GetQuizs());
-            return quizzes
-                .Where(quiz => quiz.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
-                .ToList();
+            var quizzes = _quizRepository. GetAll();
+            if (quizzes != null)
+            {
+                return quizzes
+                    .Where(quiz => quiz.Category.Equals(category, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+            throw new NoQuizsAvailableException();
         }
 
         public Quiz GetQuizById(int id)
@@ -43,7 +50,7 @@ namespace QuizApp.Services
             {
                 return res;
             }
-            return null;
+            throw new NoQuizsAvailableException();
         }
         public async Task<Quiz> GetQuizByIdWithQuestions(int id)
         {
@@ -57,6 +64,27 @@ namespace QuizApp.Services
                 }
             }
             return quiz;
+        }
+        public bool DeleteQuizIfNoQuestions(int quizId)
+        {
+            // Check if there are any questions associated with the quiz
+            var questionsCount = _questionRepository.GetAll().Count(q => q.QuizId == quizId);
+
+            if (questionsCount == 0)
+            {
+                // No questions, safe to delete the quiz
+                var deletedQuiz = _quizRepository.Delete(quizId);
+
+                if (deletedQuiz == null)
+                {
+                    // The specified quiz does not exist
+                    throw new NoQuizsAvailableException();
+                }
+
+                return true; // Quiz deleted successfully
+            }
+
+            return false; // Quiz has questions, cannot delete
         }
     }
 

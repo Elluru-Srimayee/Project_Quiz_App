@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuizApp.Exceptions;
 using QuizApp.Interfaces;
 using QuizApp.Models;
@@ -18,7 +19,7 @@ namespace QuizApp.Controllers
         {
             _quizResultService = quizResultService;
         }
-
+        [Authorize]
         [HttpGet("byQuiz/{quizId}")]
         public ActionResult<IEnumerable<QuizResultDTO>> GetResultsByQuiz(int quizId)
         {
@@ -33,36 +34,22 @@ namespace QuizApp.Controllers
                 return NotFound($"No quiz results found for Quiz ID {quizId}. {e.Message}");
             }
          }
-
-        [HttpGet("byUser/{userId}")]
-        public ActionResult<IEnumerable<QuizResultDTO>> GetResultsByUser(string username)
+        [Authorize]
+        [HttpGet("results/{username}/{quizId}")]
+        public ActionResult<IList<QuizResultDTO>> GetResultsByUserAndQuiz(string username, int quizId)
         {
             try
             {
-                var results = _quizResultService.GetResultsByUser(username);
-                var resultDTOs = MapToQuizResultDTOs(results);
-                return Ok(resultDTOs);
-            }
-            catch (NoQuizResultsAvailableException e)
-            {
-                return NotFound($"No quiz results found for User ID {username}. {e.Message}");
-            }
-        }
-
-        [HttpPost]
-        public ActionResult AddResult(QuizResultDTO quizResultDTO)
-        {
-            try
-            {
-                var result = MapToQuizResult(quizResultDTO);
-                _quizResultService.AddQuizResult(result);
-                return Ok("Quiz result added successfully.");
+                var results = _quizResultService.GetResultsByUserAndQuiz(username, quizId);
+                return Ok(results);
             }
             catch (Exception e)
             {
-                return BadRequest($"Failed to add quiz result. {e.Message}");
+                return BadRequest($"Failed to retrieve quiz results. {e.Message}");
             }
         }
+
+        [Authorize]
         [HttpGet("mapToQuizResultDTOs")]
         public ActionResult<List<QuizResultDTO>> MapToQuizResultDTOs(IList<QuizResult> results)
         {
@@ -72,10 +59,12 @@ namespace QuizApp.Controllers
             {
                 var resultDTO = new QuizResultDTO
                 {
-        
+                    UserAnswer=result.UserAnswer,
                     Username = result.Username,
                     QuizId = result.QuizId,
                     Score = result.Score,
+                    QuestionId=result.QuestionId,
+                    IsCorrect=result.IsCorrect,
                    
                 };
 
@@ -84,28 +73,18 @@ namespace QuizApp.Controllers
 
             return resultDTOs;
         }
-        [HttpGet("mapToQuizResult")]
-        private QuizResult MapToQuizResult(QuizResultDTO quizResultDTO)
-        {
-            return new QuizResult
-            {
-                Username = quizResultDTO.Username,
-                QuizId = quizResultDTO.QuizId,
-                Score = quizResultDTO.Score,
-                
-            };
-        }
-        [HttpGet("results")]
-        public ActionResult<IEnumerable<QuizResultDTO>> GetAllQuizResults()
+        [Authorize]
+        [HttpGet("totalscore/{quizId}/{username}")]
+        public ActionResult<int> GetTotalScoreForUserInQuiz(int quizId, string username)
         {
             try
             {
-                var results = _quizResultService.GetAllQuizResults();
-                return Ok(results);
+                var totalScore = _quizResultService.GetTotalScoreForUserInQuiz(quizId, username);
+                return Ok(totalScore);
             }
-            catch (NoQuizResultsAvailableException e)
+            catch (Exception e)
             {
-                return NotFound($"No quiz results found. {e.Message}");
+                return BadRequest($"Failed to get total score. {e.Message}");
             }
         }
 

@@ -13,7 +13,7 @@ namespace QuizApp.Models
         [ForeignKey("QuizId")]
         public Quiz Quiz { get; set; }
 
-        public string? Username { get; set; } 
+        public string Username { get; set; } 
         [ForeignKey("Username")]
         public User User { get; set; }
 

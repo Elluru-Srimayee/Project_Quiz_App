@@ -118,6 +118,7 @@ namespace QuizApp.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("QuizResultId");
@@ -172,7 +173,9 @@ namespace QuizApp.Migrations
 
                     b.HasOne("QuizApp.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("Username");
+                        .HasForeignKey("Username")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Quiz");
 

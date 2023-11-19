@@ -2,10 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using QuizApp.Interfaces;
 using QuizApp.Models.DTOs;
-
 namespace QuizApp.Controllers
 {
-    public class UserController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
 
@@ -13,48 +14,41 @@ namespace QuizApp.Controllers
         {
             _userService = userService;
         }
-        public IActionResult Register()
+        [HttpPost("register")]
+        public ActionResult Register(UserDTO viewModel)
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Register(UserDTO viewModel)
-        {
+            string message = "";
             try
             {
                 var user = _userService.Register(viewModel);
                 if (user != null)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return Ok(user);
                 }
             }
             catch (DbUpdateException exp)
             {
-                ViewBag.Message = "User name already exits";
+                message = "Duplicate username";
             }
             catch (Exception)
             {
-                ViewBag.Message = "Invalid data. Coudld not register";
-                throw;
+
             }
 
-            return View();
+
+            return BadRequest(message);
         }
-        public IActionResult Login()
+        [HttpPost("login")]
+        public ActionResult Login(UserDTO viewModel)
         {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Login(UserDTO userDTO)
-        {
-            var result = _userService.Login(userDTO);
+            string message = "";
+            var result = _userService.Login(viewModel);
             if (result != null)
             {
-                TempData.Add("username", userDTO.Username);
-                return RedirectToAction("Index", "Home");
+                return Ok(result);
             }
-            ViewData["Message"] = "Invalid username or password";
-            return View();
+            message = "Invalid username or password";
+            return BadRequest(message);
         }
     }
 }

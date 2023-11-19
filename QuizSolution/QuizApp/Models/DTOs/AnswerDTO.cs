@@ -1,6 +1,9 @@
-﻿public class AnswerDTO
+﻿using System.ComponentModel.DataAnnotations;
+
+public class AnswerDTO
 {
-    public string? Username { get; internal set; }
+    [Required(ErrorMessage = "The Username field is required.")]
+    public string Username { get; set; }
     public int QuestionId { get; set; }
     public string UserAnswer { get; set; }
 }

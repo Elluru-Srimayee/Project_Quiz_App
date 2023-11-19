@@ -8,6 +8,7 @@ namespace QuizApp.Interfaces
         Quiz Add(Quiz quiz);
         Quiz GetQuizById(int id);
         Task<Quiz> GetQuizByIdWithQuestions(int id);
-        Task<List<Quiz>> GetQuizzesByCategoryAsync(string category);
+        List<Quiz> GetQuizzesByCategory(string category);
+        bool DeleteQuizIfNoQuestions(int quizId);
     }
 }

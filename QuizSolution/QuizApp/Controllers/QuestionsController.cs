@@ -39,6 +39,7 @@ namespace QuizApp.Controllers
             }
             return BadRequest(errorMessage);
         }
+        [Authorize]
         [HttpGet("getAll")]
         public IActionResult GetAllQuestions()
         {
@@ -54,7 +55,7 @@ namespace QuizApp.Controllers
             }
             return BadRequest(errorMessage);
         }
-
+        [Authorize]
         [HttpGet("byquiz/{quizId}")]
         public ActionResult<IEnumerable<Questions>> GetQuestionsByQuizId(int quizId)
         {
@@ -73,29 +74,15 @@ namespace QuizApp.Controllers
         }
 
         [Authorize(Roles = "Creator")]
-        [HttpPost("Remove")]
-        public IActionResult RemoveFromQuiz(QuestionDTO questionDTO)
+        [HttpDelete("Remove")]
+        public IActionResult RemoveFromQuiz(int quizid,int questionid)
         {
-            var result = _questionService.RemoveFromQuiz(questionDTO);
+            var result = _questionService.RemoveFromQuiz(quizid,questionid);
             if (result)
                 return Ok("Deleted Question Successfully");
             return BadRequest("Could not remove the Question from quiz");
         }
 
-
-        [HttpPost("evaluate/{quizId}")]
-        public ActionResult<QuizResultDTO> EvaluateAnswer(int quizId, [FromBody] AnswerDTO answerDTO)
-        {
-            try
-            {
-                var result = _quizResultService.EvaluateAnswer(quizId, answerDTO);
-                return Ok(result);
-            }
-            catch (Exception e)
-            {
-                return BadRequest($"Failed to evaluate the answer. {e.Message}");
-            }
-        }
-
+        
     }
 }

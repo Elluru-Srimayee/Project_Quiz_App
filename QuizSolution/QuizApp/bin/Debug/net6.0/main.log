@@ -4317,3 +4317,1139 @@ FROM [QuizResults] AS [q]
 2023-11-18 17:53:31,095 [41] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
 FROM [QuizResults] AS [q]
+2023-11-18 18:37:29,551 [182] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 18:37:29,867 [182] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (58ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-18 18:38:57,969 [180] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 18:38:59,240 [180] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (74ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-18 18:39:04,318 [180] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-18 18:39:20,001 [180] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (40ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-18 18:40:04,496 [8] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 18:40:04,979 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (53ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-18 18:40:08,870 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-18 18:40:13,982 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-18 18:41:58,994 [179] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 18:41:59,466 [179] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (8ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-18 18:42:04,134 [179] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (7ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-18 18:43:15,136 [179] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-18 18:45:55,246 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-18 18:45:55,345 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-18 18:45:55,357 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-18 18:45:55,364 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-18 19:22:52,665 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-18 19:22:52,772 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-18 19:22:52,780 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-18 19:22:52,783 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-18 19:34:46,332 [1] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:35:02,354 [1] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:35:02,967 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (27ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+2023-11-18 19:35:03,047 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (38ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2023-11-18 19:35:03,118 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+2023-11-18 19:35:03,121 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2023-11-18 19:35:03,184 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (29ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2023-11-18 19:35:03,215 [1] INFO Microsoft.EntityFrameworkCore.Migrations.?[?] - Applying migration '20231118140446_updated AnswerDTO'.
+2023-11-18 19:35:03,392 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE [QuizResults] DROP CONSTRAINT [FK_QuizResults_Users_Username];
+2023-11-18 19:35:04,428 [1] ERROR Microsoft.EntityFrameworkCore.Database.Command.?[?] - Failed executing DbCommand (1,011ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+DROP INDEX [IX_QuizResults_Username] ON [QuizResults];
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[QuizResults]') AND [c].[name] = N'Username');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [QuizResults] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [QuizResults] ALTER COLUMN [Username] nvarchar(450) NOT NULL;
+ALTER TABLE [QuizResults] ADD DEFAULT N'' FOR [Username];
+CREATE INDEX [IX_QuizResults_Username] ON [QuizResults] ([Username]);
+2023-11-18 19:42:54,699 [1] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:42:55,052 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (26ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+2023-11-18 19:42:55,146 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (70ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2023-11-18 19:42:55,151 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT 1
+2023-11-18 19:42:55,153 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2023-11-18 19:42:55,202 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2023-11-18 19:42:55,233 [1] INFO Microsoft.EntityFrameworkCore.Migrations.?[?] - Applying migration '20231118140446_updated AnswerDTO'.
+2023-11-18 19:42:55,353 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE [QuizResults] DROP CONSTRAINT [FK_QuizResults_Users_Username];
+2023-11-18 19:42:55,421 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (67ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+DROP INDEX [IX_QuizResults_Username] ON [QuizResults];
+DECLARE @var0 sysname;
+SELECT @var0 = [d].[name]
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[QuizResults]') AND [c].[name] = N'Username');
+IF @var0 IS NOT NULL EXEC(N'ALTER TABLE [QuizResults] DROP CONSTRAINT [' + @var0 + '];');
+ALTER TABLE [QuizResults] ALTER COLUMN [Username] nvarchar(450) NOT NULL;
+ALTER TABLE [QuizResults] ADD DEFAULT N'' FOR [Username];
+CREATE INDEX [IX_QuizResults_Username] ON [QuizResults] ([Username]);
+2023-11-18 19:42:55,684 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+ALTER TABLE [QuizResults] ADD CONSTRAINT [FK_QuizResults_Users_Username] FOREIGN KEY ([Username]) REFERENCES [Users] ([Username]) ON DELETE CASCADE;
+2023-11-18 19:42:55,692 [1] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20231118140446_updated AnswerDTO', N'6.0.24');
+2023-11-18 19:45:47,955 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-18 19:45:48,059 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-18 19:45:48,065 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-18 19:45:48,069 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-18 19:46:26,167 [21] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:46:27,381 [21] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (79ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-18 19:47:04,590 [27] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:47:04,610 [27] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-18 19:47:12,750 [27] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (98ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-18 19:47:18,919 [27] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-18 19:47:40,806 [27] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-18 19:48:26,656 [32] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:48:26,665 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-18 19:48:30,006 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-18 19:48:31,709 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-18 19:48:35,161 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-18 19:49:04,018 [37] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:49:04,033 [37] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-18 19:49:20,439 [40] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:49:20,448 [40] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-18 19:50:13,290 [41] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:50:13,296 [41] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-18 19:52:43,524 [45] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-18 19:52:43,531 [45] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:04:19,409 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 11:04:19,598 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 11:04:19,608 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 11:04:19,611 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 11:06:36,502 [17] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:06:39,064 [17] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (115ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:07:25,404 [25] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:07:25,478 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:08:21,835 [32] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:08:21,844 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:09:08,383 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:09:08,393 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:18:03,750 [75] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:18:04,671 [75] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (184ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 11:33:16,474 [138] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:33:17,280 [138] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (38ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Quizs] ([Category], [Description], [TimeLimit], [Title])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [QuizId]
+FROM [Quizs]
+WHERE @@ROWCOUNT = 1 AND [QuizId] = scope_identity();
+2023-11-19 11:42:38,412 [107] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:42:38,661 [107] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (27ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:45:50,746 [91] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:45:50,805 [91] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (53ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:46:59,322 [86] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:46:59,330 [86] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:47:10,956 [85] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:47:10,964 [85] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:47:31,327 [85] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:47:31,340 [85] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:51:18,690 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 11:51:18,790 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 11:51:18,797 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 11:51:18,800 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 11:52:19,653 [3] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:52:20,872 [3] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (67ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:53:08,757 [24] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:53:08,778 [24] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 11:55:29,963 [28] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:55:29,985 [28] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:55:36,650 [28] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (347ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:55:42,890 [28] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:55:54,912 [28] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (50ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:56:40,266 [34] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:56:40,278 [34] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:56:43,589 [34] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:56:45,105 [34] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:56:48,535 [34] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (7ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:57:22,044 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:57:22,056 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:57:22,069 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (6ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:57:22,083 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:57:22,098 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:57:38,943 [33] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:57:38,949 [33] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:57:38,956 [33] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:57:38,963 [33] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:57:38,970 [33] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:58:08,429 [35] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:58:08,439 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:58:08,446 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:58:08,455 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:58:08,465 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:58:37,769 [35] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:58:37,775 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:58:37,785 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:58:37,792 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:58:37,802 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:58:52,193 [42] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:58:52,198 [42] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:58:52,207 [42] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:58:52,216 [42] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:58:52,223 [42] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:59:18,958 [43] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:59:18,963 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:59:18,968 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:59:18,976 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:59:18,985 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 11:59:40,310 [43] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 11:59:40,317 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 11:59:40,327 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 11:59:40,334 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 11:59:40,344 [43] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 12:00:12,484 [50] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:00:12,490 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 12:00:12,495 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 12:00:12,503 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 12:00:12,510 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 12:00:26,376 [50] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:00:26,381 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 12:00:26,388 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 12:00:26,394 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 12:00:26,401 [50] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 12:00:58,299 [37] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:00:58,307 [37] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:06:53,581 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 12:06:53,744 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 12:06:53,755 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 12:06:53,758 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 12:07:13,990 [13] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:07:15,188 [13] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (66ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:09:35,271 [23] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:09:35,291 [23] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:10:33,996 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 12:10:34,099 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 12:10:34,105 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 12:10:34,107 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 12:11:09,798 [5] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:11:10,993 [5] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (73ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:12:07,105 [25] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:12:07,120 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:12:17,697 [26] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:12:17,703 [26] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:15:15,491 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 12:15:15,677 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 12:15:15,683 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 12:15:15,685 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 12:15:49,078 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 12:15:49,181 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 12:15:49,189 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 12:15:49,192 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 12:16:57,595 [22] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:16:59,272 [22] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (120ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 12:17:57,620 [18] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:17:57,640 [18] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 12:38:28,340 [91] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:38:28,409 [91] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 12:38:28,425 [91] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 12:38:50,719 [94] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:38:50,732 [94] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 12:42:46,213 [71] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:42:46,232 [71] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:43:15,995 [70] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:43:16,001 [70] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:51:43,696 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 12:51:43,970 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 12:51:43,977 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 12:51:43,979 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 12:52:42,896 [20] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:52:45,429 [20] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (70ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:52:52,137 [21] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:52:52,153 [21] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 12:53:30,506 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 12:53:30,791 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 12:53:30,806 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:07:41,261 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:07:41,393 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:07:41,403 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:07:41,407 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:11:18,661 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:11:18,800 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:11:18,836 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:11:18,840 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:13:22,048 [19] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported. Path: $.MoveNextAction.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](JsonConverter jsonConverter, Utf8JsonWriter writer, TValue& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:19:01,359 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:19:01,491 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:19:01,497 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:19:01,501 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:19:26,201 [8] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:19:27,453 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (62ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 13:19:27,619 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:20:05,766 [25] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:20:05,776 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 13:20:05,781 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:24:12,291 [32] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:24:12,302 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 13:24:12,307 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:26:20,912 [40] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:26:20,937 [40] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 13:27:25,513 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:27:25,627 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:27:25,633 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:27:25,635 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:28:22,013 [5] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported. Path: $.MoveNextAction.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](JsonConverter jsonConverter, Utf8JsonWriter writer, TValue& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:28:48,407 [21] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported. Path: $.MoveNextAction.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](JsonConverter jsonConverter, Utf8JsonWriter writer, TValue& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:28:48,431 [5] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:29:13,833 [5] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported. Path: $.MoveNextAction.
+ ---> System.NotSupportedException: Serialization and deserialization of 'System.Action' instances are not supported.
+   at System.Text.Json.Serialization.Converters.UnsupportedTypeConverter`1.Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteStack& state, Utf8JsonWriter writer)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryWrite(Utf8JsonWriter writer, T value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ThrowNotSupportedException(WriteStack& state, NotSupportedException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.Serialization.JsonConverter`1.WriteCoreAsObject(Utf8JsonWriter writer, Object value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteCore[TValue](JsonConverter jsonConverter, Utf8JsonWriter writer, TValue& value, JsonSerializerOptions options, WriteStack& state)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at System.Text.Json.JsonSerializer.WriteStreamAsync[TValue](Stream utf8Json, TValue value, JsonTypeInfo jsonTypeInfo, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:33:43,118 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:33:43,241 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:33:43,249 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:33:43,252 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:33:45,823 [8] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Quiz/category/{category}" for actions - QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp),QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:33:57,011 [15] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Quiz/category/{category}" for actions - QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp),QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:34:50,767 [20] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Conflicting method/path combination "GET api/Quiz/category/{category}" for actions - QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp),QuizApp.Controllers.QuizController.GetQuizzesByCategory (QuizApp). Actions require a unique method/path combination for Swagger/OpenAPI 3.0. Use ConflictingActionsResolver as a workaround
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 13:35:07,163 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:35:07,301 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:35:07,310 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:35:07,315 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:35:24,570 [3] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:35:26,026 [3] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (88ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 13:35:26,238 [3] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:35:45,510 [8] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:35:45,522 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Quizs] AS [q]
+2023-11-19 13:35:45,529 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+FROM [Quizs] AS [q]
+2023-11-19 13:36:06,229 [8] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:36:06,251 [8] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 13:36:46,533 [24] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:36:46,542 [24] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 13:37:40,700 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:37:41,455 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (117ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 13:37:41,516 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 13:37:41,980 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (52ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 13:37:53,988 [30] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:37:54,001 [30] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:38:00,785 [31] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:38:00,793 [31] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:38:07,494 [30] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:38:07,528 [30] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:38:17,412 [30] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:38:17,420 [30] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:38:23,736 [30] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:38:23,744 [30] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:38:45,743 [31] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:38:45,750 [31] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 13:39:45,620 [35] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:39:45,631 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 13:39:45,645 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 13:39:45,661 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 13:39:45,672 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 13:40:05,107 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:40:05,116 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:40:20,857 [38] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:40:20,867 [38] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:40:26,462 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:40:26,472 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:40:31,622 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:40:31,634 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (7ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:40:36,088 [36] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:40:36,094 [36] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 13:57:53,851 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 13:57:53,970 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 13:57:53,984 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 13:57:54,011 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 13:58:43,138 [21] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:58:44,774 [21] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (145ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 13:59:48,856 [24] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 13:59:48,884 [24] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (11ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:00:07,968 [26] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:00:07,978 [26] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:02:01,333 [17] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:02:01,341 [17] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:02:07,817 [17] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:02:07,882 [17] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (60ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:02:15,249 [30] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:02:15,255 [30] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:02:31,462 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:02:31,470 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:03,448 [33] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:03,478 [33] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:09,731 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:09,738 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:16,072 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:16,080 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:22,192 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:22,198 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:29,752 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:29,758 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:03:34,960 [29] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:03:34,972 [29] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuizResultId], [q].[IsCorrect], [q].[QuestionId], [q].[QuizId], [q].[Score], [q].[UserAnswer], [q].[Username]
+FROM [QuizResults] AS [q]
+2023-11-19 14:07:41,505 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:07:41,599 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:07:41,606 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:07:41,609 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:07:44,511 [12] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Ambiguous HTTP method for action - QuizApp.Controllers.QuizResultController.MapToQuizResultDTOs (QuizApp). Actions require an explicit HttpMethod binding for Swagger/OpenAPI 3.0
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 14:07:44,713 [3] ERROR Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.?[?] - An unhandled exception has occurred while executing the request.
+Swashbuckle.AspNetCore.SwaggerGen.SwaggerGeneratorException: Ambiguous HTTP method for action - QuizApp.Controllers.QuizResultController.MapToQuizResultDTOs (QuizApp). Actions require an explicit HttpMethod binding for Swagger/OpenAPI 3.0
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperations(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePaths(IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerDocumentWithoutFilters(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware.Invoke(HttpContext context)
+2023-11-19 14:08:45,321 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:08:45,467 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:08:45,473 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:08:45,476 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:10:02,440 [18] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:10:04,030 [18] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (119ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 14:11:24,623 [25] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:11:24,937 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (11ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT [t].[QuizId], [t].[Category], [t].[Description], [t].[TimeLimit], [t].[Title], [q0].[QuestionId], [q0].[Answer], [q0].[Option1], [q0].[Option2], [q0].[Option3], [q0].[Option4], [q0].[QuestionTxt], [q0].[QuizId], [q0].[UserAnswer]
+FROM (
+    SELECT TOP(1) [q].[QuizId], [q].[Category], [q].[Description], [q].[TimeLimit], [q].[Title]
+    FROM [Quizs] AS [q]
+    WHERE [q].[QuizId] = @__key_0
+) AS [t]
+LEFT JOIN [Questions] AS [q0] ON [t].[QuizId] = [q0].[QuizId]
+ORDER BY [t].[QuizId]
+2023-11-19 14:11:25,061 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 14:11:25,396 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Boolean), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (Size = 4000), @p5='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [QuizResults] ([IsCorrect], [QuestionId], [QuizId], [Score], [UserAnswer], [Username])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+SELECT [QuizResultId]
+FROM [QuizResults]
+WHERE @@ROWCOUNT = 1 AND [QuizResultId] = scope_identity();
+2023-11-19 14:12:45,299 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:12:45,400 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:12:45,407 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:12:45,410 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:13:34,389 [18] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:13:35,905 [18] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (122ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 14:16:40,484 [17] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:16:40,509 [17] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (8ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:16:40,917 [17] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (72ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Questions] ([Answer], [Option1], [Option2], [Option3], [Option4], [QuestionTxt], [QuizId], [UserAnswer])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [QuestionId]
+FROM [Questions]
+WHERE @@ROWCOUNT = 1 AND [QuestionId] = scope_identity();
+2023-11-19 14:17:08,803 [28] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:17:08,819 [28] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:18:06,488 [32] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:18:06,495 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:18:06,501 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:18:06,519 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (2ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 14:18:06,589 [32] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (38ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Questions]
+WHERE [QuestionId] = @p0;
+SELECT @@ROWCOUNT;
+2023-11-19 14:18:24,637 [35] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:18:24,643 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:18:24,660 [35] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (7ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Questions] ([Answer], [Option1], [Option2], [Option3], [Option4], [QuestionTxt], [QuizId], [UserAnswer])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+SELECT [QuestionId]
+FROM [Questions]
+WHERE @@ROWCOUNT = 1 AND [QuestionId] = scope_identity();
+2023-11-19 14:23:51,548 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:23:51,682 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:23:51,690 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:23:51,694 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:24:28,271 [18] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:24:30,086 [18] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (158ms) [Parameters=[@__key_0='?' (Size = 450)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [u].[Username], [u].[Key], [u].[Password], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Username] = @__key_0
+2023-11-19 14:24:57,301 [24] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:24:57,328 [24] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (9ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:25:27,317 [25] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:25:27,328 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:26:08,617 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+2023-11-19 14:27:07,380 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (5ms) [Parameters=[@__key_0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SELECT TOP(2) [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]
+WHERE [q].[QuestionId] = @__key_0
+2023-11-19 14:27:21,314 [25] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Int32)], CommandType='Text', CommandTimeout='30']
+SET NOCOUNT ON;
+DELETE FROM [Questions]
+WHERE [QuestionId] = @p0;
+SELECT @@ROWCOUNT;
+2023-11-19 14:28:57,635 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:28:57,728 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:28:57,734 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:28:57,737 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:37:38,888 [1] INFO Microsoft.Hosting.Lifetime.?[?] - Now listening on: http://localhost:5057
+2023-11-19 14:37:39,018 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Application started. Press Ctrl+C to shut down.
+2023-11-19 14:37:39,024 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Hosting environment: Development
+2023-11-19 14:37:39,027 [1] INFO Microsoft.Hosting.Lifetime.OnApplicationStarted[0] - Content root path: F:\Hexaware Training\Project\QuizSolution\QuizApp\
+2023-11-19 14:38:22,626 [18] INFO Microsoft.EntityFrameworkCore.Infrastructure.?[?] - Entity Framework Core 6.0.24 initialized 'QuizContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.24' with options: None
+2023-11-19 14:38:24,195 [18] INFO Microsoft.EntityFrameworkCore.Database.Command.?[?] - Executed DbCommand (67ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT [q].[QuestionId], [q].[Answer], [q].[Option1], [q].[Option2], [q].[Option3], [q].[Option4], [q].[QuestionTxt], [q].[QuizId], [q].[UserAnswer]
+FROM [Questions] AS [q]

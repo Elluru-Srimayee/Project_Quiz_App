@@ -12,8 +12,8 @@ using QuizApp.Contexts;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20231116083432_Initial")]
-    partial class Initial
+    [Migration("20231118140446_updated AnswerDTO")]
+    partial class updatedAnswerDTO
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,8 +32,9 @@ namespace QuizApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"), 1L, 1);
 
-                    b.Property<int>("Answer")
-                        .HasColumnType("int");
+                    b.Property<string>("Answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Option1")
                         .IsRequired()
@@ -56,15 +57,12 @@ namespace QuizApp.Migrations
                     b.Property<int>("QuizId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("UserAnswer")
+                        .HasColumnType("int");
 
                     b.HasKey("QuestionId");
 
                     b.HasIndex("QuizId");
-
-                    b.HasIndex("Username");
 
                     b.ToTable("Questions");
                 });
@@ -81,9 +79,6 @@ namespace QuizApp.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CreatorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -98,6 +93,43 @@ namespace QuizApp.Migrations
                     b.HasKey("QuizId");
 
                     b.ToTable("Quizs");
+                });
+
+            modelBuilder.Entity("QuizApp.Models.QuizResult", b =>
+                {
+                    b.Property<int>("QuizResultId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizResultId"), 1L, 1);
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("QuizId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Score")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserAnswer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("QuizResultId");
+
+                    b.HasIndex("QuizId");
+
+                    b.HasIndex("Username");
+
+                    b.ToTable("QuizResults");
                 });
 
             modelBuilder.Entity("QuizApp.Models.User", b =>
@@ -124,8 +156,19 @@ namespace QuizApp.Migrations
 
             modelBuilder.Entity("QuizApp.Models.Questions", b =>
                 {
-                    b.HasOne("QuizApp.Models.Quiz", null)
+                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
                         .WithMany("Questions")
+                        .HasForeignKey("QuizId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Quiz");
+                });
+
+            modelBuilder.Entity("QuizApp.Models.QuizResult", b =>
+                {
+                    b.HasOne("QuizApp.Models.Quiz", "Quiz")
+                        .WithMany()
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -135,6 +178,8 @@ namespace QuizApp.Migrations
                         .HasForeignKey("Username")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Quiz");
 
                     b.Navigation("User");
                 });

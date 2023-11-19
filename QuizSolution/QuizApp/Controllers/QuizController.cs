@@ -54,36 +54,21 @@ namespace QuizApp.Controllers
             }
             return BadRequest(errorMessage);
         }
-        [HttpPost("{id}")]
-        public async Task<ActionResult> GetById(QuizDTO quizDTO)
+        
+        [HttpGet("category/{category}")]
+        public ActionResult<IList<QuizDTO>> GetQuizzesByCategory(string category)
         {
-            string errorMessage = string.Empty;
             try
             {
-                var result = await _quizService.GetQuizByIdWithQuestions(quizDTO.Id);
-                return Ok(result);
+                var quizzes = _quizService.GetQuizzesByCategory(category);
+                return Ok(quizzes);
             }
-            catch (NoQuizsAvailableException e)
+            catch (Exception e)
             {
-                errorMessage = e.Message;
+                return BadRequest($"Failed to retrieve quizzes. {e.Message}");
             }
-            return BadRequest(errorMessage);
         }
-        [HttpPost("category/{category}")]
-        public async Task<ActionResult> GetByCategory(QuizDTO quizDTO)
-        {
-            string errorMessage = string.Empty;
-            try
-            {
-                var result = await _quizService.GetQuizzesByCategoryAsync(quizDTO.Category);
-                return Ok(result);
-            }
-            catch (NoQuizsAvailableException e)
-            {
-                errorMessage = e.Message;
-            }
-            return BadRequest(errorMessage);
-        }
+        [Authorize]
         [HttpGet("quiz/{quizId}/questions")]
         public ActionResult<IEnumerable<QuestionDTO>> GetQuestionsForQuiz(int quizId)
         {
@@ -97,6 +82,7 @@ namespace QuizApp.Controllers
                 return NotFound($"No questions found for Quiz ID {quizId}. {e.Message}");
             }
         }
+        [Authorize]
         [HttpPost("evaluate/{quizId}")]
         public ActionResult<QuizResultDTO> EvaluateAnswer(int quizId, [FromBody] AnswerDTO answerDTO)
         {
@@ -110,6 +96,38 @@ namespace QuizApp.Controllers
                 return BadRequest($"Failed to evaluate the answer. {e.Message}");
             }
         }
+        [Authorize]
+        [HttpGet("leaderboard/{quizId}")]
+        public ActionResult<IEnumerable<LeaderboardEntryDTO>> GetLeaderboard(int quizId)
+        {
+            var leaderboard = _quizResultService.GetLeaderboard(quizId);
 
+            if (leaderboard == null || !leaderboard.Any())
+            {
+                return NotFound($"No leaderboard found for Quiz ID {quizId}");
+            }
+
+            return Ok(leaderboard);
+        }
+        [Authorize]
+        [HttpDelete("{quizId}")]
+        public IActionResult DeleteQuiz(int quizId)
+        {
+            try
+            {
+                var deleted = _quizService.DeleteQuizIfNoQuestions(quizId);
+
+                if (deleted)
+                {
+                    return Ok($"Quiz with ID {quizId} deleted successfully.");
+                }
+
+                return BadRequest($"Cannot delete the quiz with ID {quizId} as it has questions associated with it.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
     }
 }

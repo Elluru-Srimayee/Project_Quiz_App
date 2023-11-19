@@ -58,14 +58,28 @@ namespace QuizApp.Services
                 .Where(result => result.QuizId == quizId)
                 .ToList();
         }
+        public int GetTotalScoreForUserInQuiz(int quizId, string username)
+        {
+            var quizResults = _quizResultRepository
+                .GetAll()
+                .Where(result => result.QuizId == quizId && result.Username.Equals(username))
+                .ToList();
 
-        public IList<QuizResult> GetResultsByUser(string username)
+            // Calculate total score by summing up individual scores
+            int totalScore = quizResults.Sum(result => result.Score);
+
+            return totalScore;
+        }
+
+        public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId)
         {
             return _quizResultRepository
                 .GetAll()
-                .Where(result => result.Username != null && result.Username.Equals(username))
+                .Where(result => result.Username == username && result.QuizId == quizId)
+                .Select(result => MapToQuizResultDTO(result))
                 .ToList();
         }
+
 
         public QuizResult UpdateQuizResult(QuizResult quizResult)
         {
@@ -122,7 +136,7 @@ namespace QuizApp.Services
 
             var resultDTO = new QuizResultDTO
             {
-
+                Username = result.Username,
                 UserAnswer = result.UserAnswer,
                 QuizId = result.QuizId,
                 Score = result.Score,
@@ -131,6 +145,21 @@ namespace QuizApp.Services
 
             return resultDTO;
         }
+        public IList<LeaderboardEntryDTO> GetLeaderboard(int quizId)
+        {
+            return _quizResultRepository
+                .GetAll()
+                .Where(result => result.QuizId == quizId)
+                .GroupBy(result => result.Username)
+                .Select(group => new LeaderboardEntryDTO
+                {
+                    Username = group.Key,
+                    Score = group.Sum(result => result.Score)
+                })
+                .OrderByDescending(entry => entry.Score)
+                .ToList();
+        }
+
 
     }
 }

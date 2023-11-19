@@ -75,7 +75,7 @@ namespace QuizApp.Services
                             // Map entity list to DTO list with required properties
                             var questions = quizQuestions.Select((q, index) => new Questions
                             {
-                                QuestionId = index + 1, // Start from 1 and increment
+                                QuestionId = q.QuestionId, 
                                 QuestionTxt = q.QuestionTxt,
                                 Option1 = q.Option1,
                                 Option2 = q.Option2,
@@ -101,14 +101,14 @@ namespace QuizApp.Services
                         .FirstOrDefault(ci => ci.QuizId == quizId && ci.QuestionId == questionId);
                     return question != null ? true : false;
                 }
-                public bool RemoveFromQuiz(QuestionDTO questionDTO)
+                public bool RemoveFromQuiz(int quizid,int questionid)
                 {
-                    var questionCheck = _questionRepository.GetAll().FirstOrDefault(c => c.QuestionId == questionDTO.QuestionId);
-                    int quizId = questionDTO.QuizId;
-                    bool CheckQuizQuestion = CheckIfQuestionAlreadyPresent(questionDTO.QuestionId, questionDTO.QuizId);
+                    var questionCheck = _questionRepository.GetAll().FirstOrDefault(c => c.QuestionId == questionid);
+                   
+                    bool CheckQuizQuestion = CheckIfQuestionAlreadyPresent(questionid, quizid);
                     if (CheckQuizQuestion)
                     {
-                        var result = _questionRepository.Delete(questionDTO.QuestionId);
+                        var result = _questionRepository.Delete(questionid);
                         return true;
 
                     }
