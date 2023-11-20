@@ -88,6 +88,29 @@ namespace QuizApp.Controllers
         {
             try
             {
+                // Fetch questions for the given quiz
+                var questions = _questionService.GetQuestionsByQuizId(quizId);
+
+                if (questions.Count == 0)
+                {
+                    return NotFound($"No questions found for Quiz ID {quizId}");
+                }
+
+                // Display the questions along with their real question IDs
+                var questionsWithIds = questions.Select(q => new QuestionDTO
+                {
+                    QuestionId = q.QuestionId,
+                    QuizId = q.QuizId,
+                    QuestionTxt = q.QuestionTxt,
+                    Option1 = q.Option1,
+                    Option2 = q.Option2,
+                    Option3 = q.Option3,
+                    Option4 = q.Option4,
+                }).ToList();
+
+                // Log or return the questions to the user (this depends on frontend implementation)
+
+                // evaluating the answers
                 var result = _quizResultService.EvaluateAnswer(quizId, answerDTO);
                 return Ok(result);
             }
@@ -96,6 +119,7 @@ namespace QuizApp.Controllers
                 return BadRequest($"Failed to evaluate the answer. {e.Message}");
             }
         }
+
         [Authorize]
         [HttpGet("leaderboard/{quizId}")]
         public ActionResult<IEnumerable<LeaderboardEntryDTO>> GetLeaderboard(int quizId)
@@ -109,7 +133,7 @@ namespace QuizApp.Controllers
 
             return Ok(leaderboard);
         }
-        [Authorize]
+        [Authorize(Roles = "Creator")]
         [HttpDelete("{quizId}")]
         public IActionResult DeleteQuiz(int quizId)
         {
@@ -129,5 +153,42 @@ namespace QuizApp.Controllers
                 return StatusCode(500, $"An error occurred: {ex.Message}");
             }
         }
+        [Authorize]
+        [HttpPut("{quizId}")]
+        public IActionResult UpdateQuiz(int quizId, [FromBody] Quiz updatedQuiz)
+        {
+            try
+            {
+                // Validate if the provided quizId matches the quizId in the updatedQuiz
+                if (quizId != updatedQuiz.QuizId)
+                {
+                    return BadRequest("Mismatched quizId in the request.");
+                }
+
+                // Get the existing quiz from the service
+                var existingQuiz = _quizService.GetQuizById(quizId);
+
+                // Check if the quiz exists
+                if (existingQuiz == null)
+                {
+                    return NotFound($"Quiz with ID {quizId} not found.");
+                }
+
+                // Update the properties of the existing quiz with the values from the updatedQuiz
+                existingQuiz.Title = updatedQuiz.Title;
+                existingQuiz.Description = updatedQuiz.Description;
+                existingQuiz.TimeLimit = updatedQuiz.TimeLimit;
+
+                // Update the quiz in the service
+                _quizService.UpdateQuiz(existingQuiz);
+
+                return Ok("Quiz updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
     }
 }

@@ -51,11 +51,12 @@ namespace QuizApp.Services
             return _quizResultRepository.GetById(quizResultId);
         }
 
-        public IList<QuizResult> GetResultsByQuiz(int quizId)
+        public IList<QuizResultDTO> GetResultsByQuiz(int quizId)
         {
             return _quizResultRepository
                 .GetAll()
                 .Where(result => result.QuizId == quizId)
+                .Select(result=>MapToQuizResultDTO(result))
                 .ToList();
         }
         public int GetTotalScoreForUserInQuiz(int quizId, string username)

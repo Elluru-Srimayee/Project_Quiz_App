@@ -114,5 +114,34 @@ namespace QuizApp.Services
                     }
                     return false;
                 }
+        public void UpdateQuestion(int quizId, int questionId, Questions updatedQuestion)
+        {
+            if (updatedQuestion == null)
+            {
+                throw new ArgumentNullException(nameof(updatedQuestion), "Updated question data is null.");
+            }
+
+            
+            // Ensure the question with the provided IDs exists
+            var existingQuestion = _questionRepository.GetById(questionId);
+
+            if (existingQuestion == null || existingQuestion.QuizId != quizId)
+            {
+                throw new InvalidOperationException($"Question with ID {questionId} not found in Quiz with ID {quizId}.");
+            }
+
+            // Update the properties of the existing question with the values from the updatedQuestion
+            existingQuestion.QuestionTxt = updatedQuestion.QuestionTxt;
+            existingQuestion.Option1 = updatedQuestion.Option1;
+            existingQuestion.Option2 = updatedQuestion.Option2;
+            existingQuestion.Option3 = updatedQuestion.Option3;
+            existingQuestion.Option4 = updatedQuestion.Option4;
+            existingQuestion.Answer = updatedQuestion.Answer;
+
+            // Update the question in the repository
+            _questionRepository.Update(existingQuestion);
         }
+
+       
+    }
 }

@@ -40,6 +40,21 @@ namespace QuizApp.Controllers
             return BadRequest(errorMessage);
         }
         [Authorize]
+        [HttpPut("update/{quizId}/question/{questionId}")]
+        public IActionResult UpdateQuestion(int quizId, int questionId, [FromBody] Questions updatedQuestion)
+        {
+            try
+            {
+                _questionService.UpdateQuestion(quizId, questionId, updatedQuestion);
+                return Ok($"Question with ID {questionId} in Quiz with ID {quizId} updated successfully.");
+            }
+            catch (Exception e)
+            {
+                return BadRequest($"Failed to update the question. {e.Message}");
+            }
+        }
+
+        [Authorize]
         [HttpGet("getAll")]
         public IActionResult GetAllQuestions()
         {

@@ -26,8 +26,8 @@ namespace QuizApp.Controllers
             try
             {
                 var results = _quizResultService.GetResultsByQuiz(quizId);
-                var resultDTOs = MapToQuizResultDTOs(results);
-                return Ok(resultDTOs);
+                
+                return Ok(results);
             }
             catch (NoQuizResultsAvailableException e)
             {
@@ -35,44 +35,28 @@ namespace QuizApp.Controllers
             }
          }
         [Authorize]
-        [HttpGet("results/{username}/{quizId}")]
-        public ActionResult<IList<QuizResultDTO>> GetResultsByUserAndQuiz(string username, int quizId)
+        [HttpGet("results-with-total-score/{username}/{quizId}")]
+        public ActionResult<QuizResultsWithTotalScoreDTO> GetResultsWithTotalScoreByUserAndQuiz(string username, int quizId)
         {
             try
             {
                 var results = _quizResultService.GetResultsByUserAndQuiz(username, quizId);
-                return Ok(results);
+                var totalScore = _quizResultService.GetTotalScoreForUserInQuiz(quizId, username);
+
+                var resultsWithTotalScoreDTO = new QuizResultsWithTotalScoreDTO
+                {
+                    TotalScore = totalScore,
+                    QuizResults = results
+                };
+
+                return Ok(resultsWithTotalScoreDTO);
             }
             catch (Exception e)
             {
-                return BadRequest($"Failed to retrieve quiz results. {e.Message}");
+                return BadRequest($"Failed to retrieve quiz results with total score. {e.Message}");
             }
         }
 
-        [Authorize]
-        [HttpGet("mapToQuizResultDTOs")]
-        public ActionResult<List<QuizResultDTO>> MapToQuizResultDTOs(IList<QuizResult> results)
-        {
-            var resultDTOs = new List<QuizResultDTO>();
-
-            foreach (var result in results)
-            {
-                var resultDTO = new QuizResultDTO
-                {
-                    UserAnswer=result.UserAnswer,
-                    Username = result.Username,
-                    QuizId = result.QuizId,
-                    Score = result.Score,
-                    QuestionId=result.QuestionId,
-                    IsCorrect=result.IsCorrect,
-                   
-                };
-
-                resultDTOs.Add(resultDTO);
-            }
-
-            return resultDTOs;
-        }
         [Authorize]
         [HttpGet("totalscore/{quizId}/{username}")]
         public ActionResult<int> GetTotalScoreForUserInQuiz(int quizId, string username)
@@ -80,7 +64,7 @@ namespace QuizApp.Controllers
             try
             {
                 var totalScore = _quizResultService.GetTotalScoreForUserInQuiz(quizId, username);
-                return Ok(totalScore);
+                return Ok("The Total Score is:"+totalScore);
             }
             catch (Exception e)
             {

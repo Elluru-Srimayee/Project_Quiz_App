@@ -23,12 +23,12 @@ namespace QuizApp.Repositories
 
         public Quiz Delete(int key)
         {
-            var product = GetById(key);
-            if (product != null)
+            var quiz = GetById(key);
+            if (quiz != null)
             {
                 _context.Quizs.Remove(quiz);
                 _context.SaveChanges();
-                return product;
+                return quiz;
             }
             return null;
         }
@@ -38,6 +38,11 @@ namespace QuizApp.Repositories
             if (_context.Quizs.Count() == 0)
                 return null;
             return _context.Quizs.ToList();
+        }
+        public Quiz GetQuiz(int key)
+        {
+            return _context.Quizs
+                .FirstOrDefault(q => q.QuizId == key);
         }
 
         public Quiz GetById(int key)

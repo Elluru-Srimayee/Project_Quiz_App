@@ -26,10 +26,11 @@ namespace QuizApp.Contexts
                 question.HasKey(q => q.QuestionId);
             });
 
-            modelBuilder.Entity<Questions>(question =>
+            modelBuilder.Entity<QuizResult>(quizResult =>
             {
-                question.HasKey(q => q.QuestionId);
+                quizResult.HasKey(q => q.QuizResultId);
             });
+            
         }
     }
 

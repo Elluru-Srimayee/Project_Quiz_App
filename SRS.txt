@@ -1,7 +1,10 @@
 Title: Quiz App
 
 Description:
-The Quiz App is a web-based application that allows users to take quizzes on various topics. It provides a user-friendly interface for quiz takers and an admin panel for quiz creators. Users can select and participate in quizzes, answer questions, and receive scores. Quiz creators can design quizzes, add questions and answer choices, and view quiz results.
+The Quiz App is a web-based application that allows users to take quizzes on various topics. 
+It provides a user-friendly interface for quiz takers and an admin panel for quiz creators. 
+Users can select and participate in quizzes, answer questions, and receive scores. 
+Quiz creators can design quizzes, add questions and answer choices, and view quiz results.
 
 
 
