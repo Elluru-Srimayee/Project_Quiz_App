@@ -17,27 +17,34 @@ namespace QuizApp.Controllers
         private readonly IQuestionService _questionService;
         private readonly IQuizResultService _quizResultService;
 
-        public QuizController(IQuizService quizService,IQuestionService questionService, IQuizResultService quizResultService)
+        // Constructor injection of services
+        public QuizController(IQuizService quizService, IQuestionService questionService, IQuizResultService quizResultService)
         {
             _quizService = quizService;
             _questionService = questionService;
             _quizResultService = quizResultService;
         }
+
+        // Endpoint to get all quizzes
         [HttpGet]
         public ActionResult Get()
         {
             string errorMessage = string.Empty;
             try
             {
+                // Attempt to get all quizzes
                 var result = _quizService.GetQuizs();
-                return Ok(result);
+                return Ok(result); // Return success response
             }
             catch (NoQuizsAvailableException e)
             {
                 errorMessage = e.Message;
             }
-            return BadRequest(errorMessage);
+
+            return BadRequest(errorMessage); // Return error response
         }
+
+        // Endpoint to create a new quiz
         [Authorize(Roles = "Creator")]
         [HttpPost]
         public ActionResult Create(Quiz quiz)
@@ -45,43 +52,52 @@ namespace QuizApp.Controllers
             string errorMessage = string.Empty;
             try
             {
+                // Attempt to add a new quiz
                 var result = _quizService.Add(quiz);
-                return Ok(result);
+                return Ok(result); // Return success response
             }
             catch (Exception e)
             {
                 errorMessage = e.Message;
             }
-            return BadRequest(errorMessage);
+
+            return BadRequest(errorMessage); // Return error response
         }
-        
+
+        // Endpoint to get quizzes by category
         [HttpGet("category/{category}")]
         public ActionResult<IList<QuizDTO>> GetQuizzesByCategory(string category)
         {
             try
             {
+                // Attempt to get quizzes by category
                 var quizzes = _quizService.GetQuizzesByCategory(category);
-                return Ok(quizzes);
+                return Ok(quizzes); // Return success response
             }
             catch (Exception e)
             {
-                return BadRequest($"Failed to retrieve quizzes. {e.Message}");
+                return BadRequest($"Failed to retrieve quizzes. {e.Message}"); // Return error response
             }
         }
+
+        // Endpoint to get questions for a quiz
         [Authorize]
         [HttpGet("quiz/{quizId}/questions")]
         public ActionResult<IEnumerable<QuestionDTO>> GetQuestionsForQuiz(int quizId)
         {
             try
             {
+                // Attempt to get questions by quiz ID
                 var questions = _questionService.GetQuestionsByQuizId(quizId);
-                return Ok(questions);
+                return Ok(questions); // Return success response
             }
             catch (NoQuestionsAvailableException e)
             {
-                return NotFound($"No questions found for Quiz ID {quizId}. {e.Message}");
+                return NotFound($"No questions found for Quiz ID {quizId}. {e.Message}"); // Return error response
             }
         }
+
+        // Endpoint to evaluate an answer for a quiz
         [Authorize]
         [HttpPost("evaluate/{quizId}")]
         public ActionResult<QuizResultDTO> EvaluateAnswer(int quizId, [FromBody] AnswerDTO answerDTO)
@@ -110,50 +126,57 @@ namespace QuizApp.Controllers
 
                 // Log or return the questions to the user (this depends on frontend implementation)
 
-                // evaluating the answers
+                // Evaluating the answers
                 var result = _quizResultService.EvaluateAnswer(quizId, answerDTO);
-                return Ok(result);
+                return Ok(result); // Return success response
             }
             catch (Exception e)
             {
-                return BadRequest($"Failed to evaluate the answer. {e.Message}");
+                return BadRequest($"Failed to evaluate the answer. {e.Message}"); // Return error response
             }
         }
 
+        // Endpoint to get leaderboard for a quiz
         [Authorize]
         [HttpGet("leaderboard/{quizId}")]
         public ActionResult<IEnumerable<LeaderboardEntryDTO>> GetLeaderboard(int quizId)
         {
+            // Attempt to get the leaderboard for the quiz
             var leaderboard = _quizResultService.GetLeaderboard(quizId);
 
             if (leaderboard == null || !leaderboard.Any())
             {
-                return NotFound($"No leaderboard found for Quiz ID {quizId}");
+                return NotFound($"No leaderboard found for Quiz ID {quizId}"); // Return error response
             }
 
-            return Ok(leaderboard);
+            return Ok(leaderboard); // Return success response
         }
+
+        // Endpoint to delete a quiz if it has no associated questions
         [Authorize(Roles = "Creator")]
         [HttpDelete("{quizId}")]
         public IActionResult DeleteQuiz(int quizId)
         {
             try
             {
+                // Attempt to delete the quiz if it has no associated questions
                 var deleted = _quizService.DeleteQuizIfNoQuestions(quizId);
 
                 if (deleted)
                 {
-                    return Ok($"Quiz with ID {quizId} deleted successfully.");
+                    return Ok($"Quiz with ID {quizId} deleted successfully."); // Return success response
                 }
 
-                return BadRequest($"Cannot delete the quiz with ID {quizId} as it has questions associated with it.");
+                return BadRequest($"Cannot delete the quiz with ID {quizId} as it has questions associated with it."); // Return error response
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
+                return StatusCode(500, $"An error occurred: {ex.Message}"); // Return server error response
             }
         }
-        [Authorize]
+
+        // Endpoint to update a quiz
+        [Authorize(Roles = "Creator")]
         [HttpPut("{quizId}")]
         public IActionResult UpdateQuiz(int quizId, [FromBody] Quiz updatedQuiz)
         {
@@ -182,13 +205,12 @@ namespace QuizApp.Controllers
                 // Update the quiz in the service
                 _quizService.UpdateQuiz(existingQuiz);
 
-                return Ok("Quiz updated successfully.");
+                return Ok("Quiz updated successfully."); // Return success response
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"An error occurred: {ex.Message}");
+                return StatusCode(500, $"An error occurred: {ex.Message}"); // Return server error response
             }
         }
-
     }
 }
