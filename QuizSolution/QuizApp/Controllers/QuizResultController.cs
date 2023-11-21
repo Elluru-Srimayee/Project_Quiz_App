@@ -13,11 +13,13 @@ namespace QuizApp.Controllers
     public class QuizResultController : ControllerBase
     {
         private readonly IQuizResultService _quizResultService;
+        private readonly ILogger _logger;
 
         // Inject the quiz result service through constructor injection
-        public QuizResultController(IQuizResultService quizResultService)
+        public QuizResultController(IQuizResultService quizResultService, ILogger<QuizController> logger)
         {
             _quizResultService = quizResultService;
+            _logger = logger;
         }
 
         // Endpoint to get quiz results by quiz ID
@@ -29,11 +31,12 @@ namespace QuizApp.Controllers
             {
                 // Get quiz results for the specified quiz ID
                 var results = _quizResultService.GetResultsByQuiz(quizId);
-
+                _logger.LogInformation("Got the QuizResults successfully");
                 return Ok(results); // Return the quiz results
             }
             catch (NoQuizResultsAvailableException e)
             {
+                _logger.LogError("Could not get quizResults");
                 return NotFound($"No quiz results found for Quiz ID {quizId}. {e.Message}");
             }
         }
@@ -57,11 +60,12 @@ namespace QuizApp.Controllers
                     TotalScore = totalScore,
                     QuizResults = results
                 };
-
+                _logger.LogInformation("Got the QuizResults along with totalscore");
                 return Ok(resultsWithTotalScoreDTO); // Return the DTO
             }
             catch (Exception e)
             {
+                _logger.LogError("Could not get quizresults with total score");
                 return BadRequest($"Failed to retrieve quiz results with total score. {e.Message}");
             }
         }
@@ -75,12 +79,13 @@ namespace QuizApp.Controllers
             {
                 // Get total score for the specified user and quiz ID
                 var totalScore = _quizResultService.GetTotalScoreForUserInQuiz(quizId, username);
-
+                _logger.LogInformation("Got the total score");
                 // Return the total score
                 return Ok("The Total Score is:" + totalScore);
             }
             catch (Exception e)
             {
+                _logger.LogError("Failed to get the totalscore");
                 return BadRequest($"Failed to get total score. {e.Message}");
             }
         }

@@ -63,7 +63,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get all questions
-        [Authorize("Creator")]
+        [Authorize(Roles ="Creator")]
         [HttpGet("getAll")]
         public IActionResult GetAllQuestions()
         {
