@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using QuizApp.Exceptions;
 using QuizApp.Interfaces;
@@ -10,13 +11,14 @@ namespace QuizApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("reactApp")]
     public class QuizResultController : ControllerBase
     {
         private readonly IQuizResultService _quizResultService;
         private readonly ILogger _logger;
 
         // Inject the quiz result service through constructor injection
-        public QuizResultController(IQuizResultService quizResultService, ILogger<QuizController> logger)
+        public QuizResultController(IQuizResultService quizResultService, ILogger<QuizResultController> logger)
         {
             _quizResultService = quizResultService;
             _logger = logger;

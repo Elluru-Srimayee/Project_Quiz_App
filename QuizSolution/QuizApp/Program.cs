@@ -21,6 +21,7 @@ namespace QuizApp
             //builder.Services.AddControllersWithViews();
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
+            #region Swagger
             builder.Services.AddSwaggerGen(opt =>
             {
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -49,7 +50,18 @@ namespace QuizApp
                      }
                  });
             });
+            #endregion
 
+            #region CORS
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("reactApp", opts =>
+                {
+                    opts.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                });
+            });
+            #endregion
+            #region Utilities
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -78,6 +90,7 @@ namespace QuizApp
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<IQuizResultService, QuizResultService>();
             builder.Services.AddSingleton<TimerService>();
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -89,6 +102,9 @@ namespace QuizApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseCors("reactApp");
+
 
             app.UseAuthentication();
             app.UseAuthorization();

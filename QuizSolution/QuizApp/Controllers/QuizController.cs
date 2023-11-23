@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuizApp.Exceptions;
@@ -11,6 +12,7 @@ namespace QuizApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("reactApp")]
     public class QuizController : ControllerBase
     {
         private readonly IQuizService _quizService;
@@ -45,7 +47,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to create a new quiz
-        [Authorize(Roles = "Creator")]
+       // [Authorize(Roles = "Creator")]
         [HttpPost]
         public ActionResult Create(Quiz quiz)
         {
