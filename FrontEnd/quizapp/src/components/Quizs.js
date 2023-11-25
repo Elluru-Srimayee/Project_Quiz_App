@@ -28,6 +28,8 @@ function Quizs(){
             <div>
                 {quizList.map((quiz)=>
                 <div key={quiz.quizId} className="alert alert-primary">
+                    Quiz Id:{quiz.quizId}
+                    <br/>
                     Quiz Title:{quiz.title}
                     <br/>
                     Quiz Description:{quiz.description}

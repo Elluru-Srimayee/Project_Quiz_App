@@ -10,8 +10,9 @@ function RegisterUser(){
     const [role,setRole] = useState("");
     var [usernameError,setUsernameError]=useState("");
     var [passwordError,setPasswordError]=useState("");
+
     var checkUSerData = ()=>{
-        if(username=='')
+        if(username==='')
         {
             setUsernameError("Username cannot be empty");
             return false;
@@ -20,14 +21,14 @@ function RegisterUser(){
             setUsernameError("");
         }
            
-        if(password==''){
+        if(password===''){
             setPasswordError("Password cannot be empty");
             return false;
         }
         else{
             setPasswordError("");
         }
-        if(role=='Select Role'){
+        if(role==='Select Role'){
             return false;
         }
         return true;
@@ -35,7 +36,7 @@ function RegisterUser(){
     const signUp = (event)=>{
         event.preventDefault();
         var checkData = checkUSerData();
-        if(checkData==false)
+        if(checkData===false)
         {
             alert('please check your data')
             return;
@@ -56,6 +57,7 @@ function RegisterUser(){
     
     return(
         <form className="registerForm">
+            <h1>Register</h1>
             <label className="form-control">Username</label>
             <input type="text" className="form-control" value={username}
                     onChange={(e)=>{setUsername(e.target.value)}}/>
@@ -65,7 +67,7 @@ function RegisterUser(){
                     onChange={(e)=>{setPassword(e.target.value)}}/>
             <label className="alert alert-danger">{passwordError}</label>
             <label className="form-control">Re-Type Password</label>
-            <input type="text" className="form-control" value={repassword}
+            <input type="password" className="form-control" value={repassword}
                     onChange={(e)=>{setrePassword(e.target.value)}}/>
             <label className="form-control">Role</label>
             <select className="form-select" onChange={(e) => { setRole(e.target.value) }}>
@@ -78,6 +80,7 @@ function RegisterUser(){
             <button className="btn btn-primary button" onClick={signUp}>Sign Up</button>
             
             <button className="btn btn-danger button">Cancel</button>
+
         </form>
     );
 }

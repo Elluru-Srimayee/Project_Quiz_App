@@ -43,7 +43,7 @@ function LoginUser(){
             username: username,
             role:	role,
             password:password
-    })
+        })
         .then((userData)=>{
             console.log(userData)
         })
@@ -54,6 +54,7 @@ function LoginUser(){
     
     return(
         <form className="loginForm">
+            <h1>Login</h1>
             <label className="form-control">Username</label>
             <input type="text" className="form-control" value={username}
                     onChange={(e)=>{setUsername(e.target.value)}}/>
