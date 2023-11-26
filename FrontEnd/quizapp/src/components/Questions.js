@@ -28,6 +28,8 @@ function Questions(){
             <div>
                 {questionList.map((question)=>
                 <div key={question.questionId} className="alert alert-primary">
+                    QuestionId:{question.questionId}
+                    <br/>
                     Question:{question.questionTxt}
                     <br/>
                     Option A:{question.option1}

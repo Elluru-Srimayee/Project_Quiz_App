@@ -1,11 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-import RegisterUser from './components/RegisterUser';
-import LoginUser from './components/LoginUser';
 import Quizs from './components/Quizs';
 import AddQuiz from './components/AddQuiz'
-import UpdateQuiz from './components/UpdateQuiz';
-import DeleteQuiz from './components/DeleteQuiz';
+import UpdateQuestion from './components/UpdateQuestion';
+import Questions from './components/Questions';
+import DeleteQuestion from './components/DeleteQuestion';
 import QuestionsByQuizId from './components/QuestionsByQuizId';
 
 function App() {
@@ -15,10 +13,10 @@ function App() {
         <div className="container text-center">
           <div className="row">
             <div className="col">
-              <QuestionsByQuizId/>
+              <DeleteQuestion/>
             </div>
             <div className="col">
-              <Quizs/>
+              <Questions/>
             </div>
           </div>
         </div>

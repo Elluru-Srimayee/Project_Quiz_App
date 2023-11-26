@@ -9,7 +9,7 @@ function LoginUser(){
     var [usernameError,setUsernameError]=useState("");
     var [passwordError,setPasswordError]=useState("");
     var checkUSerData = ()=>{
-        if(username=='')
+        if(username==='')
         {
             setUsernameError("Username cannot be empty");
             return false;
@@ -18,14 +18,14 @@ function LoginUser(){
             setUsernameError("");
         }
            
-        if(password==''){
+        if(password===''){
             setPasswordError("Password cannot be empty");
             return false;
         }
         else{
             setPasswordError("");
         }
-        if(role=='Select Role'){
+        if(role==='Select Role'){
             return false;
         }
         return true;
@@ -33,7 +33,7 @@ function LoginUser(){
     const Login = (event)=>{
         event.preventDefault();
         var checkData = checkUSerData();
-        if(checkData==false)
+        if(checkData===false)
         {
             alert('please check your data')
             return;
