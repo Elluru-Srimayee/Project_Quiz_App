@@ -45,7 +45,8 @@ namespace QuizApp.Services
                     Option3 = questionDTO.Option3,
                     Option4 = questionDTO.Option4,
                     Answer = questionDTO.Answer,
-                });
+                    QuestionId = questionDTO.QuestionId,
+            });
 
                 questionId = questionDTO.QuestionId;
             }
@@ -120,19 +121,19 @@ namespace QuizApp.Services
         }
 
         // Check if a question is already associated with a quiz
-        private bool CheckIfQuestionAlreadyPresent(int questionId, int quizId)
+        private bool CheckIfQuestionAlreadyPresent(int questionId)
         {
             var question = _questionRepository.GetAll()
-                .FirstOrDefault(ci => ci.QuizId == quizId && ci.QuestionId == questionId);
+                .FirstOrDefault(ci =>  ci.QuestionId == questionId);
 
             return question != null;
         }
 
         // Remove a question from a quiz
-        public bool RemoveFromQuiz(int quizid, int questionid)
+        public bool RemoveFromQuiz( int questionid)
         {
             var questionCheck = _questionRepository.GetAll().FirstOrDefault(c => c.QuestionId == questionid);
-            bool CheckQuizQuestion = CheckIfQuestionAlreadyPresent(questionid, quizid);
+            bool CheckQuizQuestion = CheckIfQuestionAlreadyPresent(questionid);
 
             if (CheckQuizQuestion)
             {
@@ -145,7 +146,7 @@ namespace QuizApp.Services
         }
 
         // Update a question in a quiz
-        public void UpdateQuestion(int quizId, int questionId, Questions updatedQuestion)
+        public void UpdateQuestion(int questionId, QuestionDTO updatedQuestion)
         {
             if (updatedQuestion == null)
             {
@@ -155,9 +156,9 @@ namespace QuizApp.Services
             // Ensure the question with the provided IDs exists
             var existingQuestion = _questionRepository.GetById(questionId);
 
-            if (existingQuestion == null || existingQuestion.QuizId != quizId)
+            if (existingQuestion == null)
             {
-                throw new InvalidOperationException($"Question with ID {questionId} not found in Quiz with ID {quizId}.");
+                throw new InvalidOperationException($"Question with ID {questionId} not found .");
             }
 
             // Update the properties of the existing question with the values from the updatedQuestion

@@ -38,28 +38,34 @@ namespace QuizApp.Controllers
                 var result = _questionService.AddToQuiz(questionDTO);
 
                 if (result)
-                    _logger.LogInformation("Added the quiz successfully");
+                    _logger.LogInformation("Added the question successfully");
                     return Ok(questionDTO); // Return success response
             }
             catch (Exception e)
             {
                 errorMessage = e.Message;
             }
-            _logger.LogError("Failed to add the quiz");
+            _logger.LogError("Failed to add the question");
             return BadRequest(errorMessage); // Return error response
         }
 
         // Endpoint to update a question in a quiz
         //[Authorize(Roles = "Creator")]
-        [HttpPut("update/{quizId}/question/{questionId}")]
-        public IActionResult UpdateQuestion(int quizId, int questionId, [FromBody] Questions updatedQuestion)
+        [HttpPut("update")]
+        public IActionResult UpdateQuestion([FromBody] QuestionDTO updatedQuestion)
         {
             try
             {
+                // Validate input
+                if (updatedQuestion == null)
+                {
+                    return BadRequest("Invalid request body");
+                }
+
                 // Attempt to update the question
-                _questionService.UpdateQuestion(quizId, questionId, updatedQuestion);
-                _logger.LogInformation("Updated the QuizResults successfully");
-                return Ok($"Question with ID {questionId} in Quiz with ID {quizId} updated successfully.");
+                _questionService.UpdateQuestion(updatedQuestion.QuestionId, updatedQuestion);
+                _logger.LogInformation($"Updated the question with ID {updatedQuestion.QuestionId} successfully.");
+                return Ok($"Question with ID {updatedQuestion.QuestionId} updated successfully.");
             }
             catch (Exception e)
             {
@@ -67,6 +73,7 @@ namespace QuizApp.Controllers
                 return BadRequest($"Failed to update the question. {e.Message}");
             }
         }
+
 
         // Endpoint to get all questions
         //[Authorize(Roles ="Creator")]
@@ -113,10 +120,10 @@ namespace QuizApp.Controllers
         // Endpoint to remove a question from a quiz
         //[Authorize(Roles = "Creator")]
         [HttpDelete("Remove")]
-        public IActionResult RemoveFromQuiz(int quizid, int questionid)
+        public IActionResult RemoveFromQuiz(int questionid)
         {
             // Attempt to remove the question from the quiz
-            var result = _questionService.RemoveFromQuiz(quizid, questionid);
+            var result = _questionService.RemoveFromQuiz(questionid);
 
             if (result)
             {

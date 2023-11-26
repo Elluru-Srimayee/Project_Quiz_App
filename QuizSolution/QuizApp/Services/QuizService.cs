@@ -129,7 +129,6 @@ namespace QuizApp.Services
             {
                 throw new InvalidOperationException($"Quiz with ID {updatedQuiz.QuizId} not found.");
             }
-
             existingQuiz.Title = updatedQuiz.Title;
             existingQuiz.Description = updatedQuiz.Description;
             existingQuiz.TimeLimit = updatedQuiz.TimeLimit;

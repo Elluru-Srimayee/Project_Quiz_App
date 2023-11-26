@@ -25,7 +25,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get quiz results by quiz ID
-        [Authorize(Roles = "Creator")]
+        //[Authorize(Roles = "Creator")]
         [HttpGet("byQuiz/{quizId}")]
         public ActionResult<IEnumerable<QuizResultDTO>> GetResultsByQuiz(int quizId)
         {
@@ -44,7 +44,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get quiz results with total score by user and quiz ID
-        [Authorize]
+        //[Authorize]
         [HttpGet("results-with-total-score/{username}/{quizId}")]
         public ActionResult<QuizResultsWithTotalScoreDTO> GetResultsWithTotalScoreByUserAndQuiz(string username, int quizId)
         {
@@ -73,7 +73,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get total score by quiz and username
-        [Authorize]
+        //[Authorize]
         [HttpGet("totalscore/{quizId}/{username}")]
         public ActionResult<int> GetTotalScoreForUserInQuiz(int quizId, string username)
         {
