@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 function Quizs(){
+    const [selectedQuizId, setSelectedQuizId] = useState(null);
     const[quizList,setQuizList]=useState([])
+    const navigate = useNavigate();
     var getQuizs=()=>{
         fetch('http://localhost:5057/api/Quiz',{
             method:'GET',
@@ -18,6 +21,10 @@ function Quizs(){
             console.log(e)
         })
     }
+    const handleTakeQuiz = (quizId) => {
+        setSelectedQuizId(quizId);
+        navigate("/questions"); // Navigate to QuestionsByQuizId component
+      };
     var checkQuizs = quizList.length>0?true:false;
     return(
         <div>
@@ -37,6 +44,12 @@ function Quizs(){
                     Quiz Category:{quiz.category}
                     <br/>
                     Quiz TimeLimit:{quiz.timeLimit}
+                    <br/>                   
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => handleTakeQuiz(quiz.quizId)}> 
+                        Take Quiz
+                    </button>
                 </div>)}
             </div>
             :

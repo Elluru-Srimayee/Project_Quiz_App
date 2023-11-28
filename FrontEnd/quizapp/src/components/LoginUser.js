@@ -48,6 +48,10 @@ function LoginUser(){
             console.log(userData)
         })
         .catch((err)=>{
+            if(err.response.data==="Invalid username or password")
+            {
+                alert("Either Username or password doesn't match")
+            }
             console.log(err)
         })
     }

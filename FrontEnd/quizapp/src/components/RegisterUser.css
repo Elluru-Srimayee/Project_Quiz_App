@@ -6,7 +6,15 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+  .btn-login{
+    background-color:green;
+    color:white;
+    margin-right:auto;
+    margin-left:auto;
+    text-align:center;
+    width:300px;
+    position:relative;
+  }
   .form-control {
     margin-bottom: 15px;
   }

@@ -26,7 +26,7 @@ function DeleteQuestion() {
       <h1 className="alert alert-success">DeleteQuestion</h1>
       <label className="form-control" htmlFor="questionId">Question ID</label>
       <input id="questionId" type="text" className="form-control" value={questionId} onChange={(e) => setQuestionId(e.target.value)} />
-      <button onClick={clickDelete} className="btn btn-danger button">Delete Quiestion</button>
+      <button onClick={clickDelete} className="btn btn-danger button">Delete Question</button>
 
     </div>
   );

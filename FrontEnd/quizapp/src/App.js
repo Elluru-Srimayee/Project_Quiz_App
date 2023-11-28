@@ -1,28 +1,27 @@
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Quizs from './components/Quizs';
-import AddQuiz from './components/AddQuiz'
-import UpdateQuestion from './components/UpdateQuestion';
-import Questions from './components/Questions';
-import DeleteQuestion from './components/DeleteQuestion';
+import QuizsByCategory from './components/QuizsByCategory';
 import QuestionsByQuizId from './components/QuestionsByQuizId';
+import RegisterUser from './components/RegisterUser';
+import Menu from './components/Menu';
+import LoginUser from './components/LoginUser';
 
 function App() {
   return (
-    <div className="App">
-      <div className="App">
-        <div className="container text-center">
-          <div className="row">
-            <div className="col">
-              <DeleteQuestion/>
-            </div>
-            <div className="col">
-              <Questions/>
-            </div>
-          </div>
-        </div>
+    <BrowserRouter>
+      <div>
+        <Menu />
+        <Routes>
+          <Route path="/Login" element={<LoginUser/>}/>
+          <Route path='/' element={<RegisterUser />} />
+          <Route path="/quizs" element={<Quizs />} />
+          <Route path="search" element={<QuizsByCategory />} />
+          <Route path="/questions" element={<QuestionsByQuizId />} />
+        </Routes>
       </div>
-    </div>
-    
+    </BrowserRouter>
   );
 }
 

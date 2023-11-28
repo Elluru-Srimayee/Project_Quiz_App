@@ -1,6 +1,7 @@
 import { useState } from "react";
 import './RegisterUser.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function RegisterUser(){
     const roles =["Creator","Participant"];
@@ -10,6 +11,7 @@ function RegisterUser(){
     const [role,setRole] = useState("");
     var [usernameError,setUsernameError]=useState("");
     var [passwordError,setPasswordError]=useState("");
+    const navigate = useNavigate();
 
     var checkUSerData = ()=>{
         if(username==='')
@@ -51,8 +53,15 @@ function RegisterUser(){
             console.log(userData)
         })
         .catch((err)=>{
+            if(err.response.data==="Duplicate username")
+            {
+                alert("You already have an account. Please login.");
+            }
             console.log(err)
         })
+    }
+    const goToLogin = () => {
+        navigate("/login");
     }
     
     return(
@@ -80,6 +89,8 @@ function RegisterUser(){
             <button className="btn btn-primary button" onClick={signUp}>Sign Up</button>
             
             <button className="btn btn-danger button">Cancel</button>
+            <br/><hr/>
+            <button className="btn btn-login button" onClick={goToLogin}>Login</button>
 
         </form>
     );

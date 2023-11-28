@@ -58,8 +58,6 @@ function QuestionsByQuizId() {
                     Option C:{question.option3}
                     <br/>
                     Option D:{question.option4}
-                    <br/>
-                    QuizId:{question.quizId}
                 </div>)}
             </div>
             :
