@@ -7,6 +7,10 @@ import QuestionsByQuizId from './components/QuestionsByQuizId';
 import RegisterUser from './components/RegisterUser';
 import Menu from './components/Menu';
 import LoginUser from './components/LoginUser';
+import AddQuestion from './components/AddQuestion';
+import Questions from './components/Questions';
+import UpdateQuestion from './components/UpdateQuestion';
+import DeleteQuestion from './components/DeleteQuestion';
 
 function App() {
   return (
@@ -14,11 +18,15 @@ function App() {
       <div>
         <Menu />
         <Routes>
-          <Route path="/Login" element={<LoginUser/>}/>
+          <Route path="/addQuestions" element={<AddQuestion/>}/>
+          <Route path="/updateQuestions" element={<UpdateQuestion/>}/>
+          <Route path="/deleteQuestions" element={<DeleteQuestion/>}/>
+          <Route path="/login" element={<LoginUser/>}/>
           <Route path='/' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
           <Route path="search" element={<QuizsByCategory />} />
-          <Route path="/questions" element={<QuestionsByQuizId />} />
+          <Route path="/questions" element={<Questions/>} />
+          <Route path="/questionsbyid" element={<QuestionsByQuizId/>} />
         </Routes>
       </div>
     </BrowserRouter>

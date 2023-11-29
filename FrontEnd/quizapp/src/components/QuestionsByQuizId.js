@@ -1,12 +1,20 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function QuestionsByQuizId() {
   const [questionList, setQuestionList] = useState([]);
-  const [quizIdInput, setQuizIdInput] = useState(""); // State to store the input value
+  const [quizIdInput, setQuizIdInput] = useState("");
+  const location = useLocation();
 
-  const getQuestionsByQuizId = () => {
-    // Use the categoryInput in the fetch URL
-    fetch(`http://localhost:5057/api/Questions/byquiz/${quizIdInput}`, {
+  useEffect(() => {
+    if (location.state && location.state.quizId) {
+      setQuizIdInput(location.state.quizId.toString());
+      getQuestionsByQuizId(location.state.quizId);
+    }
+  }, [location.state]);
+
+  const getQuestionsByQuizId = (quizId) => {
+    fetch(`http://localhost:5057/api/Questions/byquiz/${quizId}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -23,48 +31,32 @@ function QuestionsByQuizId() {
       });
   };
 
-  const handleQuizIdChange = (e) => {
-    // Update the categoryInput state when the input changes
-    setQuizIdInput(e.target.value);
-  };
-
-  var checkQuestions = questionList.length>0?true:false;
-
   return (
-    <div>
+    <div className="inputcontainer">
       <h1 className="alert alert-success">QuestionsByQuizId</h1>
-      {/* Input field for the category */}
-      <input
-        type="number"
-        placeholder="Enter quizId"
-        value={quizIdInput}
-        onChange={handleQuizIdChange}
-      />
-      <br/>
-      <button className="btn btn-success" onClick={getQuestionsByQuizId}>
-        Get Questions By QuizId
-      </button>
+      <p>Quiz Id: {quizIdInput}</p>
       <hr />
-      {checkQuestions?
-            <div>
-                {questionList.map((question)=>
-                <div key={question.questionId} className="alert alert-primary">
-                    Question:{question.questionTxt}
-                    <br/>
-                    Option A:{question.option1}
-                    <br/>
-                    Option B:{question.option2}
-                    <br/>
-                    Option C:{question.option3}
-                    <br/>
-                    Option D:{question.option4}
-                </div>)}
+      {Array.isArray(questionList) && questionList.length > 0 ? (
+        <div>
+          {questionList.map((question) => (
+            <div key={question.questionId} className="alert alert-success">
+              Question: {question.questionTxt}
+              <br />
+              A: {question.option1}
+              <br />
+              B: {question.option2}
+              <br />
+              C: {question.option3}
+              <br />
+              D: {question.option4}
             </div>
-            :
-            <div>No questions available yet</div>
-            }
+          ))}
         </div>
-    )
+      ) : (
+        <div>No questions available yet</div>
+      )}
+    </div>
+  );
 }
 
 export default QuestionsByQuizId;

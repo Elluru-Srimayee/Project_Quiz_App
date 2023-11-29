@@ -1,7 +1,12 @@
 .quiz{
-    background-color: lightgreen;
-    border: green 2px solid;
-    width: 400px;
-    height: 110px;
-    color: green;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
 }
+.btn-takequiz {
+    background-color: rgb(19, 180, 19);
+    color: #fff;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }

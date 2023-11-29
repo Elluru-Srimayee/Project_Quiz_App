@@ -55,12 +55,12 @@ function RegisterUser(){
         .catch((err)=>{
             if(err.response.data==="Duplicate username")
             {
-                alert("You already have an account. Please login.");
+                alert('You already have an account please login');
             }
             console.log(err)
         })
     }
-    const goToLogin = () => {
+    const goToLogin=()=>{
         navigate("/login");
     }
     
@@ -89,9 +89,10 @@ function RegisterUser(){
             <button className="btn btn-primary button" onClick={signUp}>Sign Up</button>
             
             <button className="btn btn-danger button">Cancel</button>
-            <br/><hr/>
+            <br/>
+            <hr/>
+            <p className="form-control">If you already have an account please login</p>
             <button className="btn btn-login button" onClick={goToLogin}>Login</button>
-
         </form>
     );
 }

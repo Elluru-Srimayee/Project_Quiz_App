@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 function QuizsByCategory() {
-  const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [quizList, setQuizList] = useState([]);
   const [categoryInput, setCategoryInput] = useState(""); // State to store the input value
   const navigate = useNavigate();
@@ -28,15 +27,15 @@ function QuizsByCategory() {
     // Update the categoryInput state when the input changes
     setCategoryInput(e.target.value);
   };
-  const handleTakeQuiz = (quizId) => {
-    setSelectedQuizId(quizId);
-    navigate("/questions"); // Navigate to QuestionsByQuizId component
+  const handleTakeQuiz = async (quizId) => {
+    // Pass the quizId as state to the QuestionsByQuizId component
+    navigate("/questionsbyid", { state: { quizId } });
   };
 
   const checkQuizs = quizList.length > 0 ? true : false;
 
   return (
-    <div>
+    <div className="inputcontainer">
       <h1 className="alert alert-success">QuizsByCategory</h1>
       {/* Input field for the category */}
       <input
@@ -52,7 +51,7 @@ function QuizsByCategory() {
       {checkQuizs ? (
         <div>
           {quizList.map((quiz) => (
-            <div key={quiz.quizId} className="alert alert-primary">
+            <div key={quiz.quizId} className="alert alert-success">
               Quiz Id:{quiz.quizId}
               <br/>
               Quiz Title: {quiz.title}
@@ -64,7 +63,7 @@ function QuizsByCategory() {
               Quiz TimeLimit: {quiz.timeLimit}
               <br/>                   
                     <button
-                        className="btn btn-primary"
+                        className="btn btn-takequiz"
                         onClick={() => handleTakeQuiz(quiz.quizId)}> 
                         Take Quiz
                     </button>
