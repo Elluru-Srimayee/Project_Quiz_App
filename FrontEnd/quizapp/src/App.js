@@ -11,6 +11,9 @@ import AddQuestion from './components/AddQuestion';
 import Questions from './components/Questions';
 import UpdateQuestion from './components/UpdateQuestion';
 import DeleteQuestion from './components/DeleteQuestion';
+import Protected from './Protected';
+import QuizResult from './components/QuizResult';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   return (
@@ -25,8 +28,14 @@ function App() {
           <Route path='/' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
           <Route path="search" element={<QuizsByCategory />} />
-          <Route path="/questions" element={<Questions/>} />
-          <Route path="/questionsbyid" element={<QuestionsByQuizId/>} />
+          <Route path="/questions" element={<Protected>
+            <Questions/>
+          </Protected>} />
+          <Route path="/leaderboard" element={<Leaderboard/>}/>
+          <Route path="/questionsbyid" element={<Protected>
+            <QuestionsByQuizId/>
+          </Protected>} />
+          <Route path="/quizResult" element={<QuizResult/>}/>
         </Routes>
       </div>
     </BrowserRouter>

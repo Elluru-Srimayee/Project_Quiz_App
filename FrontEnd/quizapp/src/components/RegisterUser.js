@@ -53,8 +53,7 @@ function RegisterUser(){
             console.log(userData)
         })
         .catch((err)=>{
-            if(err.response.data==="Duplicate username")
-            {
+            if(err.response.data==="Duplicate username"){
                 alert('You already have an account please login');
             }
             console.log(err)
@@ -91,8 +90,9 @@ function RegisterUser(){
             <button className="btn btn-danger button">Cancel</button>
             <br/>
             <hr/>
-            <p className="form-control">If you already have an account please login</p>
+            <label className="form-control">If you already have an account please login</label>
             <button className="btn btn-login button" onClick={goToLogin}>Login</button>
+            
         </form>
     );
 }

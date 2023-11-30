@@ -45,7 +45,10 @@ function LoginUser(){
             password:password
         })
         .then((userData)=>{
-            console.log(userData)
+            var token = userData.data.token;
+            localStorage.setItem("token",token);
+            var username=userData.data.username;
+            localStorage.setItem("username",username);
         })
         .catch((err)=>{
             if(err.response.data==="Invalid username or password"){
@@ -54,6 +57,12 @@ function LoginUser(){
             console.log(err)
         })
     }
+    const logout = () => {
+        // Remove the token from local storage
+        localStorage.removeItem("token");
+        // Show an alert
+        alert("You are logged out successfully.");
+      };
     
     return(
         <form className="loginForm">
@@ -77,6 +86,9 @@ function LoginUser(){
             <button className="btn btn-primary button" onClick={Login}>Login</button>
             
             <button className="btn btn-danger button">Cancel</button>
+            <button className="btn btn-danger button" onClick={logout}>
+                Logout
+            </button>
         </form>
     );
 }

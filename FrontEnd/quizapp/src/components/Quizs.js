@@ -65,5 +65,4 @@ function Quizs() {
     </div>
   );
 }
-
 export default Quizs;
