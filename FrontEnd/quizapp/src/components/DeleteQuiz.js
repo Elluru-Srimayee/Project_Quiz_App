@@ -23,7 +23,7 @@ function DeleteQuiz() {
 
   return (
     <div className="inputcontainer">
-      <h1 className="alert alert-success">UpdateQuiz</h1>
+      <h1 className="alert alert-success">DeleteQuiz</h1>
       <label className="form-control" htmlFor="quizId">Quiz ID</label>
       <input id="quizId" type="text" className="form-control" value={quizId} onChange={(e) => setQuizId(e.target.value)} />
       <button onClick={clickDelete} className="btn btn-danger button">Delete Quiz</button>

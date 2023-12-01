@@ -26,13 +26,16 @@
   .btn-update {
     background-color: #17a2b8;
     color: #fff;
+    position: absolute;
+    top: 5px;
+    right: 5px;
   }
   
   .btn-delete {
     background-color: #dc3545;
     color: #fff;
     position: absolute;
-    top: 5px;
+    bottom: 5px;
     right: 5px;
   }
   

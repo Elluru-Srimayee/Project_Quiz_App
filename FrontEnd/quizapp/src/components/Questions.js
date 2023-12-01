@@ -24,11 +24,25 @@ function Questions() {
       });
   };
 
+  const handleDelete = async (questionId) => {
+    // Display a confirmation dialog
+    const userConfirmed = window.confirm(
+      `Do you really want to delete the question with ID ${questionId}?`
+    );
+
+    // If user confirms, proceed with deletion
+    if (userConfirmed) {
+      // Navigate to the DeleteQuestion component with questionId in the state
+      navigate("/deleteQuestions", { state: { questionId } });
+    }
+  };
+
   const addQuestion = () => {
     navigate("/addQuestions");
   };
-  const addQuiz=()=>{
-    navigate("/addQuiz");
+
+  const updateQuestion = (question) => {
+    navigate("/updateQuestions", { state: question });
   };
 
   var checkQuestions = questionList.length > 0 ? true : false;
@@ -42,15 +56,21 @@ function Questions() {
       <button className="btn btn-primary" onClick={addQuestion}>
         Add Question
       </button>
-      <button className="btn btn-primary" onClick={addQuiz}>
-        Add Quiz
-      </button>
       <hr />
       {checkQuestions ? (
         <div>
           {questionList.map((question) => (
             <div key={question.questionId} className="alert alert-success">
-              Question ID: {question.questionId}
+              Question ID: {question.questionId}{" "}
+              <button
+                className="btn btn-delete"
+                onClick={() => handleDelete(question.questionId)}
+              >
+                Delete
+              </button>
+              <button className="btn btn-update" onClick={() => updateQuestion(question)}>
+                Update
+              </button>
               <br />
               Question: {question.questionTxt}
               <br />

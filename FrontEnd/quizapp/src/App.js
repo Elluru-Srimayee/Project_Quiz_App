@@ -14,6 +14,12 @@ import Protected from './Protected';
 import QuizResult from './components/QuizResult';
 import Leaderboard from './components/Leaderboard';
 import Profile from './components/Profile';
+import UpdateQuestion from './components/UpdateQuestion';
+import DeleteQuestion from './components/DeleteQuestion';
+import UpdateQuiz from './components/UpdateQuiz';
+import DeleteQuiz from './components/DeleteQuiz';
+import Creator from './components/Creator';
+import QuizList from './components/QuizList';
 
 function App() {
   return (
@@ -34,8 +40,14 @@ function App() {
           <Route path="/questionsbyid" element={<Protected>
             <QuestionsByQuizId/>
           </Protected>} />
+          <Route path="/creator" element={<Creator/>}/>
           <Route path="/profile" element ={<Profile/>}/>
           <Route path="/quizResult" element={<QuizResult/>}/>
+          <Route path="/updateQuestions" element={<UpdateQuestion/>}/>
+          <Route path="/deleteQuestions" element={<DeleteQuestion/>}/>
+          <Route path="/updateQuiz" element={<UpdateQuiz/>}/>
+          <Route path="/deleteQuiz" element={<DeleteQuiz/>}/>
+          <Route path="/quizList" element={<QuizList/>}/>
         </Routes>
       </div>
     </BrowserRouter>

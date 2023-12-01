@@ -16,7 +16,7 @@ function Menu() {
             <Link className="nav-link" to="/search">Search</Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/questions">Creator</Link>
+            <Link className="nav-link" to="/creator">Creator</Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/leaderboard">Leaderboard</Link>

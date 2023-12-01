@@ -1,33 +1,37 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function DeleteQuestion() {
-  const[questionId,setQuestionId]=useState(0)
+  const location = useLocation();
+  const questionId = location.state && location.state.questionId;
 
-  const clickDelete = () => {
-    if (!questionId) {
-      alert('QuestionId is required for deleting.');
-      return;
-    }
+  useEffect(() => {
+    const clickDelete = async () => {
+      if (!questionId) {
+        alert("QuestionId is required for deleting.");
+        return;
+      }
 
-    console.log("quiz with QuestionId "+questionId+" is deleted successfully");
+      try {
+        await axios.delete(`http://localhost:5057/api/Questions/Remove?questionid=${questionId}`);
+        alert("Question Deleted Successfully");
+      } catch (error) {
+        console.log(error);
+        alert("Error deleting question");
+      }
+    };
 
-        axios.delete(`http://localhost:5057/api/Questions/Remove?questionid=${questionId}`)
-        .then(() => {
-            alert('Question Deleted');
-        })
-        .catch((e) => {
-            console.log(e);
-        });
-  };
+    // Execute deletion logic upon mounting
+    clickDelete();
+  }, [questionId]); // Only run the effect when questionId changes
 
   return (
     <div className="inputcontainer">
       <h1 className="alert alert-success">DeleteQuestion</h1>
-      <label className="form-control" htmlFor="questionId">Question ID</label>
-      <input id="questionId" type="text" className="form-control" value={questionId} onChange={(e) => setQuestionId(e.target.value)} />
-      <button onClick={clickDelete} className="btn btn-danger button">Delete Question</button>
-
+      <label className="form-control" htmlFor="questionId">
+        Question ID: {questionId}
+      </label>
     </div>
   );
 }
