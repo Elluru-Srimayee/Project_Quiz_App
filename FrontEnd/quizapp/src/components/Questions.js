@@ -24,30 +24,11 @@ function Questions() {
       });
   };
 
-  const handleDelete = async (questionId) => {
-    // Display a confirmation dialog
-    const userConfirmed = window.confirm(
-      `Do you really want to delete the question with ID ${questionId}?`
-    );
-
-    // If user confirms, proceed with deletion
-    if (userConfirmed) {
-      // Perform deletion logic here
-      console.log(`Deleting question with ID ${questionId}`);
-
-      // Update the questionList state (simulate deletion)
-      setQuestionList((prevQuestions) =>
-        prevQuestions.filter((question) => question.questionId !== questionId)
-      );
-    }
-  };
-
   const addQuestion = () => {
     navigate("/addQuestions");
   };
-
-  const updateQuestion = () => {
-    navigate("/updateQuestions");
+  const addQuiz=()=>{
+    navigate("/addQuiz");
   };
 
   var checkQuestions = questionList.length > 0 ? true : false;
@@ -61,8 +42,8 @@ function Questions() {
       <button className="btn btn-primary" onClick={addQuestion}>
         Add Question
       </button>
-      <button className="btn btn-update" onClick={updateQuestion}>
-        Update Question
+      <button className="btn btn-primary" onClick={addQuiz}>
+        Add Quiz
       </button>
       <hr />
       {checkQuestions ? (
@@ -70,12 +51,6 @@ function Questions() {
           {questionList.map((question) => (
             <div key={question.questionId} className="alert alert-success">
               Question ID: {question.questionId}
-              <button
-                className="btn btn-delete"
-                onClick={() => handleDelete(question.questionId)}
-              >
-                Delete
-              </button>
               <br />
               Question: {question.questionTxt}
               <br />

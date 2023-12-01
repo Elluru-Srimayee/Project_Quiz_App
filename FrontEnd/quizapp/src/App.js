@@ -9,11 +9,11 @@ import Menu from './components/Menu';
 import LoginUser from './components/LoginUser';
 import AddQuestion from './components/AddQuestion';
 import Questions from './components/Questions';
-import UpdateQuestion from './components/UpdateQuestion';
-import DeleteQuestion from './components/DeleteQuestion';
+import AddQuiz from './components/AddQuiz';
 import Protected from './Protected';
 import QuizResult from './components/QuizResult';
 import Leaderboard from './components/Leaderboard';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -22,8 +22,7 @@ function App() {
         <Menu />
         <Routes>
           <Route path="/addQuestions" element={<AddQuestion/>}/>
-          <Route path="/updateQuestions" element={<UpdateQuestion/>}/>
-          <Route path="/deleteQuestions" element={<DeleteQuestion/>}/>
+          <Route path="/addQuiz" element={<AddQuiz/>}/>
           <Route path="/login" element={<LoginUser/>}/>
           <Route path='/' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
@@ -35,6 +34,7 @@ function App() {
           <Route path="/questionsbyid" element={<Protected>
             <QuestionsByQuizId/>
           </Protected>} />
+          <Route path="/profile" element ={<Profile/>}/>
           <Route path="/quizResult" element={<QuizResult/>}/>
         </Routes>
       </div>

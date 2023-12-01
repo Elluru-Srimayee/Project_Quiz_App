@@ -59,14 +59,7 @@ function QuestionsByQuizId() {
     setSelectedOption(option);
   };
 
-  const handleNextQuestion = () => {
-    if (questionList.length > 0 && currentQuestionIndex + 1 < questionList.length) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(null);
-    } else {
-      setQuizCompleted(true);
-    }
-  };
+  
 
   const handleEvaluate = () => {
     if (location.state.quizId && localStorage.getItem("username") && questionList.length > 0) {

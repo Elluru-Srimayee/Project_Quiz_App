@@ -1,0 +1,331 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Questions.css";
+
+function Questions() {
+  const [questionList, setQuestionList] = useState([]);
+  const navigate = useNavigate();
+
+  var getQuestions = () => {
+    fetch("http://localhost:5057/api/Questions/getAll", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (data) => {
+        var myData = await data.json();
+        await console.log(myData);
+        await setQuestionList(myData);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const handleDelete = async (questionId) => {
+    // Display a confirmation dialog
+    const userConfirmed = window.confirm(
+      `Do you really want to delete the question with ID ${questionId}?`
+    );
+
+    // If user confirms, proceed with deletion
+    if (userConfirmed) {
+      // Perform deletion logic here
+      console.log(`Deleting question with ID ${questionId}`);
+
+      // Update the questionList state (simulate deletion)
+      setQuestionList((prevQuestions) =>
+        prevQuestions.filter((question) => question.questionId !== questionId)
+      );
+    }
+  };
+
+  const addQuestion = () => {
+    navigate("/addQuestions");
+  };
+
+  const updateQuestion = () => {
+    navigate("/updateQuestions");
+  };
+
+  var checkQuestions = questionList.length > 0 ? true : false;
+
+  return (
+    <div className="question">
+      <h1 className="alert alert-success">Questions</h1>
+      <button className="btn btn-success" onClick={getQuestions}>
+        Get All Questions
+      </button>
+      <button className="btn btn-primary" onClick={addQuestion}>
+        Add Question
+      </button>
+      <button className="btn btn-update" onClick={updateQuestion}>
+        Update Question
+      </button>
+      <hr />
+      {checkQuestions ? (
+        <div>
+          {questionList.map((question) => (
+            <div key={question.questionId} className="alert alert-success">
+              Question ID: {question.questionId}
+              <button
+                className="btn btn-delete"
+                onClick={() => handleDelete(question.questionId)}
+              >
+                Delete
+              </button>
+              <br />
+              Question: {question.questionTxt}
+              <br />
+              Option A: {question.option1}
+              <br />
+              Option B: {question.option2}
+              <br />
+              Option C: {question.option3}
+              <br />
+              Option D: {question.option4}
+              <br />
+              Quiz ID: {question.quizId}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>No questions available yet</div>
+      )}
+    </div>
+  );
+}
+
+export default Questions;
+
+
+using QuizApp.Interfaces;
+using QuizApp.Models;
+using QuizApp.Models.DTOs;
+using System.Security.Cryptography;
+using System.Text;
+namespace QuizApp.Services
+{
+    public class UserService : IUserService
+    {
+        private readonly IRepository<string, User> _repository;
+        private readonly ITokenService _tokenService;
+
+        public UserService(IRepository<string, User> repository, ITokenService tokenService)
+        {
+            _repository = repository;
+            _tokenService = tokenService;
+        }
+        public UserDTO Login(UserDTO userDTO)
+        {
+            var user = _repository.GetById(userDTO.Username);
+            if (user != null)
+            {
+                HMACSHA512 hmac = new HMACSHA512(user.Key);
+                var userpass = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password));
+                for (int i = 0; i < userpass.Length; i++)
+                {
+                    if (user.Password[i] != userpass[i])
+                        return null;
+                }
+                userDTO.Token = _tokenService.GetToken(userDTO);
+                userDTO.Password = "";
+                return userDTO;
+            }
+            return null;
+        }
+
+        public UserDTO Register(UserDTO userDTO)
+        {
+            HMACSHA512 hmac = new HMACSHA512();
+            User user = new User()
+            {
+                Username = userDTO.Username,
+                Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password)),
+                Key = hmac.Key,
+                Role = userDTO.Role
+            };
+            var result = _repository.Add(user);
+            if (result != null)
+            {
+                userDTO.Password = "";
+                return userDTO;
+            }
+            return null;
+
+        }
+
+    }
+}
+
+
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router } from 'react-router-dom';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';  // Import the Provider component
+import quizStore from './QuizStore';
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider store={quizStore}>  {/* Use 'store' instead of 'quizStore' */}
+    <App />
+  </Provider>,
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+
+
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+
+function QuestionsByQuizId() {
+  const [questionList, setQuestionList] = useState([]);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.state && location.state.quizId) {
+      checkQuizCompletion(location.state.quizId);
+      getQuestionsByQuizId(location.state.quizId);
+    }
+  }, [location.state]);
+
+  const checkQuizCompletion = (quizId) => {
+    const username = localStorage.getItem("username");
+
+    fetch(`http://localhost:5057/api/QuizResult/results-with-total-score/${username}/${quizId}`)
+      .then(async (response) => {
+        const data = await response.json();
+
+        if (data.quizResults.length > 0) {
+          alert("You have already completed this quiz. Multiple attempts are not allowed.");
+          navigate("/quizs");
+        } else {
+          getQuestionsByQuizId(quizId);
+        }
+      })
+      .catch((error) => console.error("Error checking quiz completion:", error));
+  };
+
+  const getQuestionsByQuizId = (quizId) => {
+    if (quizCompleted) {
+      alert("You have already completed this quiz. Multiple attempts are not allowed.");
+      navigate("/quizs");
+    } else {
+      fetch(`http://localhost:5057/api/Questions/byquiz/${quizId}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(async (data) => {
+          var myData = await data.json();
+          setQuestionList(myData);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  };
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
+  
+
+  const handleEvaluate = () => {
+    if (location.state.quizId && localStorage.getItem("username") && questionList.length > 0) {
+      const optionIndex = ['A', 'B', 'C', 'D'].indexOf(selectedOption);
+      const userAnswerValue = questionList[currentQuestionIndex][`option${optionIndex + 1}`];
+
+      const evaluationData = {
+        quizId: parseInt(location.state.quizId),
+        username: localStorage.getItem("username"),
+        questionId: questionList[currentQuestionIndex].questionId,
+        userAnswer: userAnswerValue,
+      };
+
+      fetch(`http://localhost:5057/api/Quiz/evaluate/${location.state.quizId}`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(evaluationData),
+      })
+        .then(async (response) => {
+          const data = await response.json();
+          if (currentQuestionIndex + 1 < questionList.length) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+            setSelectedOption(null);
+          } else {
+            navigate("/quizresult", {
+              state: {
+                username: localStorage.getItem("username"),
+                quizId: location.state.quizId,
+              },
+            });
+          }
+        })
+        .catch((error) => console.error('Error evaluating quiz:', error));
+    } else {
+      alert('Please provide all required fields.');
+    }
+  };
+
+  return (
+    <div className="inputcontainer">
+      <h1 className="alert alert-success">QuestionsByQuizId</h1>
+      {questionList.length > 0 && currentQuestionIndex < questionList.length ? (
+        <div>
+          <div className="alert alert-success">
+            Question: {questionList[currentQuestionIndex].questionTxt}
+          </div>
+          <form>
+            {['A', 'B', 'C', 'D'].map((option, index) => (
+              <div key={index} className="form-check">
+                <input
+                  type="radio"
+                  id={`option${index}`}
+                  name="options"
+                  value={option}
+                  checked={selectedOption === option}
+                  onChange={() => handleOptionChange(option)}
+                  className="form-check-input"
+                />
+                <label htmlFor={`option${index}`} className="form-check-label">
+                  {option}: {questionList[currentQuestionIndex][`option${index + 1}`]}
+                </label>
+              </div>
+            ))}
+          </form>
+          <button className="btn btn-primary" onClick={handleEvaluate}>
+            Next
+          </button>
+        </div>
+      ) : (
+        <div>
+          {questionList.length === 0 ? (
+            <p>No questions available for this quiz.</p>
+          ) : (
+            <p>No more questions available.</p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default QuestionsByQuizId;

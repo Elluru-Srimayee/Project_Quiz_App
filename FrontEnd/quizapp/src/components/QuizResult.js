@@ -1,10 +1,10 @@
-// QuizResults.js
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function QuizResults() {
   const location = useLocation();
   const [quizResults, setQuizResults] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Use the username and quizId from the location state
@@ -19,6 +19,7 @@ function QuizResults() {
       .catch((error) => console.error("Error fetching quiz results:", error));
   }, []); // Empty dependency array ensures that this effect runs only once when the component mounts
 
+  
   return (
     <div className="inputcontainer">
       {quizResults && (
@@ -29,7 +30,7 @@ function QuizResults() {
             {quizResults.quizResults.map((result, index) => (
               <li key={index}>
                 <p>
-                  Question ID: {result.questionId}, User Answer: {result.userAnswer},{" "}
+                  User Answer: {result.userAnswer},{" "}
                   {result.isCorrect ? "Correct" : "Incorrect"}, Score: {result.score}
                 </p>
               </li>
