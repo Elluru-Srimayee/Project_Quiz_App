@@ -1,32 +1,45 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 function DeleteQuiz() {
-  const [quizId, setQuizId] = useState("");
+  const location = useLocation();
+  const quizId = location.state && location.state.quizId;
+  const token=localStorage.getItem("token");
+  useEffect(() => {
+    const clickDelete = async () => {
+      if (!quizId) {
+        alert("QuizId is required for deleting.");
+        return;
+      }
 
-  const clickDelete = () => {
-    if (!quizId) {
-      alert('Quiz ID is required for deleting.');
-      return;
-    }
-
-    console.log("quiz with QuizId "+quizId+" is deleted successfully");
-
-        axios.delete(`http://localhost:5057/api/Quiz/${quizId}`)
-        .then(() => {
-            alert('Quiz Deleted');
-        })
-        .catch((e) => {
-            console.log(e);
+      try {
+        await axios.delete(`http://localhost:5057/api/Quiz/${quizId}`,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
         });
-  };
+        alert("Quiz Deleted Successfully");
+      } catch (error) {
+        console.log(error);
+        if(error.response.request.statusText==="Forbidden"){
+          alert('This operation is not meant for all users.')
+        }
+        alert("Error deleting quiz");
+      }
+    };
+
+    // Execute deletion logic upon mounting
+    clickDelete();
+  }, [quizId]); // Only run the effect when quizId changes
 
   return (
     <div className="inputcontainer">
       <h1 className="alert alert-success">DeleteQuiz</h1>
-      <label className="form-control" htmlFor="quizId">Quiz ID</label>
-      <input id="quizId" type="text" className="form-control" value={quizId} onChange={(e) => setQuizId(e.target.value)} />
-      <button onClick={clickDelete} className="btn btn-danger button">Delete Quiz</button>
+      <label className="form-control" htmlFor="quizId">
+        Quiz ID: {quizId}
+      </label>
     </div>
   );
 }

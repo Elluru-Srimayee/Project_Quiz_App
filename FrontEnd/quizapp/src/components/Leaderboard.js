@@ -7,8 +7,15 @@ function Leaderboard() {
   const fetchLeaderboard = (quizId) => {
     // Make sure quizId is provided
     if (quizId) {
-      // Fetch leaderboard based on quizId
-      fetch(`http://localhost:5057/api/Quiz/leaderboard/${quizId}`)
+      // Get the token from local storage
+      const token = localStorage.getItem("token");
+  
+      // Fetch leaderboard based on quizId with the authorization header
+      fetch(`http://localhost:5057/api/Quiz/leaderboard/${quizId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then(async (response) => {
           if (response.status === 404) {
             // Handle 404 separately
@@ -24,9 +31,11 @@ function Leaderboard() {
       alert("Please provide a quizId");
     }
   };
+  
 
   return (
     <div className="inputcontainer">
+      <h2 className="alert alert-success">Leaderboard</h2>
       <label className="form-control" htmlFor="quizId">
         Quiz ID
       </label>
@@ -37,25 +46,31 @@ function Leaderboard() {
         value={quizId}
         onChange={(e) => setQuizId(e.target.value)}
       />
-  
+
       <button onClick={() => fetchLeaderboard(quizId)} className="btn btn-primary">
         Get Leaderboard
-      </button>
-  
+      </button><hr/>
+
       {leaderboard !== null && (
         <div>
           {leaderboard.length > 0 ? (
             <div>
-              <h2>Leaderboard</h2>
-              <ul>
-                {leaderboard.map((entry, index) => (
-                  <li key={index}>
-                    <p>
-                      Username: {entry.username}, Score: {entry.score}
-                    </p>
-                  </li>
-                ))}
-              </ul>
+              <table className="table table-bordered border-primary">
+                <thead className="thead-dark">
+                  <tr>
+                    <th scope="col">Username</th>
+                    <th scope="col">Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leaderboard.map((entry, index) => (
+                    <tr key={index}>
+                      <td>{entry.username}</td>
+                      <td>{entry.score}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           ) : (
             <p>No leaderboard records for this quiz.</p>
@@ -63,7 +78,7 @@ function Leaderboard() {
         </div>
       )}
     </div>
-  );  
+  );
 }
 
 export default Leaderboard;

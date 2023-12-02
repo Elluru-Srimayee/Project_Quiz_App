@@ -5,14 +5,17 @@ function QuizResults() {
   const location = useLocation();
   const [quizResults, setQuizResults] = useState(null);
   const navigate = useNavigate();
-
+  const token=localStorage.getItem("token")
   useEffect(() => {
     // Use the username and quizId from the location state
     const { username, quizId } = location.state;
 
     // Fetch quiz results based on username and quizId
-    fetch(`http://localhost:5057/api/QuizResult/results-with-total-score/${username}/${quizId}`)
-      .then(async (response) => {
+    fetch(`http://localhost:5057/api/QuizResult/results-with-total-score/${username}/${quizId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+      }) .then(async (response) => {
         const data = await response.json();
         setQuizResults(data);
       })
@@ -26,16 +29,24 @@ function QuizResults() {
         <div>
           <h2>Quiz Results</h2>
           <p>Total Score: {quizResults.totalScore}</p>
-          <ul>
-            {quizResults.quizResults.map((result, index) => (
-              <li key={index}>
-                <p>
-                  User Answer: {result.userAnswer},{" "}
-                  {result.isCorrect ? "Correct" : "Incorrect"}, Score: {result.score}
-                </p>
-              </li>
-            ))}
-          </ul>
+          <table className="table table-dark table-hover">
+            <thead className="thead-dark">
+              <tr>
+                <th scope="col">User Answer</th>
+                <th scope="col">Result</th>
+                <th scope="col">Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {quizResults.quizResults.map((result, index) => (
+                <tr key={index}>
+                  <td>{result.userAnswer}</td>
+                  <td>{result.isCorrect ? "Correct" : "Incorrect"}</td>
+                  <td>{result.score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

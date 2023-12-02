@@ -51,6 +51,8 @@ function RegisterUser(){
     })
         .then((userData)=>{
             console.log(userData)
+            alert('Welcome to the quizapp'+{username});
+            navigate("/quizs");
         })
         .catch((err)=>{
             if(err.response.data==="Duplicate username"){

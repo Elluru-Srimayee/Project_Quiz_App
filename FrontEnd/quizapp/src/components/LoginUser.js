@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 function LoginUser(){
-    const roles =["Creator","Participant"];
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
-    const [role,setRole] = useState("");
+    const navigate = useNavigate();
     var [usernameError,setUsernameError]=useState("");
     var [passwordError,setPasswordError]=useState("");
     var checkUSerData = ()=>{
@@ -25,10 +25,6 @@ function LoginUser(){
         else{
             setPasswordError("");
         }
-        if(role==='Select Role'){
-            return false;
-        }
-        return true;
     }
     const Login = (event)=>{
         event.preventDefault();
@@ -41,7 +37,6 @@ function LoginUser(){
         
         axios.post("http://localhost:5057/api/User/login",{
             username: username,
-            role:	role,
             password:password
         })
         .then((userData)=>{
@@ -49,6 +44,11 @@ function LoginUser(){
             localStorage.setItem("token",token);
             var username=userData.data.username;
             localStorage.setItem("username",username);
+            var role=userData.data.role;
+            localStorage.setItem("role",role);
+            alert('Welcome to the quizapp =>'+username);
+            navigate("/quizs")
+            
         })
         .catch((err)=>{
             if(err.response.data==="Invalid username or password"){

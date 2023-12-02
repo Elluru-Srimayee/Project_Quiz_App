@@ -26,7 +26,7 @@ function QuizList() {
         console.log(e);
       });
   }
-  const handleDelete = async (quizId) => {
+  const handleDeleteQuiz = async (quizId) => {
     // Display a confirmation dialog
     const userConfirmed = window.confirm(
       `Do you really want to delete the quiz with ID ${quizId}?`
@@ -39,14 +39,9 @@ function QuizList() {
     }
   };
 
-  const handleDeleteQuiz=()=>
-  {
-    navigate("/deleteQuiz");
-  }
-  const handleUpdateQuiz=()=>
-  {
-    navigate("/updateQuiz");
-  }
+  const handleUpdateQuiz = (quiz) => {
+    navigate("/updateQuiz", { state: quiz });
+  };
   const handleAddQuiz=()=>
   {
     navigate("/addQuiz");
@@ -82,7 +77,7 @@ function QuizList() {
               </button>
               <button 
                 className="btn btn-update"
-                onClick={()=>handleUpdateQuiz(quiz.quizId)}
+                onClick={()=>handleUpdateQuiz(quiz)}
                 >
                     Update
                 </button>

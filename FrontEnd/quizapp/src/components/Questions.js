@@ -5,12 +5,14 @@ import "./Questions.css";
 function Questions() {
   const [questionList, setQuestionList] = useState([]);
   const navigate = useNavigate();
+  const token=localStorage.getItem("token");
 
   var getQuestions = () => {
     fetch("http://localhost:5057/api/Questions/getAll", {
       method: "GET",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
     })
@@ -20,6 +22,10 @@ function Questions() {
         await setQuestionList(myData);
       })
       .catch((e) => {
+        if(e.response.request.statusText==="Forbidden"){
+          alert('Oops this operation is not meant for all users');
+          navigate("/quizs");
+        }
         console.log(e);
       });
   };

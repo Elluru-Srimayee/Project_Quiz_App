@@ -27,8 +27,8 @@ function App() {
       <div>
         <Menu />
         <Routes>
-          <Route path="/addQuestions" element={<AddQuestion/>}/>
-          <Route path="/addQuiz" element={<AddQuiz/>}/>
+          <Route path="/addQuestions" element={<Protected><AddQuestion/></Protected>}/>
+          <Route path="/addQuiz" element={<Protected><AddQuiz/></Protected>}/>
           <Route path="/login" element={<LoginUser/>}/>
           <Route path='/' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
@@ -36,18 +36,21 @@ function App() {
           <Route path="/questions" element={<Protected>
             <Questions/>
           </Protected>} />
-          <Route path="/leaderboard" element={<Leaderboard/>}/>
-          <Route path="/questionsbyid" element={<Protected>
-            <QuestionsByQuizId/>
-          </Protected>} />
-          <Route path="/creator" element={<Creator/>}/>
+          <Route path="/leaderboard" element={<Protected>
+            <Leaderboard/>
+          </Protected>}/>
+          <Route path="/questionsbyid" element={
+            <Protected><QuestionsByQuizId/></Protected>}/>
+          <Route path="/creator" element={<Protected><Creator/></Protected>}/>
           <Route path="/profile" element ={<Profile/>}/>
-          <Route path="/quizResult" element={<QuizResult/>}/>
-          <Route path="/updateQuestions" element={<UpdateQuestion/>}/>
-          <Route path="/deleteQuestions" element={<DeleteQuestion/>}/>
-          <Route path="/updateQuiz" element={<UpdateQuiz/>}/>
-          <Route path="/deleteQuiz" element={<DeleteQuiz/>}/>
-          <Route path="/quizList" element={<QuizList/>}/>
+          <Route path="/quizResult" element={<Protected><QuizResult/></Protected>}/>
+          <Route path="/updateQuestions" element={<Protected>
+            <UpdateQuestion/>
+          </Protected>}/>
+          <Route path="/deleteQuestions" element={<Protected><DeleteQuestion/></Protected>}/>
+          <Route path="/updateQuiz" element={<Protected><UpdateQuiz/></Protected>}/>
+          <Route path="/deleteQuiz" element={<Protected><DeleteQuiz/></Protected>}/>
+          <Route path="/quizList" element={<Protected><QuizList/></Protected>}/>
         </Routes>
       </div>
     </BrowserRouter>

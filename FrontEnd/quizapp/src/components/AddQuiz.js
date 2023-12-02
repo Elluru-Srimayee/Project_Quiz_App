@@ -5,7 +5,7 @@ function AddQuiz() {
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [timeLimit, setTimeLimit] = useState("60"); // Timer value in seconds
-
+  const token=localStorage.getItem("token");
   const clickAdd = () => {
     // Check if required fields are provided
     if (!title || !description || !category) {
@@ -26,6 +26,7 @@ function AddQuiz() {
       method: "POST",
       headers: {
         Accept: "application/json",
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(quiz),

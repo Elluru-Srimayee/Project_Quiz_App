@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import './Creator.css'
 function Creator(){
     const navigate=useNavigate();
     const handleQuestions=()=>{
@@ -8,9 +9,9 @@ function Creator(){
         navigate("/quizList");
     }
     return(
-        <div className="inputcontroller">
-            <button className="btn btn-primary" onClick={handleQuestions}>Manage Questions</button>
-            <button className="btn btn-primary" onClick={handleQuizs}>Manage Quizs</button>
+        <div className="input-container-controller">
+            <button className="btn btn-question" onClick={handleQuestions}>Manage Questions</button>
+            <button className="btn btn-quiz" onClick={handleQuizs}>Manage Quizs</button>
         </div>
     );
 }

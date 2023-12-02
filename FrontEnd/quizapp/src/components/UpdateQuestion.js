@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function UpdateQuestion() {
   const location = useLocation();
   const [question, setQuestion] = useState(location.state || {});
-
+  const navigate = useNavigate();
   const { questionId, quizId, questionTxt, option1, option2, option3, option4, answer } = question;
 
 
@@ -14,7 +15,7 @@ function UpdateQuestion() {
       alert('Quiz ID and Question ID are required for updating.');
       return;
     }
-
+    const token = localStorage.getItem("token");
     const updatedQuestion = {
       questionId,
       questionTxt,
@@ -26,11 +27,20 @@ function UpdateQuestion() {
       quizId,
     };
 
-    axios.put(`http://localhost:5057/api/Questions/update`, updatedQuestion)
+    axios.put(`http://localhost:5057/api/Questions/update`, updatedQuestion,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
       .then(() => {
         alert('Question Updated');
       })
       .catch((e) => {
+        if(e.response.request.statusText==="Forbidden"){
+          alert('Oops this operation is not meant for all users');
+          navigate("/quizs");
+        }
         console.log(e);
       });
   };

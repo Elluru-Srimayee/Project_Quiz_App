@@ -8,6 +8,7 @@ function QuestionsByQuizId() {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const token=localStorage.getItem("token");
 
   useEffect(() => {
     if (location.state && location.state.quizId) {
@@ -19,8 +20,12 @@ function QuestionsByQuizId() {
   const checkQuizCompletion = (quizId) => {
     const username = localStorage.getItem("username");
 
-    fetch(`http://localhost:5057/api/QuizResult/results-with-total-score/${username}/${quizId}`)
-      .then(async (response) => {
+    fetch(`http://localhost:5057/api/QuizResult/results-with-total-score/${username}/${quizId}`,{
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    }).then(async (response) => {
         const data = await response.json();
 
         if (data.quizResults.length > 0) {
@@ -42,6 +47,7 @@ function QuestionsByQuizId() {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
@@ -77,6 +83,7 @@ function QuestionsByQuizId() {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(evaluationData),
