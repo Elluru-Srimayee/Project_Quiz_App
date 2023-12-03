@@ -4,6 +4,7 @@ import "./Quiz.css";
 function QuizList() {
   const [quizList, setQuizList] = useState([]);
   const navigate = useNavigate();
+  const role=localStorage.getItem("role");
 
   useEffect(() => {
     getQuizs();
@@ -28,6 +29,12 @@ function QuizList() {
   }
   const handleDeleteQuiz = async (quizId) => {
     // Display a confirmation dialog
+    if(role!="Creator")
+    {
+        alert('You don\'t have access to this page');
+        navigate("/quizs");
+    }
+    else{
     const userConfirmed = window.confirm(
       `Do you really want to delete the quiz with ID ${quizId}?`
     );
@@ -37,6 +44,7 @@ function QuizList() {
       // Navigate to the DeleteQuiz component with quizId in the state
       navigate("/deleteQuiz", { state: { quizId } });
     }
+  }
   };
 
   const handleUpdateQuiz = (quiz) => {

@@ -60,8 +60,11 @@ function LoginUser(){
     const logout = () => {
         // Remove the token from local storage
         localStorage.removeItem("token");
+        localStorage.removeItem("username");
+        localStorage.removeItem("role");
         // Show an alert
         alert("You are logged out successfully.");
+        navigate("/logout");
       };
     
     return(

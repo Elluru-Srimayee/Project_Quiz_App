@@ -27,9 +27,9 @@ function Quizs() {
       });
   }
 
-  const handleTakeQuiz = async (quizId) => {
+  const handleTakeQuiz = async (quizId,timeLimit) => {
     // Pass the quizId as state to the QuestionsByQuizId component
-    navigate("/questionsbyid", { state: { quizId } });
+    navigate("/questionsbyid", { state: { quizId,timeLimit } });
   };
 
   return (
@@ -52,7 +52,7 @@ function Quizs() {
               <br />
               <button
                 className="btn btn-takequiz"
-                onClick={() => handleTakeQuiz(quiz.quizId)}
+                onClick={() => handleTakeQuiz(quiz.quizId,quiz.timeLimit)}
               >
                 Take Quiz
               </button>

@@ -23,9 +23,6 @@ function DeleteQuiz() {
         alert("Quiz Deleted Successfully");
       } catch (error) {
         console.log(error);
-        if(error.response.request.statusText==="Forbidden"){
-          alert('This operation is not meant for all users.')
-        }
         alert("Error deleting quiz");
       }
     };

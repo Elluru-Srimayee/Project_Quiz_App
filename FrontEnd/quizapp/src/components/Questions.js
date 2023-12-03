@@ -26,6 +26,12 @@ function Questions() {
           alert('Oops this operation is not meant for all users');
           navigate("/quizs");
         }
+        if (e.response && e.response.status === 403) {
+          // Access forbidden, handle accordingly
+          alert('You don\'t have access to this page.');
+          // Redirect the user to the home page or login page
+          navigate("/quizs");
+        }
         console.log(e);
       });
   };

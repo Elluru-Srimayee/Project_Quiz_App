@@ -1,6 +1,6 @@
 import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./AddQuestion.css";
-import { useNavigate } from "react-router-dom";
 function AddQuestion(){
     const [questionTxt,setQuestionTxt] = useState("");
     const [option1,setOption1] = useState("");
@@ -9,8 +9,8 @@ function AddQuestion(){
     const [option4,setOption4]= useState("");
     const [answer,setAnswer] = useState("");
     const[quizId,setQuizId]= useState(0);
+    const navigate = useNavigate();
     const token=localStorage.getItem("token");
-    const navigate=useNavigate();
     var question;
     var clickAdd = ()=>{
        question={
@@ -36,10 +36,6 @@ function AddQuestion(){
                 alert("Question Added Successfully");
             }
         ).catch((e)=>{
-            if(e.response.request.statusText==="Forbidden"){
-                alert('Oops this operation is not meant for all users');
-                navigate("/quizs");
-            }
             console.log(e)
         })
     }

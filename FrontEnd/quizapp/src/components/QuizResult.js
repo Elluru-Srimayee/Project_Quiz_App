@@ -29,7 +29,7 @@ function QuizResults() {
         <div>
           <h2>Quiz Results</h2>
           <p>Total Score: {quizResults.totalScore}</p>
-          <table className="table table-dark table-hover">
+          <table className="table table-bordered border-primary">
             <thead className="thead-dark">
               <tr>
                 <th scope="col">User Answer</th>

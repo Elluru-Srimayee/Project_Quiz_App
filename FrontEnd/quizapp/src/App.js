@@ -51,6 +51,7 @@ function App() {
           <Route path="/updateQuiz" element={<Protected><UpdateQuiz/></Protected>}/>
           <Route path="/deleteQuiz" element={<Protected><DeleteQuiz/></Protected>}/>
           <Route path="/quizList" element={<Protected><QuizList/></Protected>}/>
+          <Route path="/logout" element={<LoginUser />}/>
         </Routes>
       </div>
     </BrowserRouter>

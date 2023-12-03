@@ -1,7 +1,12 @@
-.input-controller-container {
+.inputcontainer{
+  max-width: 600px;
+    margin: auto;
+    padding: 20px;
+}
+.input-container-controller {
     text-align: center;
-    margin-top: 200px; 
-    margin-left:500px;
+    margin-top: 100px; 
+    margin-left:350px;
     border:2px solid #000;
     display:inline-block;
     padding:20px;
@@ -10,12 +15,11 @@
     background-color: #007bff;
     color: #fff;
     padding:10px 20px;
-    margin-top:150px;
-    margin-left:500px;
+    margin-top:10px;
   }
   .btn-quiz {
     background-color: #007bff;
     color: #fff;
     padding:10px 20px;
-    margin-top:150px;
+    margin-top:10px;
   }

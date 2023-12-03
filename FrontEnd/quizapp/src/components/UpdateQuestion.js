@@ -34,13 +34,10 @@ function UpdateQuestion() {
         },
       })
       .then(() => {
-        alert('Question Updated');
+        alert('Question Updated Successfully');
+        navigate("/questions");
       })
       .catch((e) => {
-        if(e.response.request.statusText==="Forbidden"){
-          alert('Oops this operation is not meant for all users');
-          navigate("/quizs");
-        }
         console.log(e);
       });
   };
