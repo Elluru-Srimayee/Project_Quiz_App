@@ -329,3 +329,13 @@ F:\Hexaware Training\Project\QuizSolution\QuizAppTest\obj\Debug\net6.0\refint\Qu
 F:\Hexaware Training\Project\QuizSolution\QuizAppTest\obj\Debug\net6.0\QuizAppTest.pdb
 F:\Hexaware Training\Project\QuizSolution\QuizAppTest\obj\Debug\net6.0\QuizAppTest.genruntimeconfig.cache
 F:\Hexaware Training\Project\QuizSolution\QuizAppTest\obj\Debug\net6.0\ref\QuizAppTest.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\QuizAppTest.dll.config
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Azure.Core.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Azure.Identity.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.Data.Tools.Schema.Sql.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.Data.Tools.Schema.Sql.UnitTesting.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.Data.Tools.Schema.Sql.UnitTestingAdapter.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.Data.Tools.Utilities.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.SqlServer.TransactSql.ScriptDom.dll
+F:\Hexaware Training\Project\QuizSolution\QuizAppTest\bin\Debug\net6.0\Microsoft.SqlServer.Types.dll

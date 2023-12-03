@@ -16,14 +16,13 @@ namespace QuizApp.Services
     {
         private readonly IRepository<int, Quiz> _quizRepository;
         private readonly IRepository<int, Questions> _questionRepository;
-        private readonly TimerService _timerService;
+        private readonly QuizRepository _quizRepo;
 
         // Constructor to inject dependencies
-        public QuizService(IRepository<int, Quiz> quizRepository, IRepository<int, Questions> questionRepository, TimerService timerService)
+        public QuizService(IRepository<int, Quiz> quizRepository, IRepository<int, Questions> questionRepository)
         {
             _quizRepository = quizRepository;
             _questionRepository = questionRepository;
-            _timerService = timerService;
         }
 
         // Add a quiz
@@ -41,6 +40,19 @@ namespace QuizApp.Services
             if (quizs != null)
             {
                 return quizs.ToList();
+            }
+
+            throw new NoQuizsAvailableException();
+        }
+        public List<string> GetCategories()
+        {
+            var quizzes = _quizRepository.GetAll();
+
+            if (quizzes != null && quizzes.Count > 0)
+            {
+                // Extract the distinct Category values from all Quiz entities
+                List<string> categories = quizzes.Select(q => q.Category).Distinct().ToList();
+                return categories;
             }
 
             throw new NoQuizsAvailableException();
@@ -113,27 +125,28 @@ namespace QuizApp.Services
         }
 
         // Update quiz details
-        public void UpdateQuiz(Quiz updatedQuiz)
+        public Quiz UpdateQuiz(Quiz updatedQuiz)
         {
-            if (updatedQuiz == null)
+            if (updatedQuiz != null)
             {
-                throw new ArgumentNullException(nameof(updatedQuiz), "Updated quiz data is null.");
+                ValidateQuizTitle(updatedQuiz.Title);
+                ValidateQuizTimeLimit(updatedQuiz.TimeLimit);
+
+                var existingQuiz = _quizRepository.GetById(updatedQuiz.QuizId);
+
+                if (existingQuiz == null)
+                {
+                    throw new InvalidOperationException($"Quiz with ID {updatedQuiz.QuizId} not found.");
+                }
+                existingQuiz.Title = updatedQuiz.Title;
+                existingQuiz.Description = updatedQuiz.Description;
+                existingQuiz.TimeLimit = updatedQuiz.TimeLimit;
+
+                var updatedQuizResult = _quizRepository.Update(existingQuiz);
+
+                return updatedQuizResult;
             }
-
-            ValidateQuizTitle(updatedQuiz.Title);
-            ValidateQuizTimeLimit(updatedQuiz.TimeLimit);
-
-            var existingQuiz = _quizRepository.GetById(updatedQuiz.QuizId);
-
-            if (existingQuiz == null)
-            {
-                throw new InvalidOperationException($"Quiz with ID {updatedQuiz.QuizId} not found.");
-            }
-            existingQuiz.Title = updatedQuiz.Title;
-            existingQuiz.Description = updatedQuiz.Description;
-            existingQuiz.TimeLimit = updatedQuiz.TimeLimit;
-
-            _quizRepository.Update(existingQuiz);
+            return null;
         }
 
         // Validate quiz title
@@ -156,44 +169,44 @@ namespace QuizApp.Services
         }
 
         // Start a quiz
-        public Quiz StartQuiz(int quizId)
-        {
-            var quiz = _quizRepository.GetById(quizId);
+        //public Quiz StartQuiz(int quizId)
+        //{
+        //    var quiz = _quizRepository.GetById(quizId);
 
-            if (quiz != null)
-            {
-                if (quiz.TimeLimit != null)
-                {
-                    _timerService.TimerElapsed += OnTimerElapsed;
-                    _timerService.StartTimer(quizId, quiz.TimeLimit);
-                    QuizStateDTO quizState = new QuizStateDTO();
-                    quizState.Status = "InProgress";
-                }
+        //    if (quiz != null)
+        //    {
+        //        if (quiz.TimeLimit != null)
+        //        {
+        //            _timerService.TimerElapsed += OnTimerElapsed;
+        //            _timerService.StartTimer(quizId, quiz.TimeLimit);
+        //            QuizStateDTO quizState = new QuizStateDTO();
+        //            quizState.Status = "InProgress";
+        //        }
 
-                _quizRepository.Update(quiz);
-            }
+        //        _quizRepository.Update(quiz);
+        //    }
 
-            return quiz;
-        }
+        //    return quiz;
+        //}
 
         // Handle timer elapsed event
-        private void OnTimerElapsed(int quizId)
-        {
-            EndQuiz(quizId);
-        }
+        //private void OnTimerElapsed(int quizId)
+        //{
+        //    EndQuiz(quizId);
+        //}
 
         // End a quiz
-        public void EndQuiz(int quizId)
-        {
-            var quiz = _quizRepository.GetById(quizId);
+        //public void EndQuiz(int quizId)
+        //{
+        //    var quiz = _quizRepository.GetById(quizId);
 
-            if (quiz != null)
-            {
-                _timerService.StopTimer();
-                QuizStateDTO quizState = new QuizStateDTO();
-                quizState.Status = "Completed";
-                _quizRepository.Update(quiz);
-            }
-        }
+        //    if (quiz != null)
+        //    {
+        //        _timerService.StopTimer();
+        //        QuizStateDTO quizState = new QuizStateDTO();
+        //        quizState.Status = "Completed";
+        //        _quizRepository.Update(quiz);
+        //    }
+        //}
     }
 }

@@ -39,11 +39,6 @@ namespace QuizApp.Repositories
                 return null;
             return _context.Quizs.ToList();
         }
-        public Quiz GetQuiz(int key)
-        {
-            return _context.Quizs
-                .FirstOrDefault(q => q.QuizId == key);
-        }
 
         public Quiz GetById(int key)
         {
@@ -63,5 +58,6 @@ namespace QuizApp.Repositories
             }
             return null;
         }
+
     }
 }

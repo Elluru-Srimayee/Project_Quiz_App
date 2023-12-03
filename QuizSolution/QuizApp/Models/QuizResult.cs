@@ -18,8 +18,8 @@ namespace QuizApp.Models
         public User User { get; set; }
 
         public int Score { get; set; }
-        public int QuestionId { get; internal set; }
-        public string UserAnswer { get; internal set; }
-        public bool IsCorrect { get; internal set; }
+        public int QuestionId { get; set; }
+        public string UserAnswer { get; set; }
+        public bool IsCorrect { get; set; }
     }
 }

@@ -48,9 +48,26 @@ namespace QuizApp.Controllers
             _logger.LogError("Failed to get the quizs");
             return BadRequest(errorMessage); // Return error response
         }
+        [HttpGet("categories")]
+        public ActionResult<string> GetCategories()
+        {
+            string errorMessage = string.Empty;
+            try
+            {
+                var result = _quizService.GetCategories();
+                _logger.LogInformation("Received list of category");
+                return Ok(result);
+            }
+            catch(Exception e)
+            {
+                errorMessage = e.Message;
+            }
+            _logger.LogError("Failed to get the category List");
+            return BadRequest(errorMessage);
+        }
 
         // Endpoint to create a new quiz
-       // [Authorize(Roles = "Creator")]
+        [Authorize(Roles = "Creator")]
         [HttpPost]
         public ActionResult Create(Quiz quiz)
         {
@@ -89,7 +106,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get questions for a quiz
-        //[Authorize]
+        [Authorize]
         [HttpGet("quiz/{quizId}/questions")]
         public ActionResult<IEnumerable<QuestionDTO>> GetQuestionsForQuiz(int quizId)
         {
@@ -108,7 +125,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to evaluate an answer for a quiz
-        //[Authorize]
+        [Authorize]
         [HttpPost("evaluate/{quizId}")]
         public ActionResult<QuizResultDTO> EvaluateAnswer(int quizId, [FromBody] AnswerDTO answerDTO)
         {
@@ -149,7 +166,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to get leaderboard for a quiz
-        //[Authorize]
+        [Authorize]
         [HttpGet("leaderboard/{quizId}")]
         public ActionResult<IEnumerable<LeaderboardEntryDTO>> GetLeaderboard(int quizId)
         {
@@ -166,7 +183,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to delete a quiz if it has no associated questions
-         //[Authorize(Roles = "Creator")]
+         [Authorize(Roles = "Creator")]
         [HttpDelete("{quizId}")]
         public IActionResult DeleteQuiz(int quizId)
         {
@@ -191,7 +208,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to update a quiz
-        //[Authorize(Roles = "Creator")]
+        [Authorize(Roles = "Creator")]
         [HttpPut("update")]
         public IActionResult UpdateQuiz(Quiz updatedQuiz)
         {

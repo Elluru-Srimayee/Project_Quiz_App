@@ -73,7 +73,8 @@ namespace QuizApp.Services
                 Option1 = q.Option1,
                 Option2 = q.Option2,
                 Option3 = q.Option3,
-                Option4 = q.Option4
+                Option4 = q.Option4,
+                Answer = q.Answer
             }).ToList();
 
             return questionDTOs;

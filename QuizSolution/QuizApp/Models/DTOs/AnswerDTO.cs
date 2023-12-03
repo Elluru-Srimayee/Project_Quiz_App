@@ -6,4 +6,5 @@ public class AnswerDTO
     public string Username { get; set; }
     public int QuestionId { get; set; }
     public string UserAnswer { get; set; }
+    public int? QuizId { get; set; }
 }

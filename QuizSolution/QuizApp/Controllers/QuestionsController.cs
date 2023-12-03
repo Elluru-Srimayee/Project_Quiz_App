@@ -27,7 +27,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to add a question to a quiz
-        //[Authorize(Roles = "Creator")]
+        [Authorize(Roles = "Creator")]
         [HttpPost("add")]
         public IActionResult AddToQuiz(QuestionDTO questionDTO)
         {
@@ -50,7 +50,7 @@ namespace QuizApp.Controllers
         }
 
         // Endpoint to update a question in a quiz
-        //[Authorize(Roles = "Creator")]
+        [Authorize(Roles = "Creator")]
         [HttpPut("update")]
         public IActionResult UpdateQuestion([FromBody] QuestionDTO updatedQuestion)
         {
@@ -76,7 +76,7 @@ namespace QuizApp.Controllers
 
 
         // Endpoint to get all questions
-        //[Authorize(Roles ="Creator")]
+        [Authorize(Roles ="Creator")]
         [HttpGet("getAll")]
         public IActionResult GetAllQuestions()
         {
