@@ -44,7 +44,7 @@ function UpdateQuestion() {
 
   return (
     <div className="inputcontainer">
-      <h1 className="alert alert-success">UpdateQuestion</h1>
+      <h1 className="alert alert-quiz">UpdateQuestion</h1>
       <label className="form-control" htmlFor="questionId">Question ID</label>
       <input id="questionId" type="number" className="form-control" value={questionId} readOnly />
 

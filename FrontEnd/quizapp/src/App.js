@@ -20,6 +20,7 @@ import UpdateQuiz from './components/UpdateQuiz';
 import DeleteQuiz from './components/DeleteQuiz';
 import Creator from './components/Creator';
 import QuizList from './components/QuizList';
+import Launchpage from './components/Launchpage';
 
 function App() {
   return (
@@ -27,12 +28,13 @@ function App() {
       <div>
         <Menu />
         <Routes>
+          <Route path="/launch" element={<Launchpage/>}/>
           <Route path="/addQuestions" element={<Protected><AddQuestion/></Protected>}/>
           <Route path="/addQuiz" element={<Protected><AddQuiz/></Protected>}/>
           <Route path="/login" element={<LoginUser/>}/>
           <Route path='/' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
-          <Route path="search" element={<QuizsByCategory />} />
+          <Route path="/search" element={<QuizsByCategory />} />
           <Route path="/questions" element={<Protected>
             <Questions/>
           </Protected>} />
@@ -42,7 +44,6 @@ function App() {
           <Route path="/questionsbyid" element={
             <Protected><QuestionsByQuizId/></Protected>}/>
           <Route path="/creator" element={<Protected><Creator/></Protected>}/>
-          <Route path="/profile" element ={<Profile/>}/>
           <Route path="/quizResult" element={<Protected><QuizResult/></Protected>}/>
           <Route path="/updateQuestions" element={<Protected>
             <UpdateQuestion/>
@@ -52,6 +53,7 @@ function App() {
           <Route path="/deleteQuiz" element={<Protected><DeleteQuiz/></Protected>}/>
           <Route path="/quizList" element={<Protected><QuizList/></Protected>}/>
           <Route path="/logout" element={<LoginUser />}/>
+          <Route path="/profile" element={<Protected><Profile/></Protected>}/>
         </Routes>
       </div>
     </BrowserRouter>

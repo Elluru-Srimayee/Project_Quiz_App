@@ -41,6 +41,7 @@ function AddQuiz() {
 
   return (
     <div className="inputcontainer">
+      <h1 className="alert alert-quiz">Quiz Details</h1>
       <label className="form-control" htmlFor="qtitle">
         Quiz Title
       </label>

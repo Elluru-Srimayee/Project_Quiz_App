@@ -35,7 +35,7 @@ function Leaderboard() {
 
   return (
     <div className="inputcontainer">
-      <h2 className="alert alert-success">Leaderboard</h2>
+      <h2 className="alert alert-quiz">Leaderboard</h2>
       <label className="form-control" htmlFor="quizId">
         Quiz ID
       </label>

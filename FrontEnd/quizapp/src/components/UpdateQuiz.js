@@ -37,7 +37,7 @@ function UpdateQuiz() {
 
   return (
     <div className="inputcontainer">
-      <h1 className="alert alert-success">UpdateQuiz</h1>
+      <h1 className="alert alert-quiz">UpdateQuiz</h1>
       <label className="form-control" htmlFor="quizId">Quiz ID</label>
       <input id="quizId" type="number" className="form-control" value={quizId} readOnly />
       <label className="form-control" htmlFor="qtitle">Quiz Title</label>
@@ -47,7 +47,7 @@ function UpdateQuiz() {
       <input id="qdescr" type="text" className="form-control" value={description} onChange={(e) => setQuiz({ ...quiz, description: e.target.value })} />
 
       <label className="form-control" htmlFor="qcate">Quiz Category</label>
-      <input id="qcate" type="text" className="form-control" value={category} onChange={(e) => setQuiz({ ...quiz, category: e.target.value })} />
+      <input id="qcate" type="text" className="form-control" value={category} readOnly/>
 
       <label className="form-control" htmlFor="qtime">Quiz TimeLimit</label>
       <input id="qtime" type="number" className="form-control" value={timeLimit} onChange={(e) => setQuiz({ ...quiz, timeLimit: e.target.value })} />

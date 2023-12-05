@@ -6,7 +6,15 @@ function Questions() {
   const [questionList, setQuestionList] = useState([]);
   const navigate = useNavigate();
   const token=localStorage.getItem("token");
-
+  const role=localStorage.getItem("role");
+  const [quizId, setQuizId] = useState("");
+  if (role !== "Creator") {
+    alert("You don't have access to this page");
+    setTimeout(() => {
+      navigate("/quizs");
+    }, 0);
+    return null;
+  }
   var getQuestions = () => {
     fetch("http://localhost:5057/api/Questions/getAll", {
       method: "GET",
@@ -56,23 +64,46 @@ function Questions() {
   const updateQuestion = (question) => {
     navigate("/updateQuestions", { state: question });
   };
-
+  const handleSearch = () => {
+    // Fetch questions based on the provided quizId
+    fetch(`http://localhost:5057/api/Questions/byquiz/${quizId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (data) => {
+        const myData = await data.json();
+        setQuestionList(myData);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
   var checkQuestions = questionList.length > 0 ? true : false;
 
   return (
     <div className="question">
-      <h1 className="alert alert-success">Questions</h1>
+      <h1 className="alert alert-question">Questions</h1>
       <button className="btn btn-success" onClick={getQuestions}>
         Get All Questions
       </button>
       <button className="btn btn-primary" onClick={addQuestion}>
         Add Question
       </button>
+      <hr/>
+      <div>
+          <label htmlFor="quizId">Quiz ID:</label>
+          <input type="text" id="quizId" value={quizId} onChange={(e) => setQuizId(e.target.value)} />
+          <button onClick={handleSearch}>Search</button>
+        </div>
       <hr />
       {checkQuestions ? (
         <div>
           {questionList.map((question) => (
-            <div key={question.questionId} className="alert alert-success">
+            <div key={question.questionId} className="alert alert-question">
               Question ID: {question.questionId}{" "}
               <button
                 className="btn btn-delete"

@@ -43,7 +43,7 @@ function AddQuestion(){
 
     return(
         <div className="inputcontainer">
-            <h2 className="alert alert-success">Add Questions</h2>
+            <h2 className="alert alert-quiz">Add Questions</h2>
             <label className="form-control" htmlFor="qutxt">Question</label>
             <input id="qutxt" type="text" className="form-control" value={questionTxt} onChange={(e)=>{setQuestionTxt(e.target.value)}}/>
             <label className="form-control"  htmlFor="quopt1">Option A</label>

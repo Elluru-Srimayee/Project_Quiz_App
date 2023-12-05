@@ -92,7 +92,7 @@ function RegisterUser(){
             <button className="btn btn-danger button">Cancel</button>
             <br/>
             <hr/>
-            <label className="form-control">If you already have an account please login</label>
+            <label className="form-control">Already have an account? Please login</label>
             <button className="btn btn-login button" onClick={goToLogin}>Login</button>
             
         </form>

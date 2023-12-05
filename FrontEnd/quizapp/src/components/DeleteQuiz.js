@@ -33,7 +33,7 @@ function DeleteQuiz() {
 
   return (
     <div className="inputcontainer">
-      <h1 className="alert alert-success">DeleteQuiz</h1>
+      <h1 className="alert alert-quiz">DeleteQuiz</h1>
       <label className="form-control" htmlFor="quizId">
         Quiz ID: {quizId}
       </label>
