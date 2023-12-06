@@ -84,6 +84,21 @@ namespace QuizApp.Services
             }
             throw new NoQuizResultsAvailableException();
         }
+        public int[] GetAnsweredQuizIdsForUser(string username)
+        {
+            var quizResults = _quizResultRepository
+                .GetAll()
+                .Where(result => result.Username == username)
+                .ToList();
+
+            if (quizResults.Any())
+            {
+                var answeredQuizIds = quizResults.Select(result => result.QuizId).Distinct().ToArray();
+                return answeredQuizIds;
+            }
+
+            throw new NoQuizResultsAvailableException();
+        }
 
         // Get quiz results by user and quiz, and map to DTO
         public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId)

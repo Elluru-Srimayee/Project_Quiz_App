@@ -65,6 +65,42 @@ namespace QuizApp.Controllers
             _logger.LogError("Failed to get the category List");
             return BadRequest(errorMessage);
         }
+        [HttpGet("titles")]
+        public ActionResult<string> GetTitles()
+        {
+            string errorMessage = string.Empty;
+            try
+            {
+                var result = _quizService.GetTitles();
+                _logger.LogInformation("Received list of titles");
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+            }
+            _logger.LogError("Failed to get the titles List");
+            return BadRequest(errorMessage);
+        }
+
+        [HttpGet("quizId")]
+        public ActionResult<string> GetId(string title)
+        {
+            string errorMessage = string.Empty;
+            try
+            {
+                var result = _quizService.GetId(title);
+                _logger.LogInformation("Received id of quiz with Its title");
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                errorMessage = e.Message;
+            }
+            _logger.LogError("Failed to get the Id of quiz with given title.");
+            return BadRequest(errorMessage);
+        }
+
 
         // Endpoint to create a new quiz
         [Authorize(Roles = "Creator")]

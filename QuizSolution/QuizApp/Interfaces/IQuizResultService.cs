@@ -11,6 +11,7 @@ namespace QuizApp.Interfaces
         public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId);
         IList<QuizResultDTO> GetResultsByQuiz(int quizId);
         IList<QuizResult> GetAllQuizResults();
+        public int[] GetAnsweredQuizIdsForUser(string username);
         bool DeleteQuizResult(int quizResultId);
         QuizResultDTO EvaluateAnswer(int quizId, AnswerDTO answerDTO);
         public int GetTotalScoreForUserInQuiz(int quizId, string username);

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizApp.Exceptions;
 using QuizApp.Interfaces;
 using QuizApp.Models.DTOs;
+using QuizApp.Services;
 using System;
 using System.Collections.Generic;
 
@@ -42,7 +43,7 @@ namespace QuizApp.Controllers
                 return NotFound($"No quiz results found for Quiz ID {quizId}. {e.Message}");
             }
         }
-
+        
         // Endpoint to get quiz results with total score by user and quiz ID
         [Authorize]
         [HttpGet("results-with-total-score/{username}/{quizId}")]
@@ -91,5 +92,19 @@ namespace QuizApp.Controllers
                 return BadRequest($"Failed to get total score. {e.Message}");
             }
         }
+        [HttpGet("answered-quiz-ids/{username}")]
+        public ActionResult<int[]> GetAnsweredQuizIds(string username)
+        {
+            try
+            {
+                var answeredQuizIds = _quizResultService.GetAnsweredQuizIdsForUser(username);
+                return Ok(answeredQuizIds);
+            }
+            catch (NoQuizResultsAvailableException)
+            {
+                return NotFound("No quiz results available for the specified user.");
+            }
+        }
     }
+
 }

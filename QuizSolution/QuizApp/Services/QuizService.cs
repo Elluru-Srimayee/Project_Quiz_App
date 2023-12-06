@@ -57,6 +57,30 @@ namespace QuizApp.Services
 
             throw new NoQuizsAvailableException();
         }
+        public List<string> GetTitles()
+        {
+            var quizzes = _quizRepository.GetAll();
+
+            if (quizzes != null && quizzes.Count > 0)
+            {
+                // Extract the distinct Category values from all Quiz entities
+                List<string> titles = quizzes.Select(q => q.Title).Distinct().ToList();
+                return titles;
+            }
+
+            throw new NoQuizsAvailableException();
+        }
+        public int GetId(string title)
+        {
+            var quiz = _quizRepository.GetAll().FirstOrDefault(q => q.Title == title);
+
+            if (quiz != null)
+            {
+                return quiz.QuizId;
+            }
+
+            throw new KeyNotFoundException($"Quiz with title '{title}' not found");
+        }
 
         // Get quizzes by category
         public List<Quiz> GetQuizzesByCategory(string category)
@@ -165,48 +189,6 @@ namespace QuizApp.Services
             {
                 throw new ArgumentException("Time limit must be a positive value.", nameof(timeLimit));
             }
-            // You can add more validation rules for the time limit if needed
         }
-
-        // Start a quiz
-        //public Quiz StartQuiz(int quizId)
-        //{
-        //    var quiz = _quizRepository.GetById(quizId);
-
-        //    if (quiz != null)
-        //    {
-        //        if (quiz.TimeLimit != null)
-        //        {
-        //            _timerService.TimerElapsed += OnTimerElapsed;
-        //            _timerService.StartTimer(quizId, quiz.TimeLimit);
-        //            QuizStateDTO quizState = new QuizStateDTO();
-        //            quizState.Status = "InProgress";
-        //        }
-
-        //        _quizRepository.Update(quiz);
-        //    }
-
-        //    return quiz;
-        //}
-
-        // Handle timer elapsed event
-        //private void OnTimerElapsed(int quizId)
-        //{
-        //    EndQuiz(quizId);
-        //}
-
-        // End a quiz
-        //public void EndQuiz(int quizId)
-        //{
-        //    var quiz = _quizRepository.GetById(quizId);
-
-        //    if (quiz != null)
-        //    {
-        //        _timerService.StopTimer();
-        //        QuizStateDTO quizState = new QuizStateDTO();
-        //        quizState.Status = "Completed";
-        //        _quizRepository.Update(quiz);
-        //    }
-        //}
     }
 }
