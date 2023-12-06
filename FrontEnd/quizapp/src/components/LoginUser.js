@@ -47,7 +47,7 @@ function LoginUser(){
             var role=userData.data.role;
             localStorage.setItem("role",role);
             alert('Welcome to the quizapp =>'+username);
-            navigate("/quizs")
+            navigate("/launch")
             
         })
         .catch((err)=>{

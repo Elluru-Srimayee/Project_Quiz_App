@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Leaderboard() {
   const [quizId, setQuizId] = useState("");
   const [leaderboard, setLeaderboard] = useState(null);
+  const [titleList, setTitleList] = useState([]);
+  const [titleInput, setTitleInput] = useState("");
 
   const fetchLeaderboard = (quizId) => {
     // Make sure quizId is provided
     if (quizId) {
       // Get the token from local storage
       const token = localStorage.getItem("token");
-  
+
       // Fetch leaderboard based on quizId with the authorization header
       fetch(`http://localhost:5057/api/Quiz/leaderboard/${quizId}`, {
         headers: {
@@ -31,25 +33,100 @@ function Leaderboard() {
       alert("Please provide a quizId");
     }
   };
+
+  useEffect(() => {
+    // Fetch the list of categories when the component mounts
+    fetch("http://localhost:5057/api/Quiz/titles", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    })
+      .then(async (data) => {
+        const titles = await data.json();
+        setTitleList(titles);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  const handleTitleChange = (e) => {
+    // Update the categoryInput state when the dropdown selection changes
+    setTitleInput(e.target.value);
+  };
+
+  const searchResult = async () => {
+    try {
+      // Fetch the quizId based on the selected title
+      const response = await fetch(`http://localhost:5057/api/Quiz/quizId?title=${titleInput}`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+  
+      console.log("Response:", response);
+  
+      if (response.ok) {
+        const selectedQuizId = await response.text();
+  
+        // Log the selectedQuizId
+        console.log("Selected QuizId:", selectedQuizId);
+  
+        // Log a message before calling fetchLeaderboard
+        console.log("Fetching leaderboard...");
+  
+        // Ensure that the selectedQuizId is an integer
+        const parsedQuizId = parseInt(selectedQuizId, 10);
+  
+        if (!isNaN(parsedQuizId)) {
+          // Pass the parsedQuizId to fetchLeaderboard
+          fetchLeaderboard(parsedQuizId);
+        } else {
+          console.log("Invalid quizId format");
+          alert("Invalid quizId format");
+        }
+      } else {
+        console.log("Failed to fetch quizId for the selected title");
+        alert("Failed to fetch quizId for the selected title");
+      }
+    } catch (error) {
+      console.error("Error fetching quizId:", error);
+    }
+  };
+  
+  
   
 
   return (
     <div className="inputcontainer">
       <h2 className="alert alert-quiz">Leaderboard</h2>
-      <label className="form-control" htmlFor="quizId">
-        Quiz ID
-      </label>
-      <input
-        id="quizId"
-        type="text"
-        className="form-control"
-        value={quizId}
-        onChange={(e) => setQuizId(e.target.value)}
-      />
+      <div className="d-flex align-items-center flex">
+        <select
+          className="form-select"
+          value={titleInput}
+          onChange={handleTitleChange}
+        >
+          <option value="">Select a title</option>
+          {titleList.map((title) => (
+            <option key={title} value={title}>
+              {title}
+            </option>
+          ))}
+        </select>
+        <button
+          className="btn btn-success"
+          style={{ maxWidth: "45%", marginBottom: "15px" }}
+          onClick={searchResult}
+        >
+          Search
+        </button>
+      </div>
 
-      <button onClick={() => fetchLeaderboard(quizId)} className="btn btn-primary">
-        Get Leaderboard
-      </button><hr/>
+      <hr/>
 
       {leaderboard !== null && (
         <div>

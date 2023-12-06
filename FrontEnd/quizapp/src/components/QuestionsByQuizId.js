@@ -57,7 +57,12 @@ function QuestionsByQuizId() {
 
         if (data.quizResults.length > 0) {
           alert("You have already completed this quiz. Multiple attempts are not allowed.");
-          navigate("/quizs");
+          navigate("/quizresult", {
+            state: {
+              username: localStorage.getItem("username"),
+              quizId: location.state.quizId,
+            },
+          })
         } else {
           getQuestionsByQuizId(quizId);
         }
