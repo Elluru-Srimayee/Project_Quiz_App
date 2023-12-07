@@ -82,7 +82,7 @@ namespace QuizApp.Controllers
             _logger.LogError("Failed to get the titles List");
             return BadRequest(errorMessage);
         }
-
+        [Authorize]
         [HttpGet("quizId")]
         public ActionResult<string> GetId(string title)
         {

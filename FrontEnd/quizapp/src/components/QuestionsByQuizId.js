@@ -148,6 +148,7 @@ function QuestionsByQuizId() {
           Time Remaining: {Math.floor(timeRemaining / 60).toString().padStart(2, '0')}:{(timeRemaining % 60).toString().padStart(2, '0')}
         </div>
       )}
+      {(timeLimit===0 || timeLimit===null) && <div className="alert alert-info">No time limit for this quiz.</div> }
       {questionList.length > 0 ? (
         <div>
           <div className="alert alert-question">

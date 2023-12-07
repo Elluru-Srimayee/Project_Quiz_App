@@ -131,6 +131,7 @@ function Profile() {
       const response = await fetch(`http://localhost:5057/api/Quiz/quizId?title=${titleInput}`, {
         method: "GET",
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

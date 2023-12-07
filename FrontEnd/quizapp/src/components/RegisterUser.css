@@ -4,6 +4,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.747);
     /* background-image: url(https://www.architectureartdesigns.com/wp-content/uploads/2016/08/16-13.jpg); */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -38,12 +39,9 @@
   .button {
     margin-right: 10px;
   }
-  
-  /* Optional: Add styling for the Cancel button */
-  .btn-danger {
-    background-color: #dc3545;
+  .btn-signup{
+    max-width:100%
   }
-  
   /* Optional: Add hover effect to buttons */
   .button:hover, .btn-danger:hover {
     filter: brightness(90%);

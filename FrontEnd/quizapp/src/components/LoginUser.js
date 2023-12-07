@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./Login.css";
 function LoginUser(){
     const [username,setUsername] = useState("");
@@ -57,34 +57,29 @@ function LoginUser(){
             console.log(err)
         })
     }
-    const logout = () => {
-        // Remove the token from local storage
-        localStorage.removeItem("token");
-        localStorage.removeItem("username");
-        localStorage.removeItem("role");
-        // Show an alert
-        alert("You are logged out successfully.");
-        navigate("/logout");
-      };
     
     return(
+        <div class="wrapper">
         <form className="loginForm">
             <h1>Login</h1>
-            <label className="form-control">Username</label>
-            <input type="text" className="form-control" value={username}
-                    onChange={(e)=>{setUsername(e.target.value)}}/>
-           <label className="alert alert-danger">{usernameError}</label>
-            <label className="form-control">Password</label>
-            <input type="password" className="form-control" value={password}
-                    onChange={(e)=>{setPassword(e.target.value)}}/>
-            <label className="alert alert-danger">{passwordError}</label><br/>
-            <button className="btn btn-primary button" onClick={Login}>Login</button>
             
-            <button className="btn btn-danger button">Cancel</button>
-            <button className="btn btn-danger button" onClick={logout}>
-                Logout
-            </button>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Username" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
+            <label htmlFor="floatingInput">Username</label>
+        </div>
+            <label className="alert alert-danger">{usernameError}</label>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+            value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+            <label htmlFor="floatingPassword">Password</label>
+        </div>
+            <label className="alert alert-danger">{passwordError}</label><br/>
+            <button className="btn btn-login button" onClick={Login}>Login</button>
         </form>
+            <div class="text-center fs-6">
+            New User? <Link to="/">Register</Link>
+            </div>
+        </div>
     );
 }
 

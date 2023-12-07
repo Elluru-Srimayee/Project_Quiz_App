@@ -21,6 +21,8 @@ import DeleteQuiz from './components/DeleteQuiz';
 import Creator from './components/Creator';
 import QuizList from './components/QuizList';
 import Launchpage from './components/Launchpage';
+import QuizReport from './components/QuizReport'; 
+import QuizIdReport from './components/QuizIdReport';
 
 function App() {
   return (
@@ -54,6 +56,8 @@ function App() {
           <Route path="/quizList" element={<Protected><QuizList/></Protected>}/>
           <Route path="/logout" element={<LoginUser />}/>
           <Route path="/profile" element={<Protected><Profile/></Protected>}/>
+          <Route path="/report" element={<Protected><QuizReport/></Protected>}/>
+          <Route path="/QuizIdReport" element={<Protected><QuizIdReport></QuizIdReport></Protected>}/>
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,11 +1,11 @@
-.loginForm {
+.wrapper {
     max-width: 350px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     /* background-image: url(https://www.architectureartdesigns.com/wp-content/uploads/2016/08/16-13.jpg); */
-    /* background-color: rgba(255, 255, 255, 0.5); */
+    background-color: rgba(255, 255, 255, 0.747);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   

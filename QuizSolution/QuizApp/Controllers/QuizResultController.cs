@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using QuizApp.Exceptions;
 using QuizApp.Interfaces;
 using QuizApp.Models.DTOs;
+using QuizApp.Models;
 using QuizApp.Services;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace QuizApp.Controllers
         // Endpoint to get quiz results by quiz ID
         [Authorize(Roles = "Creator")]
         [HttpGet("byQuiz/{quizId}")]
-        public ActionResult<IEnumerable<QuizResultDTO>> GetResultsByQuiz(int quizId)
+        public ActionResult<IEnumerable<QuizResult>> GetResultsByQuiz(int quizId)
         {
             try
             {
@@ -41,6 +42,23 @@ namespace QuizApp.Controllers
             {
                 _logger.LogError("Could not get quizResults");
                 return NotFound($"No quiz results found for Quiz ID {quizId}. {e.Message}");
+            }
+        }
+        [Authorize(Roles="Creator")]
+        [HttpGet("AllquizResults")]
+        public ActionResult<IEnumerable<QuizResult>> GetAllQuizResults()
+        {
+            try
+            {
+                // Get quiz results for the specified quiz ID
+                var results = _quizResultService.GetAllQuizResults();
+                _logger.LogInformation("Got the QuizResults successfully");
+                return Ok(results); // Return the quiz results
+            }
+            catch (NoQuizResultsAvailableException e)
+            {
+                _logger.LogError("Could not get quizResults");
+                return NotFound($"No quiz results found . {e.Message}");
             }
         }
         

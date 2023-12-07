@@ -30,7 +30,7 @@ function QuizResults() {
       {quizResults && (
         <div>
           <h2>Quiz Results</h2>
-          <button className="btn btn-quizs" onClick={GoToQuizs}>GoToQuizs</button>
+          <button className="btn btn-success" onClick={GoToQuizs}>GoToQuizs</button>
           <p>Total Score: {quizResults.totalScore}</p>
           <table className="table table-bordered border-primary">
             <thead className="thead-dark">

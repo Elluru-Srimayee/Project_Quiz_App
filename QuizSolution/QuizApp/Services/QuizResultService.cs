@@ -60,12 +60,12 @@ namespace QuizApp.Services
         }
 
         // Get quiz results by quiz ID and map to DTO
-        public IList<QuizResultDTO> GetResultsByQuiz(int quizId)
+        public IList<QuizResult> GetResultsByQuiz(int quizId)
         {
             return _quizResultRepository
                 .GetAll()
                 .Where(result => result.QuizId == quizId)
-                .Select(result => MapToQuizResultDTO(result))
+                .Select(result => (result))
                 .ToList();
         }
 

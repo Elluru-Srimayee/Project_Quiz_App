@@ -5,12 +5,12 @@ function Leaderboard() {
   const [leaderboard, setLeaderboard] = useState(null);
   const [titleList, setTitleList] = useState([]);
   const [titleInput, setTitleInput] = useState("");
+  const token = localStorage.getItem("token");
 
   const fetchLeaderboard = (quizId) => {
     // Make sure quizId is provided
     if (quizId) {
       // Get the token from local storage
-      const token = localStorage.getItem("token");
 
       // Fetch leaderboard based on quizId with the authorization header
       fetch(`http://localhost:5057/api/Quiz/leaderboard/${quizId}`, {
@@ -63,6 +63,7 @@ function Leaderboard() {
       const response = await fetch(`http://localhost:5057/api/Quiz/quizId?title=${titleInput}`, {
         method: "GET",
         headers: {
+          Authorization: `Bearer ${token}`,
           Accept: "application/json",
           "Content-Type": "application/json",
         },

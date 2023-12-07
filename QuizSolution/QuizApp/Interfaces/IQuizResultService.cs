@@ -9,7 +9,7 @@ namespace QuizApp.Interfaces
         QuizResult AddQuizResult(QuizResult quizResult);
         QuizResult UpdateQuizResult(QuizResult quizResult);
         public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId);
-        IList<QuizResultDTO> GetResultsByQuiz(int quizId);
+        IList<QuizResult> GetResultsByQuiz(int quizId);
         IList<QuizResult> GetAllQuizResults();
         public int[] GetAnsweredQuizIdsForUser(string username);
         bool DeleteQuizResult(int quizResultId);

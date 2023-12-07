@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './RegisterUser.css';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function RegisterUser(){
     const roles =["Creator","Participant"];
@@ -56,7 +56,7 @@ function RegisterUser(){
         })
         .catch((err)=>{
             if(err.response.data==="Duplicate username"){
-                alert('You already have an account please login');
+                alert('The username already exists, please login if that is urs');
             }
             console.log(err)
         })
@@ -68,18 +68,22 @@ function RegisterUser(){
     return(
         <form className="registerForm">
             <h1>Register</h1>
-            <label className="form-control">Username</label>
-            <input type="text" className="form-control" value={username}
-                    onChange={(e)=>{setUsername(e.target.value)}}/>
-           <label className="alert alert-danger">{usernameError}</label>
-            <label className="form-control">Password</label>
-            <input type="password" className="form-control" value={password}
-                    onChange={(e)=>{setPassword(e.target.value)}}/>
-            <label className="alert alert-danger">{passwordError}</label>
-            <label className="form-control">Re-Type Password</label>
-            <input type="password" className="form-control" value={repassword}
-                    onChange={(e)=>{setrePassword(e.target.value)}}/>
-            <label className="form-control">Role</label>
+            <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Username" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
+            <label for="floatingInput">Username</label>
+        </div>
+            <label className="alert alert-danger">{usernameError}</label>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+            value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
+            <label for="floatingPassword">Password</label>
+        </div>
+            <label className="alert alert-danger">{passwordError}</label><br/>
+        <div class="form-floating">
+            <input type="Password" class="form-control" id="floatingPassword" placeholder="ReTypePassword"
+            value={repassword} onChange={(e)=>{setrePassword(e.target.value)}}/>
+            <label for="floatingPassword">ReTypePassword</label>
+        </div>
             <select className="form-select" onChange={(e) => { setRole(e.target.value) }}>
                 <option value="select">Select Role</option>
                 {roles.map((r) =>
@@ -87,13 +91,12 @@ function RegisterUser(){
                 )}
             </select>
             <br/>
-            <button className="btn btn-primary button" onClick={signUp}>Sign Up</button>
+            <button className="btn btn-login button" onClick={signUp}>Sign Up</button>
             
-            <button className="btn btn-danger button">Cancel</button>
-            <br/>
             <hr/>
-            <label className="form-control">Already have an account? Please login</label>
-            <button className="btn btn-login button" onClick={goToLogin}>Login</button>
+            <div class="text-center fs-6">
+            Already have an account? <Link to="/login">Login</Link>
+            </div>
             
         </form>
     );

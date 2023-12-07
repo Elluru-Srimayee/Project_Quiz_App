@@ -163,7 +163,10 @@ function QuizsByCategory() {
     // Pass the quizId as state to the QuestionsByQuizId component
     navigate("/questionsbyid", { state: { quizId,timeLimit } });
   };
-
+  const handleCategoryChange = (e) => {
+    // Update the categoryInput state when the dropdown selection changes
+    setCategoryInput(e.target.value);
+  };
   const checkQuizs = quizList.length > 0 ? true : false;
 
   return (
@@ -176,6 +179,17 @@ function QuizsByCategory() {
       <hr />
       {checkQuizs ? (
         <div>
+          <div className="d-flex align-items-center flex">
+        <select className="form-select" value={categoryInput} onChange={handleCategoryChange}>
+          <option value="">Select a category</option>
+          {categoryList.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+      </div>
+      <hr />
           {quizList.map((quiz) => (
             <div key={quiz.quizId} className="alert alert-question">
               Quiz Id: {quiz.quizId}

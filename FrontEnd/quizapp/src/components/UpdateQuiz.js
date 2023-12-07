@@ -31,6 +31,9 @@ function UpdateQuiz() {
         navigate("/quizList");
       })
       .catch((e) => {
+        if(e.response.data.title==="One or more validation errors occurred."){
+          alert('Please check the data and timeLimit should be an integer');
+        }
         console.log(e);
       });
   };

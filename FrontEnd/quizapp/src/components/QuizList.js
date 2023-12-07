@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./Quiz.css";
 
@@ -6,6 +6,9 @@ function QuizList() {
   const [quizList, setQuizList] = useState([]);
   const navigate = useNavigate();
   const role = localStorage.getItem("role");
+  const token=localStorage.getItem("token");
+  const location = useLocation();
+  const [quizResults, setQuizResults] = useState(null);
 
   useEffect(() => {
     if (role === "Creator") {
@@ -58,6 +61,9 @@ function QuizList() {
   const handleAddQuiz = () => {
     navigate("/addQuiz");
   };
+  const ShowQuizReport= (quizId)=>{
+    navigate("/QuizIdReport", { state: { quizId } });
+  }
 
   return (
     <div className="quiz">
@@ -98,6 +104,12 @@ function QuizList() {
                     onClick={() => handleUpdateQuiz(quiz)}
                   >
                     Update
+                  </button>
+                  <button
+                    className="btn btn-success"
+                    onClick={() => ShowQuizReport(quiz.quizId)}
+                  >
+                    QuizReport
                   </button>
                 </>
               )}
