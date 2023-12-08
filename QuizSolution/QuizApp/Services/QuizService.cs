@@ -16,7 +16,6 @@ namespace QuizApp.Services
     {
         private readonly IRepository<int, Quiz> _quizRepository;
         private readonly IRepository<int, Questions> _questionRepository;
-        private readonly QuizRepository _quizRepo;
 
         // Constructor to inject dependencies
         public QuizService(IRepository<int, Quiz> quizRepository, IRepository<int, Questions> questionRepository)

@@ -3,7 +3,7 @@
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 25px;
     background-color: rgba(255, 255, 255, 0.747);
     /* background-image: url(https://www.architectureartdesigns.com/wp-content/uploads/2016/08/16-13.jpg); */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -16,9 +16,18 @@
     text-align:center;
     width:300px;
     position:relative;
+    margin-bottom:20px;
+    border-radius:20px;
+  }
+  .btn-back{
+    background-color: rgb(56, 31, 201);
+    color:white;
+    width:80px;
+    border-radius:20px;
   }
   .form-control {
     margin-bottom: 15px;
+    border-radius:20px
   }
   
   .alert-danger {
@@ -34,6 +43,7 @@
     width: 100%;
     padding: 8px;
     margin-bottom: 15px;
+    border-radius: 25px;
   }
   
   .button {

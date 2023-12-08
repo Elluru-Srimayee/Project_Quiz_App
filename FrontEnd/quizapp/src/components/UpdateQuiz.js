@@ -53,7 +53,7 @@ function UpdateQuiz() {
       <input id="qcate" type="text" className="form-control" value={category} readOnly/>
 
       <label className="form-control" htmlFor="qtime">Quiz TimeLimit</label>
-      <input id="qtime" type="number" className="form-control" value={timeLimit} onChange={(e) => setQuiz({ ...quiz, timeLimit: e.target.value })} />
+      <input id="qtime" type="number" className="form-control" placeholder="Please provide integer value in minutes." value={timeLimit} onChange={(e) => setQuiz({ ...quiz, timeLimit: e.target.value })} />
 
       <button onClick={clickUpdate} className="btn btn-primary">Update Quiz</button>
     </div>

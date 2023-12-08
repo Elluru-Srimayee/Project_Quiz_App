@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./RegisterUser.css";
 
 function QuizResults() {
   const location = useLocation();
@@ -30,8 +31,8 @@ function QuizResults() {
       {quizResults && (
         <div>
           <h2>Quiz Results</h2>
-          <button className="btn btn-success" onClick={GoToQuizs}>GoToQuizs</button>
-          <p>Total Score: {quizResults.totalScore}</p>
+          <button className="btn btn-back" onClick={GoToQuizs}>Quizs</button>
+          <h5>Total Score: {quizResults.totalScore}</h5>
           <table className="table table-bordered border-primary">
             <thead className="thead-dark">
               <tr>

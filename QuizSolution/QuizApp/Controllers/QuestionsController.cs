@@ -101,7 +101,6 @@ namespace QuizApp.Controllers
         [HttpGet("byquiz/{quizId}")]
         public ActionResult<IEnumerable<Questions>> GetQuestionsByQuizId(int quizId)
         {
-            string errorMessage = string.Empty;
             try
             {
                 // Get questions by quiz ID
@@ -109,12 +108,12 @@ namespace QuizApp.Controllers
                 _logger.LogInformation("Got the QuestionsByQuizId successfully");
                 return Ok(questions); // Return the questions
             }
-            catch (NoQuestionsAvailableException e)
+            catch (NoQuestionsAvailableException)
             {
-                errorMessage = e.Message;
+                _logger.LogError("No questions found in the given quiz");
+                return NotFound($"No questions found for Quiz ID {quizId}."); // Return error response
             }
-            _logger.LogError("No questions found in the given quiz");
-            return NotFound($"No questions found for Quiz ID {quizId}." + errorMessage); // Return error response
+            
         }
 
         // Endpoint to remove a question from a quiz

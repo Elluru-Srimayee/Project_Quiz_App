@@ -22,7 +22,7 @@ function Leaderboard() {
           if (response.status === 404) {
             // Handle 404 separately
             setLeaderboard(null); // Clear previous records
-            alert(`No leaderboard records available for ${quizId}`);
+            alert(`No leaderboard records available for this quiz`);
           } else {
             const data = await response.json();
             setLeaderboard(data);

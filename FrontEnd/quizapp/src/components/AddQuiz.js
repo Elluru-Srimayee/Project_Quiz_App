@@ -86,6 +86,7 @@ function AddQuiz() {
         type="number"
         className="form-control"
         value={timeLimit}
+        placeholder="Please provide integer value in minutes."
         onChange={(e) => {
           setTimeLimit(e.target.value);
         }}

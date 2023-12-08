@@ -46,7 +46,7 @@ function LoginUser(){
             localStorage.setItem("username",username);
             var role=userData.data.role;
             localStorage.setItem("role",role);
-            alert('Welcome to the quizapp =>'+username);
+            alert('Welcome to the quizapp :'+username);
             navigate("/launch")
             
         })
@@ -61,8 +61,9 @@ function LoginUser(){
     return(
         <div class="wrapper">
         <form className="loginForm">
-            <h1>Login</h1>
-            
+        <h1 class="text-center mt-4 name">
+            Login
+        </h1>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="floatingInput" placeholder="Username" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
             <label htmlFor="floatingInput">Username</label>

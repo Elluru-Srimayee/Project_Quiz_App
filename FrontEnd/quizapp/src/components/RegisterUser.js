@@ -11,6 +11,9 @@ function RegisterUser(){
     const [role,setRole] = useState("");
     var [usernameError,setUsernameError]=useState("");
     var [passwordError,setPasswordError]=useState("");
+    var [rePasswordError,setRePasswordError]=useState("");
+    var [roleError,setRoleError]=useState("");
+
     const navigate = useNavigate();
 
     var checkUSerData = ()=>{
@@ -30,10 +33,20 @@ function RegisterUser(){
         else{
             setPasswordError("");
         }
-        if(role==='Select Role'){
+        if(repassword!==password){
+            setRePasswordError("Repassword didn't match with password");
             return false;
         }
-        return true;
+        else{
+            setRePasswordError("");
+        }
+        if(role===''){
+            setRoleError("Please select the role");
+            return false;
+        }
+        else{
+            setRoleError("");
+        }
     }
     const signUp = (event)=>{
         event.preventDefault();
@@ -50,9 +63,14 @@ function RegisterUser(){
             password:password
     })
         .then((userData)=>{
-            console.log(userData)
-            alert('Welcome to the quizapp'+{username});
-            navigate("/quizs");
+            var token = userData.data.token;
+            localStorage.setItem("token",token);
+            var username=userData.data.username;
+            localStorage.setItem("username",username);
+            var role=userData.data.role;
+            localStorage.setItem("role",role);
+            alert('Welcome to the quizapp :'+username);
+            navigate("/launch")
         })
         .catch((err)=>{
             if(err.response.data==="Duplicate username"){
@@ -60,9 +78,6 @@ function RegisterUser(){
             }
             console.log(err)
         })
-    }
-    const goToLogin=()=>{
-        navigate("/login");
     }
     
     return(
@@ -84,12 +99,14 @@ function RegisterUser(){
             value={repassword} onChange={(e)=>{setrePassword(e.target.value)}}/>
             <label for="floatingPassword">ReTypePassword</label>
         </div>
+        <label className="alert alert-danger">{rePasswordError}</label><br/>
             <select className="form-select" onChange={(e) => { setRole(e.target.value) }}>
                 <option value="select">Select Role</option>
                 {roles.map((r) =>
                     <option value={r} key={r}>{r}</option>
                 )}
             </select>
+            <label className="alert alert-danger">{roleError}</label><br/>
             <br/>
             <button className="btn btn-login button" onClick={signUp}>Sign Up</button>
             

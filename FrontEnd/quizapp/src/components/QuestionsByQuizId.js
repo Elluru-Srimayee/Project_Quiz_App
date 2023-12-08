@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./RegisterUser.css";
 
 function QuestionsByQuizId() {
   const [questionList, setQuestionList] = useState([]);
@@ -81,12 +82,20 @@ function QuestionsByQuizId() {
     })
       .then(async (data) => {
         var myData = await data.json();
+        if(myData.length>0){
         console.log(myData);
+        console.log("The total number of questions present in this quiz are",myData.length);
         setQuestionList(myData);
-
         if (myData.length > 0 && myData[0].timeLimit) {
           setTimeRemaining(myData[0].timeLimit * 60); // Update time remaining when time limit changes
         }
+      }
+      else{
+        alert('No questions available in this quiz yet!')
+        setTimeout(() => {
+          navigate("/quizs");
+        }, 0);
+      }
       })
       .catch((e) => {
         console.log(e);

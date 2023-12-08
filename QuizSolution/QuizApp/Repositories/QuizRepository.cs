@@ -8,7 +8,6 @@ namespace QuizApp.Repositories
     public class QuizRepository : IRepository<int, Quiz>
     {
         private readonly QuizContext _context;
-        private Quiz quiz;
 
         public QuizRepository(QuizContext context)
         {
