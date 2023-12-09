@@ -44,20 +44,34 @@ function AddQuestion(){
     return(
         <div className="inputcontainer">
             <h2 className="alert alert-quiz">Add Questions</h2>
-            <label className="form-control" htmlFor="qutxt">Question</label>
-            <input id="qutxt" type="text" className="form-control" value={questionTxt} onChange={(e)=>{setQuestionTxt(e.target.value)}}/>
-            <label className="form-control"  htmlFor="quopt1">Option A</label>
-            <input id="quopt1" type="text" className="form-control" value={option1} onChange={(e)=>{setOption1(e.target.value)}}/>
-            <label className="form-control"  htmlFor="quopt2">Option B</label>
-            <input id="quopt2" type="text" className="form-control" value={option2} onChange={(e)=>{setOption2(e.target.value)}}/>
-            <label className="form-control"  htmlFor="quopt3">Option C</label>
-            <input id="quopt3" type="text" className="form-control" value={option3} onChange={(e)=>{setOption3(e.target.value)}}/>
-            <label className="form-control"  htmlFor="quopt3">Option D</label>
-            <input id="quopt4" type="text" className="form-control" value={option4} onChange={(e)=>{setOption4(e.target.value)}}/>
-            <label className="form-control"  htmlFor="quans">Answer</label>
-            <input id="quans" type="text" className="form-control" value={answer} onChange={(e)=>{setAnswer(e.target.value)}}/>
-            <label className="form-control"  htmlFor="qId">Quiz Id</label>
-            <input id="qId" type="number" className="form-control" value={quizId} onChange={(e)=>{setQuizId(e.target.value)}}/>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={questionTxt} placeholder="Question" onChange={(e)=>{setQuestionTxt(e.target.value)}}/>
+                <label htmlFor="floatingInput">Question</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={option1} placeholder="Option A" onChange={(e)=>{setOption1(e.target.value)}}/>
+                <label htmlFor="floatingInput">Option A</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={option2} placeholder="Option B" onChange={(e)=>{setOption2(e.target.value)}}/>
+                <label htmlFor="floatingInput">Option B</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={option3} placeholder="Option C" onChange={(e)=>{setOption3(e.target.value)}}/>
+                <label htmlFor="floatingInput">Option C</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={option4} placeholder="Option D" onChange={(e)=>{setOption4(e.target.value)}}/>
+                <label htmlFor="floatingInput">Option D</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="text" className="form-control" value={answer} placeholder="Answer" onChange={(e)=>{setAnswer(e.target.value)}}/>
+                <label htmlFor="floatingInput">Answer</label>
+            </div>
+            <div className="form-floating mb-3">
+                <input id="floatingInput" type="number" className="form-control" value={quizId} placeholder="Quiz Id" onChange={(e)=>{setQuizId(e.target.value)}}/>
+                <label htmlFor="floatingInput">Quiz Id</label>
+            </div>
             <button onClick={clickAdd} className="btn btn-primary">Add Question</button>
         </div>
     );

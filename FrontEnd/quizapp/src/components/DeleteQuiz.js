@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 function DeleteQuiz() {
   const location = useLocation();
   const quizId = location.state && location.state.quizId;
   const token=localStorage.getItem("token");
+  const navigate=useNavigate();
   useEffect(() => {
     const clickDelete = async () => {
       if (!quizId) {
@@ -21,6 +22,7 @@ function DeleteQuiz() {
           },
         });
         alert("Quiz Deleted Successfully");
+        navigate("/quizList");
       } catch (error) {
         console.log(error);
         alert("Error deleting quiz");

@@ -23,6 +23,7 @@ import QuizList from './components/QuizList';
 import Launchpage from './components/Launchpage';
 import QuizReport from './components/QuizReport'; 
 import QuizIdReport from './components/QuizIdReport';
+import About from './components/About';
 
 function App() {
   return (
@@ -30,11 +31,11 @@ function App() {
       <div>
         <Menu />
         <Routes>
-          <Route path="/launch" element={<Launchpage/>}/>
+          <Route path="/" element={<Launchpage/>}/>
           <Route path="/addQuestions" element={<Protected><AddQuestion/></Protected>}/>
           <Route path="/addQuiz" element={<Protected><AddQuiz/></Protected>}/>
           <Route path="/login" element={<LoginUser/>}/>
-          <Route path='/' element={<RegisterUser />} />
+          <Route path='/register' element={<RegisterUser />} />
           <Route path="/quizs" element={<Quizs />} />
           <Route path="/search" element={<QuizsByCategory />} />
           <Route path="/questions" element={<Protected>
@@ -58,6 +59,7 @@ function App() {
           <Route path="/profile" element={<Protected><Profile/></Protected>}/>
           <Route path="/report" element={<Protected><QuizReport/></Protected>}/>
           <Route path="/QuizIdReport" element={<Protected><QuizIdReport></QuizIdReport></Protected>}/>
+          <Route path="/about" element={<Protected><About/></Protected>}/>
         </Routes>
       </div>
     </BrowserRouter>

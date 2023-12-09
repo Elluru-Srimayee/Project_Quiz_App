@@ -1,11 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddQuiz() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
-  const [timeLimit, setTimeLimit] = useState("60"); // Timer value in seconds
+  const [timeLimit, setTimeLimit] = useState("0"); 
   const token=localStorage.getItem("token");
+  const navigate=useNavigate();
   const clickAdd = () => {
     // Check if required fields are provided
     if (!title || !description || !category) {
@@ -31,10 +33,15 @@ function AddQuiz() {
       },
       body: JSON.stringify(quiz),
     })
-      .then(() => {
-        alert("Quiz Added");
+      .then(async(response) => {
+        if(!response.ok){
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        alert("Quiz Added successfully");
+        navigate("/quizList");
       })
       .catch((e) => {
+          alert("Please provide all values and timelimit should be integer");
         console.log(e);
       });
   };
@@ -42,47 +49,54 @@ function AddQuiz() {
   return (
     <div className="inputcontainer">
       <h1 className="alert alert-quiz">Quiz Details</h1>
-      <label className="form-control" htmlFor="qtitle">
-        Quiz Title
-      </label>
+      <div class="form-floating mb-3">
       <input
-        id="qtitle"
+        id="floatingInput"
         type="text"
         className="form-control"
+        placeholder="Quiz Title"
         value={title}
         onChange={(e) => {
           setTitle(e.target.value);
         }}
       />
-      <label className="form-control" htmlFor="qdescr">
-        Quiz Description
+      <label htmlFor="floatingInput">
+        Quiz Title
       </label>
+      </div>
+      <div class="form-floating mb-3">
       <input
-        id="qdescr"
+        id="floatingInput"
         type="text"
         className="form-control"
+        placeholder="Quiz Description"
         value={description}
         onChange={(e) => {
           setDescription(e.target.value);
         }}
       />
-      <label className="form-control" htmlFor="qcate">
-        Quiz Category
+      <label htmlFor="floatingInput">
+        Quiz Description
       </label>
+      </div>
+      <div class="form-floating mb-3">
       <input
-        id="qcate"
+        id="floatingInput"
         type="text"
         className="form-control"
+        placeholder="Quiz Category"
         value={category}
         onChange={(e) => {
           setCategory(e.target.value);
         }}
       />
-      <label className="form-control" htmlFor="qtime">
-        Quiz TimeLimit
+      <label htmlFor="floatingInput">
+        Quiz Category
       </label>
+      </div>
+      <div class="form-floating mb-3">
       <input
-        id="qtime"
+        id="floatingInput"
         type="number"
         className="form-control"
         value={timeLimit}
@@ -91,6 +105,10 @@ function AddQuiz() {
           setTimeLimit(e.target.value);
         }}
       />
+      <label htmlFor="floatingInput">
+        Integer timeLimit in Minutes
+      </label>
+      </div>
       <button onClick={clickAdd} className="btn btn-primary">
         Add Quiz
       </button>

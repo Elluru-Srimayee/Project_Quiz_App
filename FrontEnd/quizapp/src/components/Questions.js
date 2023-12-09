@@ -64,24 +64,6 @@ function Questions() {
   const updateQuestion = (question) => {
     navigate("/updateQuestions", { state: question });
   };
-  const handleSearch = () => {
-    // Fetch questions based on the provided quizId
-    fetch(`http://localhost:5057/api/Questions/byquiz/${quizId}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then(async (data) => {
-        const myData = await data.json();
-        setQuestionList(myData);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  };
   var checkQuestions = questionList.length > 0 ? true : false;
 
   return (
@@ -94,12 +76,6 @@ function Questions() {
         Add Question
       </button>
       <hr/>
-      <div>
-          <label htmlFor="quizId">Quiz ID:</label>
-          <input type="text" id="quizId" value={quizId} onChange={(e) => setQuizId(e.target.value)} />
-          <button onClick={handleSearch}>Search</button>
-        </div>
-      <hr />
       {checkQuestions ? (
         <div>
           {questionList.map((question) => (

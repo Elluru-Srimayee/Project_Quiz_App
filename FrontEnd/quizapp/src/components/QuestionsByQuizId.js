@@ -6,14 +6,13 @@ function QuestionsByQuizId() {
   const [questionList, setQuestionList] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [timer, setTimer] = useState(null);
   const [timeRemaining, setTimeRemaining] = useState(0);
   const location = useLocation();
   const navigate = useNavigate();
   const [timeLimit,setTimeLimit]=useState(0);
   const token = localStorage.getItem("token");
   const [decrementInterval,setDecrementInterval]=useState(null);
-
+  const totalQuestions=questionList.length;
   useEffect(() => {
     if (location.state && location.state.quizId) {
       checkQuizCompletion(location.state.quizId);
@@ -161,7 +160,9 @@ function QuestionsByQuizId() {
       {questionList.length > 0 ? (
         <div>
           <div className="alert alert-question">
-            Question: {questionList[currentQuestionIndex].questionTxt}
+           <p> Question {currentQuestionIndex+1} of {totalQuestions}: 
+            {questionList[currentQuestionIndex].questionTxt}
+            </p>
           <form>
             {['A', 'B', 'C', 'D'].map((option, index) => (
               <div key={index} className="form-check">
@@ -181,7 +182,7 @@ function QuestionsByQuizId() {
             ))}
           </form>
           <button className="btn btn-primary" onClick={handleEvaluate}>
-            Next
+            {currentQuestionIndex+1<totalQuestions?'Next':'Submit'}
           </button>
           </div>
         </div>

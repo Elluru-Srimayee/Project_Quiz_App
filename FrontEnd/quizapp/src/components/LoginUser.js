@@ -47,7 +47,7 @@ function LoginUser(){
             var role=userData.data.role;
             localStorage.setItem("role",role);
             alert('Welcome to the quizapp :'+username);
-            navigate("/launch")
+            navigate("/")
             
         })
         .catch((err)=>{
@@ -60,17 +60,21 @@ function LoginUser(){
     
     return(
         <div class="wrapper">
+            <div>
         <form className="loginForm">
+        <div class="icon">
+            <img src="./icon.jpg" alt="QuizCraft"/>
+        </div>
         <h1 class="text-center mt-4 name">
             Login
         </h1>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" placeholder="Username" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
+            <input type="text" className="form-control" id="floatingInput" placeholder="Username" value={username} onChange={(e)=>{setUsername(e.target.value)}}/>
             <label htmlFor="floatingInput">Username</label>
         </div>
             <label className="alert alert-danger">{usernameError}</label>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+            <input type="password" className="form-control" id="floatingPassword" placeholder="Password"
             value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
             <label htmlFor="floatingPassword">Password</label>
         </div>
@@ -78,9 +82,11 @@ function LoginUser(){
             <button className="btn btn-login button" onClick={Login}>Login</button>
         </form>
             <div class="text-center fs-6">
-            New User? <Link to="/">Register</Link>
+            New User? <Link to="/register">Register</Link>
             </div>
         </div>
+        </div>
+        
     );
 }
 

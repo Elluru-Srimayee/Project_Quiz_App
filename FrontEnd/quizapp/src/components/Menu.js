@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate} from "react-router-dom";
+import "./Menu.css";
 
 function Menu() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Menu() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <a class="navbar-brand" href="/launch">QuizCraft</a>
+        <a class="navbar-brand" href="/">QuizCraft</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -24,7 +25,7 @@ function Menu() {
 </svg>Home</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/leaderboard"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+              <a className="nav-link active" href="/leaderboard"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
   <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/>
 </svg>Leaderboard</a>
             </li>
@@ -55,11 +56,11 @@ function Menu() {
                             :
                             <div><Link className="dropdown-item" to="/login">Login</Link>
                             <Link className="dropdown-item" to="/">Register</Link></div>
-                            }
-                            
-                            
-                            
+                            } 
                         </div>
+                    </li>
+                    <li className='nav-item'>
+                    <a className="nav-link active" aria-current="page" href="/about">About</a>
                     </li>
           </ul>
         </div>
