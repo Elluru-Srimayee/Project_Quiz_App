@@ -22,6 +22,7 @@ function QuestionsByQuizId() {
         setTimeRemaining(location.state.timeLimit*60);
         setDecrementInterval(setInterval(handleTimerTick,1000));
       }
+      console.log("Timelimit is:",location.state.timeLimit);
     }
   }, [location.state]);
 

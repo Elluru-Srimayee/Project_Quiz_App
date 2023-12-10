@@ -58,7 +58,7 @@ function About(){
       <h5>Developer Information</h5>
       <p>The QuizCraft is developed and maintained by <strong>Srimayee</strong> and <strong>Srivalli</strong> we made our QuizCraft Application reliable. To share the feedback of our QuizCraft Application please contact us at quizcraft@yahoo.com</p>
       <h5>Privacy Policy</h5>
-      <p>We hereby clearly declare that no personal data of the user is asked and maintained in our quizcraft applications.
+      <p>We hereby clearly declare that no personal data of the user is asked and maintained in our QuizCraft applications.
          The quizresults of the participants are acceccible by the quiz creators and it is cautioned to not share the QuizCraft credentials with anyone to avoid cheating.
       </p>
     </div>

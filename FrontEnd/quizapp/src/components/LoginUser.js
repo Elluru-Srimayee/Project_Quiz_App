@@ -82,7 +82,7 @@ function LoginUser(){
             <button className="btn btn-login button" onClick={Login}>Login</button>
         </form>
             <div class="text-center fs-6">
-            New User? <Link to="/register">Register</Link>
+            New User? <Link to="/register" data-bs-toggle="tooltip" title="Register!">Register</Link>
             </div>
         </div>
         </div>

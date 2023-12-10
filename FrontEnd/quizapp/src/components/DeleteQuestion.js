@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useNavigate } from "react-router-dom";
 
 function DeleteQuestion() {
   const location = useLocation();
   const questionId = location.state && location.state.questionId;
   const token=localStorage.getItem("token");
+  const navigate=useNavigate();
   useEffect(() => {
     const clickDelete = async () => {
       if (!questionId) {
@@ -19,8 +20,12 @@ function DeleteQuestion() {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
-        });alert("Question Deleted Successfully");
-      } catch (error) {
+        }).then(
+          ()=>{
+              alert("Question Deleted Successfully");
+              navigate("/questions");
+          }
+      )} catch (error) {
         console.log(error);
         alert("Error deleting question");
       }

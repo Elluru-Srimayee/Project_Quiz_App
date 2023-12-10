@@ -66,11 +66,11 @@ function UpdateQuestion() {
         <label htmlFor="floatingInput">Option B</label>
       </div>
       <div className="form-floating mb-3">
-        <input id="floatingInput" type="text" className="form-control" value={option3} onChange={(e) => setQuestion({ ...question, option3: e.target.value })} />
+        <input id="floatingInput" type="text" className="form-control" value={option3} placeholder="Option C" onChange={(e) => setQuestion({ ...question, option3: e.target.value })} />
         <label htmlFor="floatingInput">Option C</label>      
       </div>
       <div className="form-floating mb-3">
-        <input id="floatingInput" type="text" className="form-control" value={option4} onChange={(e) => setQuestion({ ...question, option4: e.target.value })} />
+        <input id="floatingInput" type="text" className="form-control" value={option4} placeholder="Option D" onChange={(e) => setQuestion({ ...question, option4: e.target.value })} />
         <label htmlFor="floatingInput">Option D</label>
       </div>
       <div className="form-floating mb-3">

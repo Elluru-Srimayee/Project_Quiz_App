@@ -36,6 +36,7 @@ function QuizResults() {
           <table className="table table-bordered border-primary">
             <thead className="thead-dark">
               <tr>
+                <th scope="col">S.No.</th>
                 <th scope="col">User Answer</th>
                 <th scope="col">Result</th>
                 <th scope="col">Score</th>
@@ -44,6 +45,7 @@ function QuizResults() {
             <tbody>
               {quizResults.quizResults.map((result, index) => (
                 <tr key={index}>
+                  <td>{index+1}</td>
                   <td>{result.userAnswer}</td>
                   <td>{result.isCorrect ? "Correct" : "Incorrect"}</td>
                   <td>{result.score}</td>

@@ -34,6 +34,7 @@ function AddQuestion(){
         }).then(
             ()=>{
                 alert("Question Added Successfully");
+                navigate("/questions");
             }
         ).catch((e)=>{
             console.log(e)

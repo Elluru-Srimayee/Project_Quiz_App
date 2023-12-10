@@ -74,12 +74,6 @@ function Leaderboard() {
       if (response.ok) {
         const selectedQuizId = await response.text();
   
-        // Log the selectedQuizId
-        console.log("Selected QuizId:", selectedQuizId);
-  
-        // Log a message before calling fetchLeaderboard
-        console.log("Fetching leaderboard...");
-  
         // Ensure that the selectedQuizId is an integer
         const parsedQuizId = parseInt(selectedQuizId, 10);
   
@@ -136,6 +130,7 @@ function Leaderboard() {
               <table className="table table-bordered border-primary">
                 <thead className="thead-dark">
                   <tr>
+                    <th scope="col">Rank</th>
                     <th scope="col">Username</th>
                     <th scope="col">Score</th>
                   </tr>
@@ -143,6 +138,7 @@ function Leaderboard() {
                 <tbody>
                   {leaderboard.map((entry, index) => (
                     <tr key={index}>
+                      <td>{index+1}</td>
                       <td>{entry.username}</td>
                       <td>{entry.score}</td>
                     </tr>

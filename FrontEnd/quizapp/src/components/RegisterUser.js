@@ -17,17 +17,17 @@ function RegisterUser(){
     const navigate = useNavigate();
 
     var checkUSerData = ()=>{
-        if(username==='')
+        const usernameRegex=/^[a-z_][a-z0-9_]*$/;
+        if(!usernameRegex.test(username))
         {
-            setUsernameError("Username cannot be empty");
+            setUsernameError("Invalid username format username cannot be empty shouldn't start with digit username should contain lowercase letters, digits and underscores, and not include uppercase letters.");
             return false;
         }
         else{
             setUsernameError("");
         }
-           
-        if(password===''){
-            setPasswordError("Password cannot be empty");
+        if(password.length<6){
+            setPasswordError("Password should have atleast 6 characters");
             return false;
         }
         else{
@@ -115,7 +115,7 @@ function RegisterUser(){
             
             <hr/>
             <div class="text-center fs-6">
-            Already have an account? <Link to="/login">Login</Link>
+            Already have an account? <Link to="/login" data-bs-toggle="tooltip" title="Login!">Login</Link>
             </div>
             
         </form>
