@@ -26,7 +26,12 @@ namespace QuizApp.Services
             _quizRepository = quizRepository ?? throw new ArgumentNullException(nameof(quizRepository));
         }
 
-        // Add a quiz result
+        /// <summary>
+        ///  Add a quiz result
+        /// </summary>
+        /// <param name="quizResult"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public QuizResult AddQuizResult(QuizResult quizResult)
         {
             if (quizResult == null)
@@ -35,7 +40,11 @@ namespace QuizApp.Services
             return _quizResultRepository.Add(quizResult);
         }
 
-        // Delete a quiz result by ID
+        /// <summary>
+        ///  Delete a quiz result by ID
+        /// </summary>
+        /// <param name="quizResultId"></param>
+        /// <returns></returns>
         public bool DeleteQuizResult(int quizResultId)
         {
             var existingResult = _quizResultRepository.GetById(quizResultId);
@@ -47,7 +56,10 @@ namespace QuizApp.Services
             return false;
         }
 
-        // Get all quiz results
+        /// <summary>
+        ///  Get all quiz results
+        /// </summary>
+        /// <returns></returns>
         public IList<QuizResult> GetAllQuizResults()
         {
             return _quizResultRepository.GetAll();
@@ -59,7 +71,11 @@ namespace QuizApp.Services
             return _quizResultRepository.GetById(quizResultId);
         }
 
-        // Get quiz results by quiz ID and map to DTO
+        /// <summary>
+        ///  Get quiz results by quiz ID and map to DTO
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
         public IList<QuizResult> GetResultsByQuiz(int quizId)
         {
             return _quizResultRepository
@@ -69,7 +85,13 @@ namespace QuizApp.Services
                 .ToList();
         }
 
-        // Get the total score for a user in a quiz
+        /// <summary>
+        ///  Get the total score for a user in a quiz
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizResultsAvailableException"></exception>
         public int GetTotalScoreForUserInQuiz(int quizId, string username)
         {
             var quizResults = _quizResultRepository
@@ -84,6 +106,12 @@ namespace QuizApp.Services
             }
             throw new NoQuizResultsAvailableException();
         }
+        /// <summary>
+        /// Get the list of quiz Ids that are already answered by the given user.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizResultsAvailableException"></exception>
         public int[] GetAnsweredQuizIdsForUser(string username)
         {
             var quizResults = _quizResultRepository
@@ -100,7 +128,13 @@ namespace QuizApp.Services
             throw new NoQuizResultsAvailableException();
         }
 
-        // Get quiz results by user and quiz, and map to DTO
+        /// <summary>
+        ///  Get quiz results by user and quiz, and map to DTO
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizResultsAvailableException"></exception>
         public IList<QuizResultDTO> GetResultsByUserAndQuiz(string username, int quizId)
         {
             var results= _quizResultRepository
@@ -115,7 +149,12 @@ namespace QuizApp.Services
             return results;
         }
 
-        // Update a quiz result
+        /// <summary>
+        ///  Update a quiz result
+        /// </summary>
+        /// <param name="quizResult"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public QuizResult UpdateQuizResult(QuizResult quizResult)
         {
             if (quizResult == null)
@@ -129,7 +168,14 @@ namespace QuizApp.Services
             return null;
         }
 
-        // Evaluate an answer and return the result as DTO
+        /// <summary>
+        ///  Evaluate an answer and return the result as DTO
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <param name="answerdto"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
+        /// <exception cref="BadRequestException"></exception>
         public QuizResultDTO EvaluateAnswer(int quizId, AnswerDTO answerdto)
         {
             var quiz = _quizRepository.GetById(quizId);
@@ -166,7 +212,11 @@ namespace QuizApp.Services
             return MapToQuizResultDTO(quizResult);
         }
 
-        // Map QuizResult entity to QuizResultDTO
+        /// <summary>
+        ///  Map QuizResult entity to QuizResultDTO
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public QuizResultDTO MapToQuizResultDTO(QuizResult result)
         {
             var resultDTO = new QuizResultDTO
@@ -181,7 +231,11 @@ namespace QuizApp.Services
             return resultDTO;
         }
 
-        // Get the leaderboard for a quiz
+        /// <summary>
+        ///  Get the leaderboard for a quiz
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
         public IList<LeaderboardEntryDTO> GetLeaderboard(int quizId)
         {
             return _quizResultRepository

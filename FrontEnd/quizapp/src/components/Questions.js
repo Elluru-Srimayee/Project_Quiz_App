@@ -100,6 +100,8 @@ function Questions() {
               Option C: {question.option3}
               <br />
               Option D: {question.option4}
+              <br/>
+              Answer:{question.answer}
               <br />
               Quiz ID: {question.quizId}
             </div>

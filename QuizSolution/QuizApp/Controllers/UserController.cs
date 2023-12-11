@@ -16,6 +16,11 @@ namespace QuizApp.Controllers
         {
             _userService = userService;
         }
+        /// <summary>
+        /// Drives the control of the user to make registration.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost("register")]
         public ActionResult Register(UserDTO viewModel)
         {
@@ -40,6 +45,11 @@ namespace QuizApp.Controllers
 
             return BadRequest(message);
         }
+        /// <summary>
+        /// Drives the user to login to the quiz app.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public ActionResult Login(UserDTO viewModel)
         {

@@ -17,21 +17,33 @@ namespace QuizApp.Services
         private readonly IRepository<int, Quiz> _quizRepository;
         private readonly IRepository<int, Questions> _questionRepository;
 
-        // Constructor to inject dependencies
+        /// <summary>
+        /// Constructor to inject dependencies
+        /// </summary>
+        /// <param name="quizRepository"></param>
+        /// <param name="questionRepository"></param>
         public QuizService(IRepository<int, Quiz> quizRepository, IRepository<int, Questions> questionRepository)
         {
             _quizRepository = quizRepository;
             _questionRepository = questionRepository;
         }
 
-        // Add a quiz
+        /// <summary>
+        ///  Add a quiz
+        /// </summary>
+        /// <param name="quiz"></param>
+        /// <returns></returns>
         public Quiz Add(Quiz quiz)
         {
             var result = _quizRepository.Add(quiz);
             return result;
         }
 
-        // Get all quizzes
+        /// <summary>
+        ///  Get all quizzes
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public List<Quiz> GetQuizs()
         {
             var quizs = _quizRepository.GetAll();
@@ -43,6 +55,11 @@ namespace QuizApp.Services
 
             throw new NoQuizsAvailableException();
         }
+        /// <summary>
+        /// Gets the list of all distinct catogeries of quizs.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public List<string> GetCategories()
         {
             var quizzes = _quizRepository.GetAll();
@@ -56,19 +73,30 @@ namespace QuizApp.Services
 
             throw new NoQuizsAvailableException();
         }
+        /// <summary>
+        /// Gets the list of all distinct titles present in the quiz table.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public List<string> GetTitles()
         {
             var quizzes = _quizRepository.GetAll();
 
             if (quizzes != null && quizzes.Count > 0)
             {
-                // Extract the distinct Category values from all Quiz entities
+                // Extract the distinct Title values from all Quiz entities
                 List<string> titles = quizzes.Select(q => q.Title).Distinct().ToList();
                 return titles;
             }
 
             throw new NoQuizsAvailableException();
         }
+        /// <summary>
+        /// Gets the QuizId for the respective quiz title.
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
+        /// <exception cref="KeyNotFoundException"></exception>
         public int GetId(string title)
         {
             var quiz = _quizRepository.GetAll().FirstOrDefault(q => q.Title == title);
@@ -80,8 +108,12 @@ namespace QuizApp.Services
 
             throw new KeyNotFoundException($"Quiz with title '{title}' not found");
         }
-
-        // Get quizzes by category
+        /// <summary>
+        /// Get quizzes by category
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public List<Quiz> GetQuizzesByCategory(string category)
         {
             var quizzes = _quizRepository.GetAll();
@@ -96,7 +128,12 @@ namespace QuizApp.Services
             throw new NoQuizsAvailableException();
         }
 
-        // Get a quiz by its ID
+        /// <summary>
+        /// Gets the Quiz by using the Id property.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public Quiz GetQuizById(int id)
         {
             var res = _quizRepository.GetById(id);
@@ -108,8 +145,11 @@ namespace QuizApp.Services
 
             throw new NoQuizsAvailableException();
         }
-
-        // Get a quiz by its ID with associated questions
+        /// <summary>
+        ///  Get a quiz by its ID with associated questions
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<Quiz> GetQuizByIdWithQuestions(int id)
         {
             var quiz = await Task.Run(() => GetQuizById(id));
@@ -127,7 +167,12 @@ namespace QuizApp.Services
             return quiz;
         }
 
-        // Delete a quiz if it has no associated questions
+        /// <summary>
+        ///  Delete a quiz if it has no associated questions
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuizsAvailableException"></exception>
         public bool DeleteQuizIfNoQuestions(int quizId)
         {
             var questionsCount = _questionRepository.GetAll().Count(q => q.QuizId == quizId);
@@ -147,7 +192,12 @@ namespace QuizApp.Services
             return false; // Quiz has questions, cannot delete
         }
 
-        // Update quiz details
+        /// <summary>
+        /// Update quiz details
+        /// </summary>
+        /// <param name="updatedQuiz"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
         public Quiz UpdateQuiz(Quiz updatedQuiz)
         {
             if (updatedQuiz != null)
@@ -172,7 +222,11 @@ namespace QuizApp.Services
             return null;
         }
 
-        // Validate quiz title
+        /// <summary>
+        /// Validate quiz title
+        /// </summary>
+        /// <param name="title"></param>
+        /// <exception cref="ArgumentException"></exception>
         private void ValidateQuizTitle(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
@@ -181,7 +235,11 @@ namespace QuizApp.Services
             }
         }
 
-        // Validate quiz time limit (Example: Ensure it's a positive value)
+        /// <summary>
+        /// Validate quiz time limit (Example: Ensure it's a positive value)
+        /// </summary>
+        /// <param name="timeLimit"></param>
+        /// <exception cref="ArgumentException"></exception>
         private void ValidateQuizTimeLimit(int? timeLimit)
         {
             if (timeLimit < 0)

@@ -26,7 +26,11 @@ namespace QuizApp.Controllers
             _logger = logger;
         }
 
-        // Endpoint to add a question to a quiz
+        /// <summary>
+        ///  Endpoint to add a question to a quiz
+        /// </summary>
+        /// <param name="questionDTO"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Creator")]
         [HttpPost("add")]
         public IActionResult AddToQuiz(QuestionDTO questionDTO)
@@ -49,7 +53,11 @@ namespace QuizApp.Controllers
             return BadRequest(errorMessage); // Return error response
         }
 
-        // Endpoint to update a question in a quiz
+        /// <summary>
+        ///  Endpoint to update a question in a quiz
+        /// </summary>
+        /// <param name="updatedQuestion"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Creator")]
         [HttpPut("update")]
         public IActionResult UpdateQuestion([FromBody] QuestionDTO updatedQuestion)
@@ -75,7 +83,10 @@ namespace QuizApp.Controllers
         }
 
 
-        // Endpoint to get all questions
+        /// <summary>
+        ///  Endpoint to get all questions
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles ="Creator")]
         [HttpGet("getAll")]
         public IActionResult GetAllQuestions()
@@ -96,8 +107,12 @@ namespace QuizApp.Controllers
             return BadRequest(errorMessage); // Return error response
         }
 
-        // Endpoint to get questions by quiz ID
-        //[Authorize]
+        /// <summary>
+        ///  Endpoint to get questions by quiz ID
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpGet("byquiz/{quizId}")]
         public ActionResult<IEnumerable<Questions>> GetQuestionsByQuizId(int quizId)
         {
@@ -116,8 +131,12 @@ namespace QuizApp.Controllers
             
         }
 
-        // Endpoint to remove a question from a quiz
-        //[Authorize(Roles = "Creator")]
+        /// <summary>
+        ///  Endpoint to remove a question from a quiz
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "Creator")]
         [HttpDelete("Remove")]
         public IActionResult RemoveFromQuiz(int questionid)
         {

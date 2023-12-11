@@ -89,7 +89,7 @@ namespace QuizApp
             builder.Services.AddScoped<IQuizService, QuizService>();
             builder.Services.AddScoped<IQuestionService, QuestionService>();
             builder.Services.AddScoped<IQuizResultService, QuizResultService>();
-            builder.Services.AddSingleton<TimerService>();
+            //builder.Services.AddSingleton<TimerService>();
             #endregion
             var app = builder.Build();
 

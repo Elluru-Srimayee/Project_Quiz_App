@@ -27,7 +27,11 @@ namespace QuizApp.Services
             _quizResultRepository = quizResultRepository;
         }
 
-        // Add a question to a quiz
+        /// <summary>
+        /// Add a question to a quiz
+        /// </summary>
+        /// <param name="questionDTO"></param>
+        /// <returns></returns>
         public bool AddToQuiz(QuestionDTO questionDTO)
         {
             var existingQuestion = _questionRepository.GetAll().FirstOrDefault(c => c.QuestionId == questionDTO.QuestionId);
@@ -59,7 +63,10 @@ namespace QuizApp.Services
             return true;
         }
 
-        // Get all questions
+        /// <summary>
+        /// Get all questions
+        /// </summary>
+        /// <returns></returns>
         public IList<QuestionDTO> GetAllQuestions()
         {
             var questions = _questionRepository.GetAll();
@@ -80,7 +87,12 @@ namespace QuizApp.Services
             return questionDTOs;
         }
 
-        // Get questions for a specific quiz
+        /// <summary>
+        ///  Get questions for a specific quiz
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
+        /// <exception cref="NoQuestionsAvailableException"></exception>
         public IList<Questions> GetQuestionsByQuizId(int quizId)
         {
             if (quizId != 0)
@@ -115,13 +127,21 @@ namespace QuizApp.Services
             return null;
         }
 
-        // Get a question by its ID
+        /// <summary>
+        /// Get a question by its ID
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <returns></returns>
         public Questions GetQuestionById(int questionId)
         {
             return _questionRepository.GetById(questionId);
         }
 
-        // Check if a question is already associated with a quiz
+        /// <summary>
+        ///  Check if a question is already associated with a quiz
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <returns></returns>
         private bool CheckIfQuestionAlreadyPresent(int questionId)
         {
             var question = _questionRepository.GetAll()
@@ -130,7 +150,11 @@ namespace QuizApp.Services
             return question != null;
         }
 
-        // Remove a question from a quiz
+        /// <summary>
+        /// Remove a question from a quiz
+        /// </summary>
+        /// <param name="questionid"></param>
+        /// <returns></returns>
         public bool RemoveFromQuiz( int questionid)
         {
             var questionCheck = _questionRepository.GetAll().FirstOrDefault(c => c.QuestionId == questionid);
@@ -146,7 +170,13 @@ namespace QuizApp.Services
             return false;
         }
 
-        // Update a question in a quiz
+        /// <summary>
+        /// Update a question in a quiz
+        /// </summary>
+        /// <param name="questionId"></param>
+        /// <param name="updatedQuestion"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public void UpdateQuestion(int questionId, QuestionDTO updatedQuestion)
         {
             if (updatedQuestion == null)

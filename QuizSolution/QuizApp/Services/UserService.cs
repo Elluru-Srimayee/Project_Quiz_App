@@ -16,7 +16,11 @@ namespace QuizApp.Services
             _repository = repository;
             _tokenService = tokenService;
         }
-
+        /// <summary>
+        /// Login to the quiz app if the user credentials are valid.
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
         public UserDTO Login(UserDTO userDTO)
         {
             var user = _repository.GetById(userDTO.Username);
@@ -42,7 +46,11 @@ namespace QuizApp.Services
             }
             return null;
         }
-
+        /// <summary>
+        /// Register to the quiz app validating the details given by user.
+        /// </summary>
+        /// <param name="userDTO"></param>
+        /// <returns></returns>
         public UserDTO Register(UserDTO userDTO)
         {
             HMACSHA512 hmac = new HMACSHA512();

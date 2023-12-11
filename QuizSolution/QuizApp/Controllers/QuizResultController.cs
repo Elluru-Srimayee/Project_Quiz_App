@@ -26,7 +26,11 @@ namespace QuizApp.Controllers
             _logger = logger;
         }
 
-        // Endpoint to get quiz results by quiz ID
+        /// <summary>
+        ///  Endpoint to get quiz results by quiz ID
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
         [Authorize(Roles = "Creator")]
         [HttpGet("byQuiz/{quizId}")]
         public ActionResult<IEnumerable<QuizResult>> GetResultsByQuiz(int quizId)
@@ -44,6 +48,10 @@ namespace QuizApp.Controllers
                 return NotFound($"No quiz results found for Quiz ID {quizId}. {e.Message}");
             }
         }
+        /// <summary>
+        ///  Endpoint to get all the quiz results.
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles="Creator")]
         [HttpGet("AllquizResults")]
         public ActionResult<IEnumerable<QuizResult>> GetAllQuizResults()
@@ -61,8 +69,13 @@ namespace QuizApp.Controllers
                 return NotFound($"No quiz results found . {e.Message}");
             }
         }
-        
-        // Endpoint to get quiz results with total score by user and quiz ID
+
+        /// <summary>
+        ///  Endpoint to get quiz results with total score by user and quiz ID
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="quizId"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("results-with-total-score/{username}/{quizId}")]
         public ActionResult<QuizResultsWithTotalScoreDTO> GetResultsWithTotalScoreByUserAndQuiz(string username, int quizId)
@@ -91,7 +104,12 @@ namespace QuizApp.Controllers
             }
         }
 
-        // Endpoint to get total score by quiz and username
+        /// <summary>
+        ///  Endpoint to get total score by quiz and username
+        /// </summary>
+        /// <param name="quizId"></param>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpGet("totalscore/{quizId}/{username}")]
         public ActionResult<int> GetTotalScoreForUserInQuiz(int quizId, string username)
@@ -110,6 +128,11 @@ namespace QuizApp.Controllers
                 return BadRequest($"Failed to get total score. {e.Message}");
             }
         }
+        /// <summary>
+        ///  Endpoint to get the list of quiz ids that are already answered by the user.
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         [HttpGet("answered-quiz-ids/{username}")]
         public ActionResult<int[]> GetAnsweredQuizIds(string username)
         {
