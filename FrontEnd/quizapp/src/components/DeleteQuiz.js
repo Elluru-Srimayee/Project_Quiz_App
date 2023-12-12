@@ -25,7 +25,7 @@ function DeleteQuiz() {
         navigate("/quizList");
       } catch (error) {
         console.log(error);
-        alert("Error deleting quiz");
+        alert(`Make sure that the quiz with id ${quizId} doesn't have questions.`);
       }
     };
 

@@ -7,7 +7,6 @@ function Questions() {
   const navigate = useNavigate();
   const token=localStorage.getItem("token");
   const role=localStorage.getItem("role");
-  const [quizId, setQuizId] = useState("");
   if (role !== "Creator") {
     alert("You don't have access to this page");
     setTimeout(() => {

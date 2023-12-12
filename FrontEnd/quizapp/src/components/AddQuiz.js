@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 
 function AddQuiz() {
@@ -7,18 +7,22 @@ function AddQuiz() {
   const [category, setCategory] = useState("");
   const [timeLimit, setTimeLimit] = useState("0"); 
   const token=localStorage.getItem("token");
+  const [categoryList, setCategoryList] = useState([]);
+  const [categoryInput, setCategoryInput] = useState("");
+  const [newCategoryInput,setNewCategoryInput]=useState("");
+  const [isAddingNewCategory, setIsAddingNewCategory] = useState(false);
   const navigate=useNavigate();
   const clickAdd = () => {
     // Check if required fields are provided
-    if (!title || !description || !category) {
+    if (!title || !description || (isAddingNewCategory&&!newCategoryInput)) {
       alert("Title, Description, and Category are required fields.");
       return;
     }
-
+    const selectedCategory = isAddingNewCategory ? newCategoryInput : category;
     const quiz = {
       title: title,
       description: description,
-      category: category,
+      category: selectedCategory,
       timeLimit: timeLimit || null, // Set to null if timeLimit is empty
     };
 
@@ -46,6 +50,37 @@ function AddQuiz() {
       });
   };
 
+  useEffect(() => {
+    // Fetch the list of categories when the component mounts
+    fetch("http://localhost:5057/api/Quiz/categories", {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(async (data) => {
+        var categories = await data.json();
+        setCategoryList(categories);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+  const handleCategoryChange = (e) => {
+    const selectedCategory = e.target.value;
+
+    if (selectedCategory === "new") {
+      setIsAddingNewCategory(true);
+      setCategoryInput(""); // Reset categoryInput
+    } else {
+      setIsAddingNewCategory(false);
+      setCategoryInput(selectedCategory);
+    }
+  };
+  const handleNewCategoryInput=(e)=>{
+    setNewCategoryInput(e.target.value);
+  };
   return (
     <div className="inputcontainer">
       <h1 className="alert alert-quiz">Quiz Details</h1>
@@ -79,7 +114,7 @@ function AddQuiz() {
         Quiz Description
       </label>
       </div>
-      <div class="form-floating mb-3">
+      {/* <div class="form-floating mb-3">
       <input
         id="floatingInput"
         type="text"
@@ -93,7 +128,31 @@ function AddQuiz() {
       <label htmlFor="floatingInput">
         Quiz Category
       </label>
-      </div>
+      </div> */}
+      <div class="form-floating mb-3">
+
+      <select className="form-select" value={categoryInput} placeholder="Category" onChange={handleCategoryChange}>
+          <option value="">Select a category</option>
+          {categoryList.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+          <option value="new">Add New Category</option>
+        </select>
+        {isAddingNewCategory && (
+        <div className="form-floating mb-3">
+          <input
+            id="newCategoryInput"
+            type="text"
+            className="form-control"
+            placeholder="New Category"
+            value={newCategoryInput}
+            onChange={handleNewCategoryInput}
+          />
+          <label htmlFor="newCategoryInput">New Category</label>
+        </div>
+      )}
       <div class="form-floating mb-3">
       <input
         id="floatingInput"
@@ -112,6 +171,7 @@ function AddQuiz() {
       <button onClick={clickAdd} className="btn btn-primary">
         Add Quiz
       </button>
+      </div>
     </div>
   );
 }
