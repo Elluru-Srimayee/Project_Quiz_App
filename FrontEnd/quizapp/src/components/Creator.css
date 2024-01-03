@@ -3,6 +3,7 @@ body{
   background-attachment: fixed;
   color: black;
   background-size: cover;
+  padding-top:56px;
 }
 .inputcontainer{
   max-width: 600px;

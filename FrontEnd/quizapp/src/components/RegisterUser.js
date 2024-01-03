@@ -20,7 +20,7 @@ function RegisterUser(){
         const usernameRegex=/^[a-z_][a-z0-9_]*$/;
         if(!usernameRegex.test(username))
         {
-            setUsernameError("Invalid username format username cannot be empty shouldn't start with digit username should contain lowercase letters, digits and underscores, and not include uppercase letters.");
+            setUsernameError("Invalid username format username cannot be empty shouldn't start with digit username can contain lowercase letters, digits and underscores, and not include uppercase letters.");
             return false;
         }
         else{

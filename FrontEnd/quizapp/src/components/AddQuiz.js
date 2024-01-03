@@ -129,7 +129,7 @@ function AddQuiz() {
         Quiz Category
       </label>
       </div> */}
-      <div class="form-floating mb-3">
+      <div>
 
       <select className="form-select" value={categoryInput} placeholder="Category" onChange={handleCategoryChange}>
           <option value="">Select a category</option>

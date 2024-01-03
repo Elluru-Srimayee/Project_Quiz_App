@@ -12,7 +12,7 @@ function Menu() {
 
     }
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <div className="container-fluid">
         <a class="navbar-brand" href="/">QuizCraft</a>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
