@@ -9673,34 +9673,45 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LEOVO\\.nuget\\packages\\": {}
+    "C:\\Users\\2000112379\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\Hexaware Training\\Project\\QuizSolution\\QuizAppTest\\QuizAppTest.csproj",
+      "projectUniqueName": "C:\\Users\\2000112379\\Desktop\\QUIZAPP\\Project_Quiz_App\\QuizSolution\\QuizAppTest\\QuizAppTest.csproj",
       "projectName": "QuizAppTest",
-      "projectPath": "F:\\Hexaware Training\\Project\\QuizSolution\\QuizAppTest\\QuizAppTest.csproj",
-      "packagesPath": "C:\\Users\\LEOVO\\.nuget\\packages\\",
-      "outputPath": "F:\\Hexaware Training\\Project\\QuizSolution\\QuizAppTest\\obj\\",
+      "projectPath": "C:\\Users\\2000112379\\Desktop\\QUIZAPP\\Project_Quiz_App\\QuizSolution\\QuizAppTest\\QuizAppTest.csproj",
+      "packagesPath": "C:\\Users\\2000112379\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\2000112379\\Desktop\\QUIZAPP\\Project_Quiz_App\\QuizSolution\\QuizAppTest\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\LEOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\2000112379\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "F:\\Hexaware Training\\Project\\QuizSolution\\QuizApp\\QuizApp.csproj": {
-              "projectPath": "F:\\Hexaware Training\\Project\\QuizSolution\\QuizApp\\QuizApp.csproj"
+            "C:\\Users\\2000112379\\Desktop\\QUIZAPP\\Project_Quiz_App\\QuizSolution\\QuizApp\\QuizApp.csproj": {
+              "projectPath": "C:\\Users\\2000112379\\Desktop\\QUIZAPP\\Project_Quiz_App\\QuizSolution\\QuizApp\\QuizApp.csproj"
             }
           }
         }
@@ -9760,7 +9771,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

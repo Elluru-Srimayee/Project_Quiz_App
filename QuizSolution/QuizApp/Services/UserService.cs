@@ -39,6 +39,7 @@ namespace QuizApp.Services
                 if (userFromDatabase != null)
                 {
                     userDTO.Role = userFromDatabase.Role;
+                    userDTO.Email=userFromDatabase.Email;
                     userDTO.Token = _tokenService.GetToken(userDTO);
                     userDTO.Password = "";
                     return userDTO;
@@ -57,6 +58,7 @@ namespace QuizApp.Services
             User user = new User()
             {
                 Username = userDTO.Username,
+                Email = userDTO.Email,
                 Password = hmac.ComputeHash(Encoding.UTF8.GetBytes(userDTO.Password)),
                 Key = hmac.Key,
                 Role = userDTO.Role

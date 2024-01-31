@@ -1,6 +1,7 @@
 body{
-  background-image: url(https://img.freepik.com/premium-photo/cheerful-employees-chatting-while-working-laptop-discussing-work-during-coffee-break-office-business-woman-glasses-listens-colleague-has-pleasant-conversation-friendships_173815-30696.jpg?w=740);
+  /* background-image: url(https://img.freepik.com/premium-photo/cheerful-employees-chatting-while-working-laptop-discussing-work-during-coffee-break-office-business-woman-glasses-listens-colleague-has-pleasant-conversation-friendships_173815-30696.jpg?w=740); */
   background-attachment: fixed;
+  background-image:url("/public/bgimage.webp");
   color: black;
   background-size: cover;
   padding-top:56px;
